@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const logger = require('./controllers/logger');
+const db = require('./models');
 
 // Middleware to parse JSON Request Bodies
 app.use(express.json());
@@ -16,31 +17,35 @@ app.use((req, res, next) => {
 
 // Connect to the server
 server = app.listen(process.env.port, () => {
-  logger.info(`Server is listening on port ${process.env.port}`);
+    logger.info(`Server is listening on port ${process.env.port}`);
 });
+db.sequelize.authenticate()
+  .then(() => {
+    console.log('Database connection established successfully.');
+    // Then start your server here, e.g. app.listen(...)
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+    process.exit(1);  // Exit if connection fails
+  });
 
-// //gracefull shutdown, term signals
-process.on('SIGTERM', () => {
-  logger.info('SIGTERM signal received: closing HTTP server');
-  app.close(() => {
+// Graceful shutdown handler
+const shutdown = (signal) => {
+  logger.info(`${signal} signal received: closing HTTP server`);
+
+  server.close(() => {
     logger.info('HTTP server closed');
-    mongoose.connection.close(false, () => {
-      logger.info("mongoose connection is closed");
+
+    db.sequelize.close().then(() => {
+      logger.info("Sequelize connection closed");
       process.exit(0);
+    }).catch(err => {
+      logger.error("Error closing Sequelize connection:", err);
+      process.exit(1);
     });
   });
-});
+};
 
-const shutdown = () => {
-  logger.info('SIGINT signal received: closing HTTP server');
-  server.close(() => {
-    mongoose.disconnect()
-      .then(() => {
-        logger.info("Mongoose connection is closed");
-        logger.warn('HTTP server closed\n');
-        process.exit(0);
-      })
-  });
-}
-
-process.on('SIGINT', shutdown);
+// Handle process termination signals
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));

@@ -1,0 +1,41 @@
+{
+  "development": {
+    "username": "root",
+    "password": "pass",
+    "database": "depresscaredb",
+    "host": "localhost",
+    "dialect": "mysql",
+    "dialectOptions": {
+      "options": {
+        "encrypt": false,
+        "trustServerCertificate": true
+      }
+    }
+  },
+  "test": {
+    "username": "your_sql_username",
+    "password": "your_sql_password",
+    "database": "DepressCare_Test",
+    "host": "localhost",
+    "dialect": "mysql",
+    "dialectOptions": {
+      "options": {
+        "encrypt": false,
+        "trustServerCertificate": true
+      }
+    }
+  },
+  "production": {
+    "username": "your_sql_username",
+    "password": "your_sql_password",
+    "database": "DepressCare_Prod",
+    "host": "localhost",
+    "dialect": "mysql",
+    "dialectOptions": {
+      "options": {
+        "encrypt": true,
+        "trustServerCertificate": false
+      }
+    }
+  }
+}
