@@ -4,6 +4,7 @@ require('dotenv').config();
 const logger = require('./controllers/logger');
 const db = require('./models');
 const authRouter = require('./routes/authRoutes');
+const adminRouter = require('./routes/adminRoutes');
 const authMiddleware = require('./middlewares/authMiddleware');
 const { errorHandler, notFoundHandler, asyncHandler } = require('./middlewares/errorHandler');
 
@@ -11,6 +12,7 @@ const { errorHandler, notFoundHandler, asyncHandler } = require('./middlewares/e
 app.use(express.json());
 // Midddleware to parse URL-encoded Request Bodies
 app.use(express.urlencoded({ extended: false }));
+
 
 // Middleware to create logs
 app.use((req, res, next) => {
@@ -20,12 +22,14 @@ app.use((req, res, next) => {
 
 // authentication middleware
 app.use(authMiddleware);
-app.use(errorHandler);
-app.use(notFoundHandler);
-app.use(asyncHandler);
 
 //connect to routers
 app.use('/api/auth', authRouter);
+app.use('/api/admin',adminRouter);
+
+app.use(notFoundHandler);
+app.use(errorHandler);
+
 
 // Connect to the server
 server = app.listen(process.env.port, () => {
