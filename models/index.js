@@ -16,6 +16,7 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
+// Read and initialize models
 fs
   .readdirSync(__dirname)
   .filter(file => {
@@ -31,11 +32,21 @@ fs
     db[model.name] = model;
   });
 
+// Handle associations
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
 });
+
+// Sync all models
+sequelize.sync({ alter: true })  // Use `force: true` for dev if you want to drop & recreate
+  .then(() => {
+    console.log('✔ All models synced with DB');
+  })
+  .catch(err => {
+    console.error('❌ Failed to sync models:', err);
+  });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

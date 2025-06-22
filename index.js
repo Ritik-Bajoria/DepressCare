@@ -3,6 +3,8 @@ const app = express();
 require('dotenv').config();
 const logger = require('./controllers/logger');
 const db = require('./models');
+const authRouter = require('./routes/authRouter');
+const authMiddleware = require('./middlewares/authMiddleware')
 
 // Middleware to parse JSON Request Bodies
 app.use(express.json());
@@ -14,6 +16,12 @@ app.use((req, res, next) => {
   logger.info(`Request from ${req.ip} at ${req.method} ${req.originalUrl}`);
   next();
 });
+
+// authentication middleware
+app.use(authMiddleware);
+
+//connect to routers
+app.use('/api/auth', authRouter);
 
 // Connect to the server
 server = app.listen(process.env.port, () => {
