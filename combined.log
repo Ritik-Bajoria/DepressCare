@@ -306,3 +306,22 @@
 6/22/2025 10:33:42 AM [INFO]:  SIGINT signal received: closing HTTP server
 6/22/2025 10:33:42 AM [INFO]:  HTTP server closed
 6/22/2025 10:33:43 AM [INFO]:  Sequelize connection closed
+6/22/2025 10:39:25 AM [INFO]:  App started on process id:14484
+6/22/2025 10:39:25 AM [INFO]:  Server is listening on port 3000
+6/22/2025 10:39:28 AM [INFO]:  Request from ::1 at GET /api/auth/me
+6/22/2025 3:22:40 PM [INFO]:  App started on process id:15224
+6/22/2025 3:22:40 PM [INFO]:  Server is listening on port 3000
+6/22/2025 3:22:57 PM [INFO]:  Request from ::1 at GET /api/auth/me
+6/22/2025 3:23:14 PM [INFO]:  Request from ::1 at GET /api/admin
+6/22/2025 3:23:28 PM [INFO]:  Request from ::1 at POST /api/admin
+6/22/2025 3:24:53 PM [INFO]:  Request from ::1 at POST /api/auth/login
+6/22/2025 3:25:09 PM [INFO]:  Request from ::1 at POST /api/admin
+6/22/2025 3:25:17 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/22/2025 3:25:17 PM [INFO]:  HTTP server closed
+6/22/2025 3:25:17 PM [INFO]:  Sequelize connection closed
+6/22/2025 3:27:26 PM [INFO]:  App started on process id:2440
+6/22/2025 3:27:26 PM [INFO]:  Server is listening on port 3000
+6/22/2025 3:27:30 PM [INFO]:  Request from ::1 at POST /api/admin
+6/22/2025 3:28:05 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/22/2025 3:28:05 PM [INFO]:  HTTP server closed
+6/22/2025 3:28:05 PM [INFO]:  Sequelize connection closed
