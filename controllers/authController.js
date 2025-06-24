@@ -18,8 +18,8 @@ const registerUser = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { full_name, email, password, phone, gender, date_of_birth, role } = req.body;
-
+  const { full_name, email, password,address, phone, gender, date_of_birth } = req.body;
+  role = 'patient';
   try {
     // Check if user already exists
     const userExists = await User.findOne({ where: { email } });
@@ -37,6 +37,7 @@ const registerUser = async (req, res) => {
       email,
       password_hash: hashedPassword,
       phone,
+      address,
       gender,
       date_of_birth,
       role: role || 'Patient', // Default to Patient if role not specified

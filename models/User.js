@@ -7,12 +7,28 @@ module.exports = (sequelize) => {
     email: { type: DataTypes.STRING(100), allowNull: false, unique: true, validate: { isEmail: true } },
     password_hash: { type: DataTypes.STRING(255), allowNull: false },
     phone: { type: DataTypes.STRING(20) },
+    address: { type: DataTypes.STRING(255) },
     gender: { type: DataTypes.ENUM('Male', 'Female', 'Other') },
     date_of_birth: { type: DataTypes.DATEONLY },
     role: { type: DataTypes.ENUM('Patient', 'Psychiatrist', 'Admin', 'InternalManagement'), allowNull: false },
     profile_picture: { type: DataTypes.STRING(255) },
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
   }, { tableName: 'Users', timestamps: false });
+
+  User.associate = (models) => {
+    User.hasMany(models.DepressionForm, {
+      foreignKey: 'patient_id',
+      as: 'DepressionForms'
+    });
+    User.hasMany(models.Appointment, {
+      foreignKey: 'patient_id',
+      as: 'PatientAppointments'
+    });
+    User.hasMany(models.Appointment, {
+      foreignKey: 'psychiatrist_id',
+      as: 'PsychiatristAppointments'
+    });
+  };
 
   return User;
 };

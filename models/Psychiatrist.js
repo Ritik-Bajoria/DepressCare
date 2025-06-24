@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
     specialization: { type: DataTypes.STRING(100) },
     years_of_experience: { type: DataTypes.INTEGER },
     bio: { type: DataTypes.TEXT },
-    availability: { type: DataTypes.TEXT }
+    availability: { type: DataTypes.BOOLEAN }
   }, { tableName: 'Psychiatrists', timestamps: false });
 
   return Psychiatrist;

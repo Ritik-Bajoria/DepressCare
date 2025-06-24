@@ -593,3 +593,344 @@
 6/22/2025 5:15:01 PM [INFO]:  SIGINT signal received: closing HTTP server
 6/22/2025 5:15:01 PM [INFO]:  HTTP server closed
 6/22/2025 5:15:01 PM [INFO]:  Sequelize connection closed
+6/23/2025 7:22:35 AM [INFO]:  App started on process id:25636
+6/23/2025 7:22:37 AM [INFO]:  Server is listening on port 3000
+6/23/2025 7:50:51 AM [INFO]:  Request from ::1 at POST /api/admin/users/2/role
+6/23/2025 7:51:08 AM [INFO]:  Request from ::1 at GET /api/admin/users
+6/23/2025 7:51:16 AM [INFO]:  Request from ::1 at POST /api/admin/users/2/role
+6/23/2025 7:53:43 AM [INFO]:  Request from ::1 at POST /api/admin/users/2/role
+6/23/2025 7:55:01 AM [INFO]:  Request from ::1 at PUT /api/admin/users/2/role
+6/23/2025 7:59:01 AM [INFO]:  Request from ::1 at POST /api/admin/enroll-psychiatrist
+6/23/2025 8:08:20 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 8:08:20 AM [INFO]:  HTTP server closed
+6/23/2025 8:08:20 AM [INFO]:  Sequelize connection closed
+6/23/2025 8:22:28 AM [INFO]:  App started on process id:26164
+6/23/2025 8:22:29 AM [INFO]:  Server is listening on port 3000
+6/23/2025 8:22:33 AM [INFO]:  Request from ::1 at POST /api/admin/community-posts
+6/23/2025 8:23:41 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 8:23:41 AM [INFO]:  HTTP server closed
+6/23/2025 8:23:41 AM [INFO]:  Sequelize connection closed
+6/23/2025 8:23:43 AM [INFO]:  App started on process id:19428
+6/23/2025 8:23:44 AM [INFO]:  Server is listening on port 3000
+6/23/2025 8:24:00 AM [INFO]:  Request from ::1 at POST /api/admin/community-posts
+6/23/2025 8:24:02 AM [INFO]:  Request from ::1 at POST /api/admin/community-posts
+6/23/2025 8:27:33 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 8:27:33 AM [INFO]:  HTTP server closed
+6/23/2025 8:27:33 AM [INFO]:  Sequelize connection closed
+6/23/2025 8:27:36 AM [INFO]:  App started on process id:14752
+6/23/2025 8:27:58 AM [INFO]:  App started on process id:20772
+6/23/2025 8:27:58 AM [INFO]:  Server is listening on port 3000
+6/23/2025 8:28:02 AM [INFO]:  Request from ::1 at POST /api/admin/community-posts
+6/23/2025 11:42:38 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 11:42:38 AM [INFO]:  HTTP server closed
+6/23/2025 11:42:38 AM [INFO]:  Sequelize connection closed
+6/23/2025 9:56:04 PM [INFO]:  App started on process id:18640
+6/23/2025 9:56:06 PM [INFO]:  Server is listening on port 3000
+6/23/2025 9:56:09 PM [INFO]:  Request from ::1 at GET /api/admin/reports/UserStats?format=json
+6/23/2025 9:57:33 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 9:57:33 PM [INFO]:  HTTP server closed
+6/23/2025 9:57:33 PM [INFO]:  Sequelize connection closed
+6/23/2025 9:57:35 PM [INFO]:  App started on process id:21952
+6/23/2025 9:57:36 PM [INFO]:  Server is listening on port 3000
+6/23/2025 9:57:39 PM [INFO]:  Request from ::1 at GET /api/admin/reports/UserStats?format=json
+6/23/2025 9:58:37 PM [INFO]:  Request from ::1 at GET /api/admin//reports/AppointmentStats?format=excel&startDate=2023-11-01&endDate=2023-11-30
+6/23/2025 9:58:46 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AppointmentStats?format=excel&startDate=2023-11-01&endDate=2023-11-30
+6/23/2025 10:00:05 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 10:00:05 PM [INFO]:  HTTP server closed
+6/23/2025 10:00:05 PM [INFO]:  Sequelize connection closed
+6/23/2025 10:00:07 PM [INFO]:  App started on process id:23836
+6/23/2025 10:00:08 PM [INFO]:  Server is listening on port 3000
+6/23/2025 10:00:11 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AppointmentStats?format=excel&startDate=2023-11-01&endDate=2023-11-30
+6/23/2025 10:03:10 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 10:03:10 PM [INFO]:  HTTP server closed
+6/23/2025 10:03:10 PM [INFO]:  Sequelize connection closed
+6/23/2025 10:03:12 PM [INFO]:  App started on process id:28016
+6/23/2025 10:03:13 PM [INFO]:  Server is listening on port 3000
+6/23/2025 10:03:16 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AppointmentStats?format=excel&startDate=2023-11-01&endDate=2023-11-30
+6/23/2025 10:03:17 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AppointmentStats?format=excel&startDate=2023-11-01&endDate=2023-11-30
+6/23/2025 10:09:29 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 10:09:29 PM [INFO]:  HTTP server closed
+6/23/2025 10:09:29 PM [INFO]:  Sequelize connection closed
+6/23/2025 10:09:31 PM [INFO]:  App started on process id:7500
+6/23/2025 10:09:32 PM [INFO]:  Server is listening on port 3000
+6/23/2025 10:09:40 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AppointmentStats?format=excel&startDate=2023-11-01&endDate=2023-11-30
+6/23/2025 10:15:14 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AppointmentStats?format=excel&startDate=2023-11-01&endDate=2023-11-30
+6/23/2025 10:15:24 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AppointmentStats?format=excel&startDate=2023-11-01&endDate=2023-11-30
+6/23/2025 10:18:06 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AppointmentStats?format=excel&startDate=2023-11-01&endDate=2023-11-30
+6/23/2025 10:18:17 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AppointmentStats?format=excel&startDate=2023-11-01&endDate=2023-11-30
+6/23/2025 10:19:50 PM [INFO]:  Request from ::1 at GET /api/admin/reports/UserStats
+6/23/2025 10:20:01 PM [INFO]:  Request from ::1 at GET /api/admin/reports/UserStats
+6/23/2025 10:23:24 PM [INFO]:  Request from ::1 at GET /api/admin/reports/UserStats?format=json
+6/23/2025 10:25:22 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AppointmentStats?format=excel&startDate=2023-11-01&endDate=2023-11-30
+6/23/2025 10:26:29 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AssessmentSummary?format=pdf
+6/23/2025 10:26:35 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 10:26:35 PM [INFO]:  HTTP server closed
+6/23/2025 10:26:35 PM [INFO]:  Sequelize connection closed
+6/23/2025 10:26:41 PM [INFO]:  App started on process id:18180
+6/23/2025 10:26:42 PM [INFO]:  Server is listening on port 3000
+6/23/2025 10:26:48 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AssessmentSummary?format=pdf
+6/23/2025 10:28:37 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 10:28:37 PM [INFO]:  HTTP server closed
+6/23/2025 10:28:37 PM [INFO]:  Sequelize connection closed
+6/23/2025 10:28:41 PM [INFO]:  App started on process id:7568
+6/23/2025 10:28:42 PM [INFO]:  Server is listening on port 3000
+6/23/2025 10:28:46 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AssessmentSummary?format=pdf
+6/23/2025 10:28:47 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AssessmentSummary?format=pdf
+6/23/2025 10:30:40 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 10:30:40 PM [INFO]:  HTTP server closed
+6/23/2025 10:30:40 PM [INFO]:  Sequelize connection closed
+6/23/2025 10:30:42 PM [INFO]:  App started on process id:26712
+6/23/2025 10:30:43 PM [INFO]:  Server is listening on port 3000
+6/23/2025 10:30:47 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AssessmentSummary?format=pdf
+6/23/2025 10:31:37 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 10:31:37 PM [INFO]:  HTTP server closed
+6/23/2025 10:31:37 PM [INFO]:  Sequelize connection closed
+6/23/2025 10:31:39 PM [INFO]:  App started on process id:25672
+6/23/2025 10:31:40 PM [INFO]:  Server is listening on port 3000
+6/23/2025 10:31:45 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AssessmentSummary?format=pdf
+6/23/2025 10:31:47 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AssessmentSummary?format=pdf
+6/23/2025 10:32:53 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AssessmentSummary?format=excel
+6/23/2025 10:32:56 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AssessmentSummary?format=excel
+6/23/2025 10:33:54 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AssessmentSummary?format=json
+6/23/2025 10:34:18 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AppointmentStats?format=json
+6/23/2025 10:35:39 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 10:35:39 PM [INFO]:  HTTP server closed
+6/23/2025 10:35:39 PM [INFO]:  Sequelize connection closed
+6/23/2025 10:35:42 PM [INFO]:  App started on process id:10224
+6/23/2025 10:35:44 PM [INFO]:  Server is listening on port 3000
+6/23/2025 10:35:49 PM [INFO]:  Request from ::1 at GET /api/admin/reports/AppointmentStats?format=pdf
+6/23/2025 11:04:22 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 11:04:22 PM [INFO]:  HTTP server closed
+6/23/2025 11:04:22 PM [INFO]:  Sequelize connection closed
+6/23/2025 11:05:41 PM [INFO]:  App started on process id:21372
+6/23/2025 11:05:43 PM [INFO]:  Server is listening on port 3000
+6/23/2025 11:05:44 PM [INFO]:  Request from ::1 at POST /api/auth/register
+6/23/2025 11:06:18 PM [INFO]:  Request from ::1 at POST /api/auth/register
+6/23/2025 11:10:10 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/23/2025 11:10:10 PM [INFO]:  HTTP server closed
+6/23/2025 11:10:10 PM [INFO]:  Sequelize connection closed
+6/23/2025 11:16:28 PM [INFO]:  App started on process id:5908
+6/23/2025 11:16:29 PM [INFO]:  Server is listening on port 3000
+6/23/2025 11:16:37 PM [INFO]:  Request from ::1 at POST /api/auth/login
+6/24/2025 8:49:32 AM [INFO]:  App started on process id:28148
+6/24/2025 8:49:34 AM [INFO]:  Server is listening on port 3000
+6/24/2025 8:53:52 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 8:53:52 AM [INFO]:  HTTP server closed
+6/24/2025 8:53:52 AM [INFO]:  Sequelize connection closed
+6/24/2025 8:53:54 AM [INFO]:  App started on process id:5868
+6/24/2025 8:53:55 AM [INFO]:  Server is listening on port 3000
+6/24/2025 8:59:03 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 8:59:03 AM [INFO]:  HTTP server closed
+6/24/2025 8:59:03 AM [INFO]:  Sequelize connection closed
+6/24/2025 8:59:15 AM [INFO]:  App started on process id:7976
+6/24/2025 8:59:16 AM [INFO]:  Server is listening on port 3000
+6/24/2025 8:59:25 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 8:59:25 AM [INFO]:  HTTP server closed
+6/24/2025 8:59:25 AM [INFO]:  Sequelize connection closed
+6/24/2025 9:03:10 AM [INFO]:  App started on process id:24232
+6/24/2025 9:03:24 AM [INFO]:  App started on process id:17776
+6/24/2025 9:03:25 AM [INFO]:  Server is listening on port 3000
+6/24/2025 9:05:24 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 9:05:24 AM [INFO]:  HTTP server closed
+6/24/2025 9:05:24 AM [INFO]:  Sequelize connection closed
+6/24/2025 9:06:21 AM [INFO]:  App started on process id:3720
+6/24/2025 9:06:22 AM [INFO]:  Server is listening on port 3000
+6/24/2025 9:06:52 AM [INFO]:  Request from ::1 at POST /api/auth/register
+6/24/2025 9:09:12 AM [INFO]:  Request from ::1 at POST /api/auth/login
+6/24/2025 9:09:38 AM [INFO]:  Request from ::1 at POST /api/auth/login
+6/24/2025 9:09:46 AM [INFO]:  Request from ::1 at POST /api/auth/logout
+6/24/2025 9:09:53 AM [INFO]:  Request from ::1 at GET /api/auth/me
+6/24/2025 10:27:54 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 10:27:54 AM [INFO]:  HTTP server closed
+6/24/2025 10:27:54 AM [INFO]:  Sequelize connection closed
+6/24/2025 10:28:43 AM [INFO]:  App started on process id:11088
+6/24/2025 10:28:45 AM [INFO]:  Server is listening on port 3000
+6/24/2025 10:33:52 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 10:33:52 AM [INFO]:  HTTP server closed
+6/24/2025 10:33:52 AM [INFO]:  Sequelize connection closed
+6/24/2025 10:36:04 AM [INFO]:  App started on process id:9656
+6/24/2025 10:36:05 AM [INFO]:  Server is listening on port 3000
+6/24/2025 10:42:49 AM [INFO]:  Request from ::1 at POST /api/auth/register
+6/24/2025 10:45:30 AM [INFO]:  Request from ::1 at GET /
+6/24/2025 10:45:30 AM [INFO]:  Request from ::1 at GET /favicon.ico
+6/24/2025 10:59:05 AM [INFO]:  Request from ::ffff:172.16.2.96 at GET /
+6/24/2025 10:59:06 AM [INFO]:  Request from ::ffff:172.16.2.96 at GET /favicon.ico
+6/24/2025 11:00:41 AM [INFO]:  Request from ::1 at POST /api/auth/register
+6/24/2025 11:00:48 AM [INFO]:  Request from ::1 at POST /api/auth/login
+6/24/2025 11:07:27 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:07:29 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:07:30 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:08:14 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:08:21 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:12:14 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:12:14 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:12:15 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:12:16 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:12:48 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:12:53 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:12:53 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:12:53 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:12:54 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:12:54 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:12:54 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:12:54 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:12:54 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:12:54 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:15:03 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:15:04 AM [INFO]:  Request from ::ffff:172.16.2.96 at OPTIONS /api/register
+6/24/2025 11:19:15 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 11:19:15 AM [INFO]:  HTTP server closed
+6/24/2025 11:19:15 AM [INFO]:  Sequelize connection closed
+6/24/2025 11:19:18 AM [INFO]:  App started on process id:2740
+6/24/2025 11:19:20 AM [INFO]:  Server is listening on port 3000
+6/24/2025 11:21:19 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 11:21:19 AM [INFO]:  HTTP server closed
+6/24/2025 11:21:19 AM [INFO]:  Sequelize connection closed
+6/24/2025 11:21:23 AM [INFO]:  App started on process id:19032
+6/24/2025 11:21:24 AM [INFO]:  Server is listening on port 3000
+6/24/2025 11:21:39 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 11:21:39 AM [INFO]:  HTTP server closed
+6/24/2025 11:21:39 AM [INFO]:  Sequelize connection closed
+6/24/2025 11:21:41 AM [INFO]:  App started on process id:21388
+6/24/2025 11:21:42 AM [INFO]:  Server is listening on port 3000
+6/24/2025 11:23:29 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/login
+6/24/2025 11:25:08 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 11:25:08 AM [INFO]:  HTTP server closed
+6/24/2025 11:25:08 AM [INFO]:  Sequelize connection closed
+6/24/2025 11:25:09 AM [INFO]:  App started on process id:6540
+6/24/2025 11:25:10 AM [INFO]:  Server is listening on port 3000
+6/24/2025 11:25:18 AM [INFO]:  Request from 172.16.2.96 at POST /api/register
+6/24/2025 11:26:27 AM [INFO]:  Request from 172.16.2.96 at POST /api/register
+6/24/2025 11:26:30 AM [INFO]:  Request from 172.16.2.96 at POST /api/register
+6/24/2025 11:26:58 AM [INFO]:  Request from 172.16.2.96 at POST /api/register
+6/24/2025 11:30:16 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 11:30:16 AM [INFO]:  HTTP server closed
+6/24/2025 11:30:16 AM [INFO]:  Sequelize connection closed
+6/24/2025 11:30:18 AM [INFO]:  App started on process id:26848
+6/24/2025 11:30:19 AM [INFO]:  Server is listening on port 3000
+6/24/2025 11:31:08 AM [INFO]:  Request from 172.16.2.96 at GET /
+6/24/2025 11:31:12 AM [INFO]:  Request from 172.16.2.96 at POST /api/auth/register
+6/24/2025 11:34:43 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/login
+6/24/2025 11:34:44 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/login
+6/24/2025 11:35:08 AM [INFO]:  Request from 172.16.2.96 at POST /api/auth/register
+6/24/2025 11:36:49 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/login
+6/24/2025 11:37:43 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/login
+6/24/2025 11:38:12 AM [INFO]:  Request from 172.16.2.96 at POST /api/auth/login
+6/24/2025 11:47:35 AM [INFO]:  Request from 172.16.2.96 at GET /api/users
+6/24/2025 11:49:22 AM [INFO]:  Request from 127.0.0.1 at GET /api/admin/enroll-psychiatrist
+6/24/2025 11:49:28 AM [INFO]:  Request from 127.0.0.1 at POST /api/admin/enroll-psychiatrist
+6/24/2025 11:50:17 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 11:50:17 AM [INFO]:  HTTP server closed
+6/24/2025 11:50:17 AM [INFO]:  Sequelize connection closed
+6/24/2025 11:50:19 AM [INFO]:  App started on process id:12988
+6/24/2025 11:50:50 AM [INFO]:  App started on process id:3568
+6/24/2025 11:51:21 AM [INFO]:  App started on process id:2728
+6/24/2025 11:51:22 AM [INFO]:  Server is listening on port 3000
+6/24/2025 11:51:27 AM [INFO]:  Request from 172.16.2.96 at POST /api/admin/enroll-phychiatrist
+6/24/2025 11:51:28 AM [INFO]:  Request from 127.0.0.1 at POST /api/admin/enroll-psychiatrist
+6/24/2025 11:52:10 AM [INFO]:  Request from 172.16.2.96 at POST /api/admin/enroll-phychiatrist
+6/24/2025 11:53:37 AM [INFO]:  Request from 172.16.2.96 at POST /api/admin/enroll-phychiatrist
+6/24/2025 11:54:34 AM [INFO]:  Request from 172.16.2.96 at POST /api/admin/enroll-phychiatrist
+6/24/2025 11:55:24 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 11:55:24 AM [INFO]:  HTTP server closed
+6/24/2025 11:55:24 AM [INFO]:  Sequelize connection closed
+6/24/2025 11:55:26 AM [INFO]:  App started on process id:10880
+6/24/2025 11:55:27 AM [INFO]:  Server is listening on port 3000
+6/24/2025 11:55:46 AM [INFO]:  Request from 127.0.0.1 at POST /api/admin/enroll-internal
+6/24/2025 11:55:57 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/login
+6/24/2025 11:56:35 AM [INFO]:  Request from 172.16.2.96 at POST /api/admin/enroll-phychiatrist
+6/24/2025 11:57:38 AM [INFO]:  Request from 172.16.2.96 at POST /api/admin/enroll-psychiatrist
+6/24/2025 11:57:38 AM [INFO]:  Request from 172.16.2.96 at POST /api/admin/enroll-psychiatrist
+6/24/2025 11:57:38 AM [INFO]:  Request from 172.16.2.96 at POST /api/admin/enroll-psychiatrist
+6/24/2025 11:57:38 AM [INFO]:  Request from 172.16.2.96 at GET /api/users
+6/24/2025 11:58:11 AM [INFO]:  Request from 127.0.0.1 at POST /api/admin/enroll-psychiatrist
+6/24/2025 11:58:41 AM [INFO]:  Request from 172.16.2.96 at POST /api/admin/enroll-psychiatrist
+6/24/2025 11:58:50 AM [INFO]:  Request from 127.0.0.1 at POST /api/admin/enroll-internal
+6/24/2025 11:59:06 AM [INFO]:  Request from 172.16.2.96 at POST /api/admin/enroll-psychiatrist
+6/24/2025 11:59:29 AM [INFO]:  Request from 172.16.2.96 at POST /api/admin/enroll-psychiatrist
+6/24/2025 11:59:30 AM [INFO]:  Request from 172.16.2.96 at GET /api/users
+6/24/2025 12:01:19 PM [INFO]:  Request from 172.16.2.96 at POST /api/admin/enroll-psychiatrist
+6/24/2025 12:01:22 PM [INFO]:  Request from 127.0.0.1 at DELETE /api/admin/users/11
+6/24/2025 12:02:01 PM [INFO]:  Request from 172.16.2.96 at POST /api/admin/enroll-psychiatrist
+6/24/2025 12:02:01 PM [INFO]:  Request from 172.16.2.96 at GET /api/users
+6/24/2025 12:02:52 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 12:02:52 PM [INFO]:  HTTP server closed
+6/24/2025 12:02:52 PM [INFO]:  Sequelize connection closed
+6/24/2025 12:02:54 PM [INFO]:  App started on process id:25052
+6/24/2025 12:02:55 PM [INFO]:  Server is listening on port 3000
+6/24/2025 12:02:58 PM [INFO]:  Request from 127.0.0.1 at DELETE /api/admin/users/11
+6/24/2025 12:03:59 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:03:59 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:04:09 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:04:09 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:04:32 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:04:32 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:04:58 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:04:58 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:05 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:05 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:05 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:05 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:06 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:06 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:06 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:06 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:06 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:06 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:07 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:07 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:07 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:07 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:07 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:07 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:07 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:07 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:08 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:08 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:08 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:08 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:08 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:08 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:08 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:08 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:09 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:09 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:09 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:09 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:10 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:10 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:28 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:28 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:29 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/users
+6/24/2025 12:05:44 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/users
+6/24/2025 12:05:53 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:05:53 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:06:02 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:06:02 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:06:46 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:06:46 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:08:00 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/admin/users/12
+6/24/2025 12:08:42 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 12:08:42 PM [INFO]:  HTTP server closed
+6/24/2025 12:08:42 PM [INFO]:  Sequelize connection closed
+6/24/2025 12:08:43 PM [INFO]:  App started on process id:17348
+6/24/2025 12:08:44 PM [INFO]:  Server is listening on port 3000
+6/24/2025 12:08:46 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/admin/users/12
+6/24/2025 12:08:47 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/admin/users/12
+6/24/2025 12:08:49 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/admin/users/12
+6/24/2025 12:08:56 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 12:08:56 PM [INFO]:  HTTP server closed
+6/24/2025 12:08:56 PM [INFO]:  Sequelize connection closed
+6/24/2025 12:08:59 PM [INFO]:  App started on process id:22996
+6/24/2025 12:09:00 PM [INFO]:  Server is listening on port 3000
+6/24/2025 12:09:27 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:09:27 PM [INFO]:  Request from 172.16.2.96 at GET /api/admin/users
+6/24/2025 12:09:33 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 12:09:33 PM [INFO]:  HTTP server closed
+6/24/2025 12:09:33 PM [INFO]:  Sequelize connection closed
+6/24/2025 12:09:40 PM [INFO]:  App started on process id:6516
+6/24/2025 12:09:41 PM [INFO]:  Server is listening on port 3000
+6/24/2025 12:09:46 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/admin/users/12
+6/24/2025 12:10:05 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/24/2025 12:10:05 PM [INFO]:  HTTP server closed
+6/24/2025 12:10:05 PM [INFO]:  Sequelize connection closed

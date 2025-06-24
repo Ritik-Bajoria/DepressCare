@@ -9,5 +9,14 @@ module.exports = (sequelize) => {
     notes: { type: DataTypes.TEXT }
   }, { tableName: 'DepressionForms', timestamps: false });
 
+  DepressionForm.associate = (models) => {
+    DepressionForm.belongsTo(models.User, {
+      foreignKey: 'patient_id',
+      as: 'User' // This alias should match what you use in your includes
+    });
+    DepressionForm.hasMany(models.FormResponse, {
+      foreignKey: 'form_id'
+    });
+  };
   return DepressionForm;
 };

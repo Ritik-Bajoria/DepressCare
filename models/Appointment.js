@@ -11,5 +11,16 @@ module.exports = (sequelize) => {
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
   }, { tableName: 'Appointments', timestamps: false });
 
+  Appointment.associate = (models) => {
+    Appointment.belongsTo(models.User, {
+      foreignKey: 'patient_id',
+      as: 'Patient'
+    });
+    Appointment.belongsTo(models.User, {
+      foreignKey: 'psychiatrist_id',
+      as: 'Psychiatrist'
+    });
+  };
+
   return Appointment;
 };

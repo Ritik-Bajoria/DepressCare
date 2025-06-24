@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
+const morgan = require('morgan'); // <-- Added Morgan
+const cors = require('cors'); 
 const logger = require('./controllers/logger');
 const db = require('./models');
 const authRouter = require('./routes/authRoutes');
@@ -13,7 +15,12 @@ app.use(express.json());
 // Midddleware to parse URL-encoded Request Bodies
 app.use(express.urlencoded({ extended: false }));
 
+app.use(cors({
+  origin: 'http://localhost:5173'
+}));
 
+
+app.use(morgan('dev')); 
 // Middleware to create logs
 app.use((req, res, next) => {
   logger.info(`Request from ${req.ip} at ${req.method} ${req.originalUrl}`);
@@ -32,7 +39,7 @@ app.use(errorHandler);
 
 
 // Connect to the server
-server = app.listen(process.env.port, () => {
+server = app.listen(process.env.port,'0.0.0.0' ,() => {
     logger.info(`Server is listening on port ${process.env.port}`);
 });
 db.sequelize.authenticate()

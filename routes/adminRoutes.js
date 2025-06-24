@@ -16,29 +16,23 @@ router.use(roleMiddleware(['admin']));
 router.get('/users', asyncHandler(adminController.getAllUsers));
 
 /**
- * @route PUT /admin/users/:id/role
- * @desc Update user role
- * @access Private (Admin)
- */
-router.put(
-  '/users/:id/role',
-  [
-    check('role')
-      .isIn(['Patient', 'Psychiatrist', 'Admin', 'InternalManagement'])
-      .withMessage('Invalid role specified')
-  ],
-  asyncHandler(adminController.updateUserRole)
-);
-
-/**
  * @route POST /admin/enroll-psychiatrist
- * @desc Enroll a new psychiatrist
+ * @desc Create new user and enroll as psychiatrist
  * @access Private (Admin)
  */
 router.post(
   '/enroll-psychiatrist',
   [
-    check('user_id').isInt().withMessage('User ID must be an integer'),
+    check('full_name').notEmpty().withMessage('Full name is required'),
+    check('email').isEmail().withMessage('Invalid email format'),
+    check('password')
+      .isLength({ min: 8 })
+      .withMessage('Password must be at least 8 characters')
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+      .withMessage('Password must contain at least one uppercase, one lowercase, one number and one special character'),
+    check('phone').optional().isMobilePhone().withMessage('Invalid phone number'),
+    check('gender').optional().isIn(['Male', 'Female', 'Other']).withMessage('Invalid gender'),
+    check('date_of_birth').optional().isISO8601().withMessage('Invalid date format (YYYY-MM-DD)'),
     check('license_number').notEmpty().withMessage('License number is required'),
     check('qualifications').notEmpty().withMessage('Qualifications are required'),
     check('specialization').notEmpty().withMessage('Specialization is required'),
@@ -51,7 +45,75 @@ router.post(
 );
 
 /**
+ * @route POST /admin/enroll-internal
+ * @desc Create new user and enroll as internal management
+ * @access Private (Admin)
+ */
+router.post(
+  '/enroll-internal',
+  [
+    check('full_name').notEmpty().withMessage('Full name is required'),
+    check('email').isEmail().withMessage('Invalid email format'),
+    check('password')
+      .isLength({ min: 8 })
+      .withMessage('Password must be at least 8 characters')
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+      .withMessage('Password must contain at least one uppercase, one lowercase, one number and one special character'),
+    check('phone').optional().isMobilePhone().withMessage('Invalid phone number'),
+    check('gender').optional().isIn(['Male', 'Female', 'Other']).withMessage('Invalid gender'),
+    check('date_of_birth').optional().isISO8601().withMessage('Invalid date format (YYYY-MM-DD)'),
+  ],
+  asyncHandler(adminController.enrollInternalManagement)
+);
+
+
+/**
+ * @route DELETE /admin/users/:id
+ * @desc Delete a user and all associated data
+ * @access Private (Admin)
+ */
+router.delete(
+  '/users/:id',
+  asyncHandler(adminController.deleteUser)
+);
+
+/**
+ * @route PATCH /admin/users/:id
+ * @desc Update user information
+ * @access Private (Admin)
+ */
+router.patch(
+  '/users/:id',
+  [
+    check('email').optional().isEmail().withMessage('Invalid email format'),
+    check('phone').optional().isMobilePhone().withMessage('Invalid phone number'),
+    check('gender').optional().isIn(['Male', 'Female', 'Other']).withMessage('Invalid gender'),
+    check('date_of_birth').optional().isISO8601().withMessage('Invalid date format (YYYY-MM-DD)'),
+    check('role').optional()
+  ],
+  asyncHandler(adminController.updateUser)
+);
+
+/**
+ * @route GET /admin/users
+ * @desc Get all users with filtering
+ * @access Private (Admin)
+ */
+router.get(
+  '/users',
+  [
+    check('role').optional().isIn(['Patient', 'Psychiatrist', 'Admin', 'InternalManagement']),
+    check('search').optional().trim(),
+    check('page').optional().isInt({ min: 1 }).toInt(),
+    check('limit').optional().isInt({ min: 1, max: 100 }).toInt()
+  ],
+  asyncHandler(adminController.getAllUsers)
+);
+
+/**
  * @route GET /admin/reports/:type
+ * @examples http://localhost:3000/api/admin/reports/UserStats?format=json,
+ *           http://localhost:3000/api/admin/reports/AppointmentStats?format=excel&startDate=2023-11-01&endDate=2023-11-30         
  * @desc Generate reports (UserStats, AppointmentStats, AssessmentSummary)
  * @access Private (Admin)
  */

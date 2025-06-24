@@ -1,8 +1,10 @@
 const db = require('../models');
-const { User, Psychiatrist, Report } = db;
+const { User, Psychiatrist, Report, Appointment } = db;
 const { generateToken } = require('../utils/authUtils');
 const { validationResult } = require('express-validator');
 const { generateReport } = require('../utils/reportGenerator');
+const CommunityPost = db.CommunityPost;
+const bcrypt = require('bcrypt');
 
 /**
  * @desc    Get all users
@@ -21,41 +23,88 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
+
+
 /**
- * @desc    Update user role
- * @route   PUT /admin/users/:id/role
- * @access  Private (Admin)
+ * @desc Create new user and enroll as psychiatrist
+ * @route POST /admin/enroll-psychiatrist
+ * @access Private (Admin)
  */
-const updateUserRole = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
+const enrollPsychiatrist = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const { role } = req.body;
+    const { 
+      full_name,
+      email,
+      password,
+      phone,
+      gender,
+      date_of_birth,
+      license_number, 
+      qualifications, 
+      specialization, 
+      years_of_experience, 
+      bio 
+    } = req.body;
 
-    const user = await User.findByPk(id);
-    if (!user) {
-      return res.status(404).json({ success: false, message: 'User not found' });
-    }
-
-    // Prevent modifying own admin role
-    if (user.user_id === req.user.user_id && role !== 'Admin') {
-      return res.status(403).json({ 
+    // Check if email already exists
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json({ 
         success: false, 
-        message: 'Cannot remove your own admin privileges' 
+        message: 'Email already in use' 
       });
     }
 
-    user.role = role;
-    await user.save();
+    // Check if license number exists
+    const existingLicense = await Psychiatrist.findOne({ where: { license_number } });
+    if (existingLicense) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'License number already in use' 
+      });
+    }
 
-    res.json({ 
-      success: true, 
-      message: 'User role updated',
-      data: { user_id: user.user_id, new_role: user.role }
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create transaction for atomic operations
+    await db.sequelize.transaction(async (t) => {
+      // Create new user with Psychiatrist role
+      const user = await User.create({
+        full_name,
+        email,
+        password_hash: hashedPassword,
+        phone,
+        gender,
+        date_of_birth,
+        role: 'Psychiatrist'
+      }, { transaction: t });
+
+      // Create psychiatrist profile
+      const psychiatrist = await Psychiatrist.create({
+        psychiatrist_id: user.user_id,
+        license_number,
+        qualifications,
+        specialization,
+        years_of_experience,
+        bio,
+        availability: true
+      }, { transaction: t });
+
+      res.status(201).json({ 
+        success: true, 
+        message: 'Psychiatrist created and enrolled successfully',
+        data: {
+          user: {
+            user_id: user.user_id,
+            full_name: user.full_name,
+            email: user.email,
+            role: user.role
+          },
+          psychiatrist
+        }
+      });
     });
   } catch (error) {
     next(error);
@@ -63,49 +112,159 @@ const updateUserRole = async (req, res, next) => {
 };
 
 /**
- * @desc    Enroll a new psychiatrist
- * @route   POST /admin/enroll-psychiatrist
- * @access  Private (Admin)
+ * @desc Create new user and enroll as internal management
+ * @route POST /admin/enroll-internal
+ * @access Private (Admin)
  */
-const enrollPsychiatrist = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
+const enrollInternalManagement = async (req, res, next) => {
   try {
-    const { user_id, license_number, qualifications, specialization, years_of_experience, bio } = req.body;
+    const { 
+      full_name,
+      email,
+      password,
+      phone,
+      gender,
+      date_of_birth
+    } = req.body;
 
-    const user = await User.findByPk(user_id);
+    // Check if email already exists
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Email already in use' 
+      });
+    }
+
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create new user with InternalManagement role
+    const user = await User.create({
+      full_name,
+      email,
+      password_hash: hashedPassword,
+      phone,
+      gender,
+      date_of_birth,
+      role: 'InternalManagement'
+    });
+
+    // If you have a separate InternalManagement table:
+    // const internal = await InternalManagement.create({
+    //   user_id: user.user_id,
+    //   position,
+    //   department
+    // });
+
+    res.status(201).json({ 
+      success: true, 
+      message: 'Internal management staff created successfully',
+      data: {
+        user_id: user.user_id,
+        full_name: user.full_name,
+        email: user.email,
+        role: user.role
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * @desc Delete user and associated data based on role
+ * @route DELETE /admin/users/:id
+ * @access Private (Admin)
+ */
+const deleteUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    // Prevent admin from deleting themselves
+    if (id === req.user.user_id) {
+      return res.status(403).json({ 
+        success: false, 
+        message: 'You cannot delete your own account' 
+      });
+    }
+
+    const user = await User.findByPk(id);
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
 
-    // Check if already a psychiatrist
-    const existingPsych = await Psychiatrist.findOne({ where: { psychiatrist_id: user_id } });
-    if (existingPsych) {
-      return res.status(400).json({ success: false, message: 'User is already a psychiatrist' });
-    }
+    // Start transaction for atomic operations
+    await db.sequelize.transaction(async (t) => {
+      // Delete role-specific data first
+      switch (user.role) {
+        case 'Patient':
+          await Patient.destroy({ where: { user_id: id }, transaction: t });
+          break;
+        case 'Psychiatrist':
+          await Psychiatrist.destroy({ where: { psychiatrist_id: id }, transaction: t });
+          // Also delete any appointments, prescriptions, etc.
+          await Appointment.destroy({ where: { psychiatrist_id: id }, transaction: t });
+          break;
+        case 'InternalManagement':
+          // await InternalManagement.destroy({ where: { user_id: id }, transaction: t });
+          break;
+      }
 
-    // Update user role
-    user.role = 'Psychiatrist';
-    await user.save();
-
-    // Create psychiatrist profile
-    const psychiatrist = await Psychiatrist.create({
-      psychiatrist_id: user_id,
-      license_number,
-      qualifications,
-      specialization,
-      years_of_experience,
-      bio,
-      availability: JSON.stringify({}) // Initialize empty availability
+      // Finally delete the user
+      await user.destroy({ transaction: t });
     });
 
-    res.status(201).json({ 
+    res.json({ 
       success: true, 
-      message: 'Psychiatrist enrolled successfully',
-      data: psychiatrist
+      message: `User (${user.role}) and all associated data deleted successfully` 
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * @desc Update user information
+ * @route PUT /admin/users/:id
+ * @access Private (Admin)
+ */
+const updateUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { full_name, email, phone, gender, date_of_birth, role } = req.body;
+
+    const user = await User.findByPk(id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    // Prevent role change to/from Psychiatrist through this endpoint
+    if (role && role !== user.role) {
+      user.role = role;
+    }
+
+    // Update fields
+    if (full_name) user.full_name = full_name;
+    if (email) user.email = email;
+    if (phone) user.phone = phone;
+    if (gender) user.gender = gender;
+    if (date_of_birth) user.date_of_birth = date_of_birth;
+
+    await user.save();
+
+    res.json({ 
+      success: true, 
+      message: 'User updated successfully',
+      data: {
+        user_id: user.user_id,
+        full_name: user.full_name,
+        email: user.email,
+        role: user.role,
+        phone: user.phone,
+        gender: user.gender
+      }
     });
   } catch (error) {
     next(error);
@@ -171,8 +330,10 @@ const createCommunityPost = async (req, res, next) => {
 
 module.exports = {
   getAllUsers,
-  updateUserRole,
   enrollPsychiatrist,
+  enrollInternalManagement,
+  updateUser,
+  deleteUser,
   generateReports,
   createCommunityPost
 };

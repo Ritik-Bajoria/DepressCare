@@ -2,8 +2,10 @@ const ExcelJS = require('exceljs');
 const PdfPrinter = require('pdfmake');
 const fs = require('fs');
 const path = require('path');
-const { User, Appointment, DepressionForm, Psychiatrist, PatientPayment, PsychiatristSalary } = require('../models');
+const sequelize = require('sequelize');
+const { User, Appointment, DepressionForm, Psychiatrist, PatientPayment, PsychiatristSalary, FormQuestion,FormResponse } = require('../models');
 const moment = require('moment');
+const { Op } = require('sequelize');
 
 /**
  * Generate reports in various formats (PDF, Excel, JSON)
@@ -112,8 +114,16 @@ const generateAppointmentStatsReport = async (dateFilter) => {
     Appointment.findAll({
       where,
       include: [
-        { model: User, as: 'Patient', attributes: ['full_name', 'email'] },
-        { model: User, as: 'Psychiatrist', attributes: ['full_name', 'email'] }
+        { 
+          model: User,
+          as: 'Patient',
+          attributes: ['full_name', 'email']
+        },
+        { 
+          model: User,
+          as: 'Psychiatrist',
+          attributes: ['full_name', 'email']
+        }
       ],
       order: [['scheduled_time', 'DESC']]
     }),
@@ -146,8 +156,11 @@ const generateAssessmentSummaryReport = async (dateFilter) => {
     DepressionForm.findAll({
       where,
       include: [
-        { model: User, attributes: ['full_name', 'email'] },
-        { model: FormResponse, include: [FormQuestion] }
+        { 
+          model: User, 
+          as: 'User', // Must match the alias in your association
+          attributes: ['full_name', 'email'] 
+        }
       ],
       order: [['filled_at', 'DESC']]
     }),
@@ -175,65 +188,120 @@ const generateAssessmentSummaryReport = async (dateFilter) => {
 
 // Format Generators
 const generateExcelReport = async (title, reportData, filename) => {
-  const workbook = new ExcelJS.Workbook();
-  const worksheet = workbook.addWorksheet('Report');
+  try {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Report');
 
-  // Add title
-  worksheet.mergeCells('A1:D1');
-  worksheet.getCell('A1').value = title;
-  worksheet.getCell('A1').font = { size: 16, bold: true };
+    // Add title
+    worksheet.mergeCells('A1:D1');
+    worksheet.getCell('A1').value = title;
+    worksheet.getCell('A1').font = { size: 16, bold: true };
 
-  // Add metadata
-  worksheet.addRow(['Generated at', reportData.metadata.generatedAt]);
-  worksheet.addRow(['Time range', reportData.metadata.timeRange]);
+    // Add metadata
+    worksheet.addRow(['Generated at', new Date().toLocaleString()]);
+    worksheet.addRow(['Time range', reportData.metadata?.timeRange || 'All time']);
 
-  // Add data-specific headers and rows
-  if (reportData.users) {
-    worksheet.addRow(['User Statistics']);
-    worksheet.addRow(['Total Users', 'Total Patients', 'Total Psychiatrists']);
-    worksheet.addRow([
-      reportData.metadata.total_users,
-      reportData.metadata.total_patients,
-      reportData.metadata.total_psychiatrists
-    ]);
-
-    worksheet.addRow([]);
-    worksheet.addRow(['User Details']);
-    worksheet.addRow(['ID', 'Name', 'Email', 'Role', 'Created At']);
-
-    reportData.users.forEach(user => {
+    // Add data-specific headers and rows
+    if (reportData.users) {
+      // User Stats Report
+      worksheet.addRow(['User Statistics']);
+      worksheet.addRow(['Total Users', 'Total Patients', 'Total Psychiatrists']);
       worksheet.addRow([
-        user.user_id,
-        user.full_name,
-        user.email,
-        user.role,
-        moment(user.created_at).format('YYYY-MM-DD HH:mm')
+        reportData.metadata?.total_users || 0,
+        reportData.metadata?.total_patients || 0,
+        reportData.metadata?.total_psychiatrists || 0
       ]);
+
+      worksheet.addRow([]);
+      worksheet.addRow(['User Details']);
+      worksheet.addRow(['ID', 'Name', 'Email', 'Role', 'Created At']);
+
+      (reportData.users || []).forEach(user => {
+        worksheet.addRow([
+          user.user_id,
+          user.full_name,
+          user.email,
+          user.role,
+          moment(user.created_at).format('YYYY-MM-DD HH:mm')
+        ]);
+      });
+    } 
+    else if (reportData.appointments) {
+      // Appointment Stats Report
+      worksheet.addRow(['Appointment Statistics']);
+      worksheet.addRow(['Total Appointments', 'Completed', 'Scheduled', 'Cancelled']);
+      worksheet.addRow([
+        reportData.metadata?.total_appointments || 0,
+        reportData.metadata?.completed || 0,
+        reportData.metadata?.scheduled || 0,
+        reportData.metadata?.cancelled || 0
+      ]);
+
+      worksheet.addRow([]);
+      worksheet.addRow(['Appointment Details']);
+      worksheet.addRow(['ID', 'Patient', 'Psychiatrist', 'Scheduled Time', 'Status']);
+
+      (reportData.appointments || []).forEach(appt => {
+        worksheet.addRow([
+          appt.appointment_id,
+          appt.Patient?.full_name || 'N/A',
+          appt.Psychiatrist?.full_name || 'N/A',
+          moment(appt.scheduled_time).format('YYYY-MM-DD HH:mm'),
+          appt.status
+        ]);
+      });
+    }
+    else if (reportData.assessments) {
+      // Assessment Report
+      worksheet.addRow(['Assessment Statistics']);
+      worksheet.addRow(['Total Assessments', 'Average Score', 'Max Score', 'Min Score']);
+      worksheet.addRow([
+        reportData.metadata?.total_assessments || 0,
+        reportData.metadata?.average_score ? Math.round(reportData.metadata.average_score * 100) / 100 : 0,
+        reportData.metadata?.max_score || 0,
+        reportData.metadata?.min_score || 0
+      ]);
+
+      worksheet.addRow([]);
+      worksheet.addRow(['Assessment Details']);
+      worksheet.addRow(['ID', 'Patient', 'Score', 'Date Taken']);
+
+      (reportData.assessments || []).forEach(assessment => {
+        worksheet.addRow([
+          assessment.form_id,
+          assessment.User?.full_name || 'N/A',
+          assessment.total_score,
+          moment(assessment.filled_at).format('YYYY-MM-DD')
+        ]);
+      });
+    }
+
+    // Auto-size columns
+    worksheet.columns.forEach(column => {
+      const header = column.header || '';
+      column.width = Math.max(15, header.length < 20 ? 20 : header.length + 5);
     });
-  } else if (reportData.appointments) {
-    // Similar structure for appointments
-    // ...
-  } else if (reportData.assessments) {
-    // Similar structure for assessments
-    // ...
+
+    // Generate file
+    const reportsDir = path.join(__dirname, '../reports');
+    if (!fs.existsSync(reportsDir)) {
+      fs.mkdirSync(reportsDir, { recursive: true });
+    }
+
+    const filePath = path.join(reportsDir, `${filename}.xlsx`);
+    await workbook.xlsx.writeFile(filePath);
+    const file = await workbook.xlsx.writeBuffer();
+
+    return {
+      file,
+      contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      filename: `${filename}.xlsx`,
+      filePath
+    };
+  } catch (error) {
+    console.error('Excel report generation error:', error);
+    throw error;
   }
-
-  // Style the worksheet
-  worksheet.columns.forEach(column => {
-    column.width = column.header.length < 20 ? 20 : column.header.length;
-  });
-
-  // Generate file
-  const filePath = path.join(__dirname, '../reports', `${filename}.xlsx`);
-  await workbook.xlsx.writeFile(filePath);
-  const file = await workbook.xlsx.writeBuffer();
-
-  return {
-    file,
-    contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    filename: `${filename}.xlsx`,
-    filePath
-  };
 };
 
 const generatePdfReport = (title, reportData, filename) => {
