@@ -20,6 +20,14 @@ module.exports = (sequelize) => {
       foreignKey: 'patient_id',
       as: 'DepressionForms'
     });
+    User.hasOne(models.Psychiatrist, {
+      foreignKey: 'psychiatrist_id',
+      as: 'Psychiatrist'
+    });
+    User.hasOne(models.Patient, {
+      foreignKey: 'user_id',
+      as: 'Patient'
+    });
     User.hasMany(models.Appointment, {
       foreignKey: 'patient_id',
       as: 'PatientAppointments'

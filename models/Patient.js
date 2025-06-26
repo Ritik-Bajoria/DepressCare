@@ -29,5 +29,12 @@ module.exports = (sequelize) => {
     timestamps: false
   });
 
+    Patient.associate = (models) => {
+    Patient.belongsTo(models.User, {
+      foreignKey: 'user_id',
+      as: 'User'
+    });
+  };
+
   return Patient;
 };

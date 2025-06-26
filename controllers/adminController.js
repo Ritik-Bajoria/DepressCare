@@ -1,10 +1,13 @@
 const db = require('../models');
-const { User, Psychiatrist, Report, Appointment } = db;
-const { generateToken } = require('../utils/authUtils');
+const { User, Psychiatrist, Report, Appointment, Patient } = db;
+// const { generateToken } = require('../utils/authUtils');
 const { validationResult } = require('express-validator');
 const { generateReport } = require('../utils/reportGenerator');
 const CommunityPost = db.CommunityPost;
 const bcrypt = require('bcrypt');
+const fs = require('fs');
+const path = require('path');
+
 
 /**
  * @desc    Get all users
@@ -15,18 +18,36 @@ const getAllUsers = async (req, res, next) => {
   try {
     const users = await User.findAll({
       attributes: { exclude: ['password_hash'] },
+      include: [
+        {
+          model: db.Psychiatrist,
+          as: 'Psychiatrist',
+          required: false,
+          attributes: ['license_number', 'qualifications', 'specialization', 'years_of_experience', 'bio', 'availability']
+        },
+        {
+          model: db.Patient,
+          as: 'Patient',
+          required: false,
+          attributes: ['patient_id', 'previous_diagnosis', 'symptoms', 'short_description']
+        }
+      ],
       order: [['created_at', 'DESC']]
     });
-    res.json({ success: true, count: users.length, data: users });
+
+    res.json({ 
+      success: true, 
+      count: users.length, 
+      data: users 
+    });
   } catch (error) {
     next(error);
   }
 };
 
 
-
 /**
- * @desc Create new user and enroll as psychiatrist
+ * @desc Create new user and enroll as psychiatrist with profile picture handling
  * @route POST /admin/enroll-psychiatrist
  * @access Private (Admin)
  */
@@ -39,6 +60,7 @@ const enrollPsychiatrist = async (req, res, next) => {
       phone,
       gender,
       date_of_birth,
+      profile_picture, // Added profile_picture from request body
       license_number, 
       qualifications, 
       specialization, 
@@ -68,6 +90,12 @@ const enrollPsychiatrist = async (req, res, next) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    // Process profile picture if provided
+    let profilePicturePath = null;
+    if (profile_picture) {
+      profilePicturePath = await saveProfilePicture(profile_picture);
+    }
+
     // Create transaction for atomic operations
     await db.sequelize.transaction(async (t) => {
       // Create new user with Psychiatrist role
@@ -78,6 +106,7 @@ const enrollPsychiatrist = async (req, res, next) => {
         phone,
         gender,
         date_of_birth,
+        profile_picture: profilePicturePath, // Save the path to the profile picture
         role: 'Psychiatrist'
       }, { transaction: t });
 
@@ -100,7 +129,8 @@ const enrollPsychiatrist = async (req, res, next) => {
             user_id: user.user_id,
             full_name: user.full_name,
             email: user.email,
-            role: user.role
+            role: user.role,
+            profile_picture: user.profile_picture // Include profile picture in response
           },
           psychiatrist
         }
@@ -110,6 +140,46 @@ const enrollPsychiatrist = async (req, res, next) => {
     next(error);
   }
 };
+
+/**
+ * Helper function to save base64 profile picture to server
+ * @param {string} base64Data - Base64 encoded image data
+ * @returns {string} - Path to saved image
+ */
+async function saveProfilePicture(base64Data) {
+  try {
+    // Extract the image type and data from base64 string
+    const matches = base64Data.match(/^data:image\/([A-Za-z-+/]+);base64,(.+)$/);
+    
+    if (!matches || matches.length !== 3) {
+      throw new Error('Invalid base64 image data');
+    }
+
+    const imageType = matches[1];
+    const imageData = matches[2];
+    const buffer = Buffer.from(imageData, 'base64');
+    
+    // Create unique filename (using timestamp)
+    const timestamp = Date.now();
+    const filename = `profile_${timestamp}.${imageType}`;
+    const uploadDir = path.join(__dirname, '../uploads/profile_pictures');
+    const filePath = path.join(uploadDir, filename);
+
+    // Ensure upload directory exists
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+
+    // Save file
+    fs.writeFileSync(filePath, buffer);
+    
+    // Return relative path to be stored in database
+    return `/uploads/profile_pictures/${filename}`;
+  } catch (error) {
+    console.error('Error saving profile picture:', error);
+    throw error;
+  }
+}
 
 /**
  * @desc Create new user and enroll as internal management
@@ -224,52 +294,227 @@ const deleteUser = async (req, res, next) => {
     next(error);
   }
 };
-
 /**
- * @desc Update user information
+ * @desc Update user information with role-specific handling and image management
  * @route PUT /admin/users/:id
  * @access Private (Admin)
  */
 const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { full_name, email, phone, gender, date_of_birth, role } = req.body;
+    const { 
+      full_name, 
+      email, 
+      phone, 
+      gender, 
+      date_of_birth, 
+      role,
+      profile_picture,
+      // Patient-specific fields
+      previous_diagnosis,
+      symptoms,
+      short_description,
+      // Psychiatrist-specific fields
+      license_number,
+      qualifications,
+      specialization,
+      years_of_experience,
+      bio,
+      availability
+    } = req.body;
 
-    const user = await User.findByPk(id);
-    if (!user) {
-      return res.status(404).json({ success: false, message: 'User not found' });
-    }
+    // Start transaction for atomic operations
+    await db.sequelize.transaction(async (t) => {
+      // Find user with associated role data
+      const user = await User.findByPk(id, {
+        include: [
+          { model: Patient, as: 'Patient' },
+          { model: Psychiatrist, as: 'Psychiatrist' }
+        ],
+        transaction: t
+      });
 
-    // Prevent role change to/from Psychiatrist through this endpoint
-    if (role && role !== user.role) {
-      user.role = role;
-    }
-
-    // Update fields
-    if (full_name) user.full_name = full_name;
-    if (email) user.email = email;
-    if (phone) user.phone = phone;
-    if (gender) user.gender = gender;
-    if (date_of_birth) user.date_of_birth = date_of_birth;
-
-    await user.save();
-
-    res.json({ 
-      success: true, 
-      message: 'User updated successfully',
-      data: {
-        user_id: user.user_id,
-        full_name: user.full_name,
-        email: user.email,
-        role: user.role,
-        phone: user.phone,
-        gender: user.gender
+      if (!user) {
+        return res.status(404).json({ success: false, message: 'User not found' });
       }
+
+      // Check for duplicate email if email is being updated
+      if (email && email !== user.email) {
+        const existingUser = await User.findOne({ 
+          where: { 
+            email,
+            user_id: { [Op.ne]: id }
+          },
+          transaction: t
+        });
+        
+        if (existingUser) {
+          return res.status(400).json({ 
+            success: false, 
+            message: 'Email already in use by another account' 
+          });
+        }
+      }
+
+      // Check for duplicate license number if updating psychiatrist
+      if (license_number && user.Psychiatrist && license_number !== user.Psychiatrist.license_number) {
+        const existingPsychiatrist = await Psychiatrist.findOne({ 
+          where: { 
+            license_number,
+            psychiatrist_id: { [Op.ne]: id }
+          },
+          transaction: t
+        });
+        
+        if (existingPsychiatrist) {
+          return res.status(400).json({ 
+            success: false, 
+            message: 'License number already in use by another psychiatrist' 
+          });
+        }
+      }
+
+      // Handle profile picture update if provided
+      let profilePicturePath = user.profile_picture;
+      if (profile_picture) {
+        // Delete old profile picture if it exists
+        if (profilePicturePath) {
+          await deleteProfilePicture(profilePicturePath);
+        }
+        // Save new profile picture
+        profilePicturePath = await saveProfilePicture(profile_picture);
+      }
+
+      // Update basic user fields
+      if (full_name) user.full_name = full_name;
+      if (email) user.email = email;
+      if (phone) user.phone = phone;
+      if (gender) user.gender = gender;
+      if (date_of_birth) user.date_of_birth = date_of_birth;
+      if (profilePicturePath) user.profile_picture = profilePicturePath;
+
+      // Handle role change if requested
+      if (role && role !== user.role) {
+        // Validate role change logic here if needed
+        user.role = role;
+      }
+
+      await user.save({ transaction: t });
+
+      // Handle role-specific updates
+      if (user.role === 'Patient') {
+        if (user.Patient) {
+          // Update existing patient record
+          if (previous_diagnosis !== undefined) user.Patient.previous_diagnosis = previous_diagnosis;
+          if (symptoms) user.Patient.symptoms = symptoms;
+          if (short_description) user.Patient.short_description = short_description;
+          await user.Patient.save({ transaction: t });
+        } else {
+          // Create new patient record if doesn't exist
+          await Patient.create({
+            user_id: user.user_id,
+            previous_diagnosis: previous_diagnosis || false,
+            symptoms: symptoms || null,
+            short_description: short_description || null
+          }, { transaction: t });
+        }
+      } 
+      else if (user.role === 'Psychiatrist') {
+        if (user.Psychiatrist) {
+          // Update existing psychiatrist record
+          if (license_number) user.Psychiatrist.license_number = license_number;
+          if (qualifications) user.Psychiatrist.qualifications = qualifications;
+          if (specialization) user.Psychiatrist.specialization = specialization;
+          if (years_of_experience) user.Psychiatrist.years_of_experience = years_of_experience;
+          if (bio) user.Psychiatrist.bio = bio;
+          if (availability !== undefined) user.Psychiatrist.availability = availability;
+          await user.Psychiatrist.save({ transaction: t });
+        } else {
+          // Create new psychiatrist record if doesn't exist
+          await Psychiatrist.create({
+            psychiatrist_id: user.user_id,
+            license_number: license_number || null,
+            qualifications: qualifications || null,
+            specialization: specialization || null,
+            years_of_experience: years_of_experience || 0,
+            bio: bio || null,
+            availability: availability !== undefined ? availability : true
+          }, { transaction: t });
+        }
+      }
+
+      // Fetch updated user with associations
+      const updatedUser = await User.findByPk(id, {
+        include: [
+          { model: Patient, as: 'Patient' },
+          { model: Psychiatrist, as: 'Psychiatrist' }
+        ],
+        transaction: t
+      });
+
+      res.json({ 
+        success: true, 
+        message: 'User updated successfully',
+        data: formatUserResponse(updatedUser)
+      });
     });
   } catch (error) {
     next(error);
   }
 };
+
+/**
+ * Helper function to format user response
+ */
+function formatUserResponse(user) {
+  const response = {
+    user_id: user.user_id,
+    full_name: user.full_name,
+    email: user.email,
+    phone: user.phone,
+    gender: user.gender,
+    date_of_birth: user.date_of_birth,
+    role: user.role,
+    profile_picture: user.profile_picture,
+    created_at: user.created_at
+  };
+
+  // Include role-specific data
+  if (user.role === 'Patient' && user.Patient) {
+    response.patient = {
+      previous_diagnosis: user.Patient.previous_diagnosis,
+      symptoms: user.Patient.symptoms,
+      short_description: user.Patient.short_description
+    };
+  } else if (user.role === 'Psychiatrist' && user.Psychiatrist) {
+    response.psychiatrist = {
+      license_number: user.Psychiatrist.license_number,
+      qualifications: user.Psychiatrist.qualifications,
+      specialization: user.Psychiatrist.specialization,
+      years_of_experience: user.Psychiatrist.years_of_experience,
+      bio: user.Psychiatrist.bio,
+      availability: user.Psychiatrist.availability
+    };
+  }
+
+  return response;
+}
+/**
+ * Helper function to delete profile picture
+ */
+async function deleteProfilePicture(filePath) {
+  try {
+    if (filePath) {
+      const fullPath = path.join(__dirname, '../..', filePath);
+      if (fs.existsSync(fullPath)) {
+        fs.unlinkSync(fullPath);
+      }
+    }
+  } catch (error) {
+    console.error('Error deleting profile picture:', error);
+    // Don't throw error as we don't want to fail the whole operation
+  }
+}
 
 /**
  * @desc    Generate reports
@@ -327,6 +572,7 @@ const createCommunityPost = async (req, res, next) => {
     next(error);
   }
 };
+
 
 module.exports = {
   getAllUsers,

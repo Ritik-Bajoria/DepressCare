@@ -5,20 +5,25 @@ const morgan = require('morgan'); // <-- Added Morgan
 const cors = require('cors'); 
 const logger = require('./controllers/logger');
 const db = require('./models');
+const path = require('path');
 const authRouter = require('./routes/authRoutes');
 const adminRouter = require('./routes/adminRoutes');
 const authMiddleware = require('./middlewares/authMiddleware');
 const { errorHandler, notFoundHandler, asyncHandler } = require('./middlewares/errorHandler');
 
 // Middleware to parse JSON Request Bodies
-app.use(express.json());
-// Midddleware to parse URL-encoded Request Bodies
-app.use(express.urlencoded({ extended: false }));
-
+// app.use(express.json());
+// // Midddleware to parse URL-encoded Request Bodies
+// app.use(express.urlencoded({ extended: false }));
+// Increase payload size limit (e.g., 50MB)
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(cors({
   origin: 'http://localhost:5173'
 }));
 
+// Serve static files from /uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(morgan('dev')); 
 // Middleware to create logs
