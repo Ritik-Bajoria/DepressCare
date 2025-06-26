@@ -9,7 +9,7 @@ const db = require('../models');
 const { User, Psychiatrist } = db;
 
 // Apply admin role middleware to all routes
-// router.use(roleMiddleware(['admin']));
+router.use(roleMiddleware(['admin']));
 
 /**
  * @route GET /admin/users
