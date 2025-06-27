@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
     User.hasOne(models.Patient, {
       foreignKey: 'user_id',
       as: 'Patient'
-    });
+    });  
     User.hasMany(models.Appointment, {
       foreignKey: 'patient_id',
       as: 'PatientAppointments'
@@ -35,6 +35,15 @@ module.exports = (sequelize) => {
     User.hasMany(models.Appointment, {
       foreignKey: 'psychiatrist_id',
       as: 'PsychiatristAppointments'
+    });
+    User.hasMany(models.Recommendation, {
+      foreignKey: 'psychiatrist_id',
+      as: 'GivenRecommendations'
+    });
+    
+    User.hasMany(models.Recommendation, {
+      foreignKey: 'patient_id',
+      as: 'ReceivedRecommendations'
     });
   };
 

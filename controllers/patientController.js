@@ -223,11 +223,22 @@ const getPrescriptions = async (req, res, next) => {
   try {
     const patient_id = req.user.user_id;
 
-    const prescriptions = await Prescription.findAll({
+    const prescriptions = await db.Prescription.findAll({
       include: [{
-        model: Appointment,
+        model: db.Appointment,
+        as: 'Appointment',
         where: { patient_id },
-        attributes: ['scheduled_time']
+        attributes: ['scheduled_time', 'status'],
+        include: [{
+          model: db.User,
+          as: 'PsychiatristUser',
+          attributes: ['full_name'],
+          include: [{
+            model: db.Psychiatrist,
+            as: 'Psychiatrist',
+            attributes: ['specialization']
+          }]
+        }]
       }],
       order: [['uploaded_at', 'DESC']]
     });
@@ -251,18 +262,20 @@ const getRecommendations = async (req, res, next) => {
   try {
     const patient_id = req.user.user_id;
 
-    const recommendations = await Recommendation.findAll({
+    const recommendations = await db.Recommendation.findAll({
       where: { patient_id },
-      include: [{
-        model: User,
-        as: 'PsychiatristUser',
-        attributes: ['full_name', 'profile_picture'],
-        include: [{
-          model: Psychiatrist,
-          as: 'Psychiatrist',
-          attributes: ['specialization']
-        }]
-      }],
+      include: [
+        {
+          model: db.User,
+          as: 'PsychiatristUser',
+          attributes: ['full_name', 'profile_picture'],
+          include: [{
+            model: db.Psychiatrist,
+            as: 'Psychiatrist',
+            attributes: ['specialization']
+          }]
+        }
+      ],
       order: [['created_at', 'DESC']]
     });
 

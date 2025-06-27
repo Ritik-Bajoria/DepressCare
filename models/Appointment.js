@@ -14,11 +14,17 @@ module.exports = (sequelize) => {
   Appointment.associate = (models) => {
     Appointment.belongsTo(models.User, {
       foreignKey: 'patient_id',
-      as: 'Patient'
+      as: 'PatientUser'
     });
+    
     Appointment.belongsTo(models.User, {
       foreignKey: 'psychiatrist_id',
-      as: 'Psychiatrist'
+      as: 'PsychiatristUser'
+    });
+    
+    Appointment.hasMany(models.Prescription, {
+      foreignKey: 'appointment_id',
+      as: 'Prescriptions'
     });
   };
 

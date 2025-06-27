@@ -9,14 +9,14 @@ const { asyncHandler } = require('../middlewares/errorHandler');
 router.use(roleMiddleware(['Patient']));
 
 /**
- * @route GET /patients/psychiatrists
+ * @route GET /patient/psychiatrists
  * @desc Search psychiatrists
  * @access Private (Patient)
  */
 router.get('/psychiatrists', asyncHandler(patientController.searchPsychiatrists));
 
 /**
- * @route POST /patients/appointments
+ * @route POST /patient/appointments
  * @desc Book new appointment
  * @access Private (Patient)
  */
@@ -30,7 +30,7 @@ router.post(
 );
 
 /**
- * @route PATCH /patients/appointments/:id/cancel
+ * @route PATCH /patient/appointments/:id/cancel
  * @desc Cancel appointment
  * @access Private (Patient)
  */
@@ -43,14 +43,14 @@ router.patch(
 );
 
 /**
- * @route GET /patients/appointments
+ * @route GET /patient/appointments
  * @desc Get appointment history
  * @access Private (Patient)
  */
 router.get('/appointments', asyncHandler(patientController.getAppointmentHistory));
 
 /**
- * @route POST /patients/assessments
+ * @route POST /patient/assessments
  * @desc Submit depression self-assessment
  * @access Private (Patient)
  */
@@ -66,14 +66,14 @@ router.post(
 );
 
 /**
- * @route GET /patients/prescriptions
+ * @route GET /patient/prescriptions
  * @desc Get prescriptions
  * @access Private (Patient)
  */
 router.get('/prescriptions', asyncHandler(patientController.getPrescriptions));
 
 /**
- * @route GET /patients/recommendations
+ * @route GET /patient/recommendations
  * @desc Get recommendations
  * @access Private (Patient)
  */

@@ -9,5 +9,20 @@ module.exports = (sequelize) => {
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
   }, { tableName: 'Recommendations', timestamps: false });
 
+  Recommendation.associate = (models) => {
+    Recommendation.belongsTo(models.User, {
+      foreignKey: 'psychiatrist_id',
+      as: 'PsychiatristUser'
+    });
+    Recommendation.belongsTo(models.User, {
+      foreignKey: 'patient_id',
+      as: 'PatientUser'
+    });
+    Recommendation.belongsTo(models.Psychiatrist, {
+      foreignKey: 'psychiatrist_id',
+      as: 'Psychiatrist'
+    });
+  };
+  
   return Recommendation;
 };

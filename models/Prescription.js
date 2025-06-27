@@ -9,5 +9,17 @@ module.exports = (sequelize) => {
     notes: { type: DataTypes.TEXT },
     uploaded_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
   }, { tableName: 'Prescriptions', timestamps: false });
+
+  Prescription.associate = (models) => {
+    Prescription.belongsTo(models.Appointment, {
+      foreignKey: 'appointment_id',
+      as: 'Appointment'
+    });
+    Prescription.belongsTo(models.User, {
+      foreignKey: 'uploaded_by',
+      as: 'UploadedBy'
+    });
+  };
+
   return Prescription;
 };
