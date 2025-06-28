@@ -1929,3 +1929,30 @@
 6/28/2025 5:22:31 PM [INFO]:  SIGINT signal received: closing HTTP server
 6/28/2025 5:22:31 PM [INFO]:  HTTP server closed
 6/28/2025 5:22:31 PM [INFO]:  Sequelize connection closed
+6/28/2025 5:34:20 PM [INFO]:  App started on process id:31344
+6/28/2025 5:34:21 PM [INFO]:  Server is listening on port 3000
+6/28/2025 5:34:23 PM [INFO]:  Request from 127.0.0.1 at GET /api/psychiatrist/patients/1/assessments
+6/28/2025 5:37:17 PM [INFO]:  Request from 127.0.0.1 at POST /api/patient/appointments
+6/28/2025 5:37:35 PM [INFO]:  Request from 127.0.0.1 at POST /api/patient/appointments
+6/28/2025 5:38:06 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 5:38:06 PM [INFO]:  HTTP server closed
+6/28/2025 5:38:06 PM [INFO]:  Sequelize connection closed
+6/28/2025 5:38:52 PM [INFO]:  App started on process id:1400
+6/28/2025 5:38:55 PM [INFO]:  Server is listening on port 3000
+6/28/2025 5:39:00 PM [INFO]:  Request from 127.0.0.1 at POST /api/patient/appointments
+6/28/2025 5:39:05 PM [INFO]:  Request from 127.0.0.1 at POST /api/patient/appointments
+6/28/2025 5:42:28 PM [INFO]:  App started on process id:28052
+6/28/2025 5:42:30 PM [INFO]:  Server is listening on port 3000
+6/28/2025 5:42:33 PM [INFO]:  Request from 127.0.0.1 at POST /api/patient/appointments
+6/28/2025 6:38:30 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 6:38:30 PM [INFO]:  HTTP server closed
+6/28/2025 6:38:30 PM [INFO]:  Sequelize connection closed
+6/28/2025 6:38:33 PM [INFO]:  App started on process id:21600
+6/28/2025 6:38:34 PM [INFO]:  Server is listening on port 3000
+6/28/2025 6:38:37 PM [INFO]:  Request from 127.0.0.1 at POST /api/patient/appointments
+6/28/2025 6:38:48 PM [INFO]:  App started on process id:23884
+6/28/2025 6:38:49 PM [INFO]:  Server is listening on port 3000
+6/28/2025 6:38:51 PM [INFO]:  Request from 127.0.0.1 at POST /api/patient/appointments
+6/28/2025 6:39:46 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 6:39:46 PM [INFO]:  HTTP server closed
+6/28/2025 6:39:46 PM [INFO]:  Sequelize connection closed

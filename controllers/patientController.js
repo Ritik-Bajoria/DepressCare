@@ -51,47 +51,47 @@ const searchPsychiatrists = async (req, res, next) => {
  * @route POST /patients/appointments
  * @access Private (Patient)
  */
-const bookAppointment = async (req, res, next) => {
+const bookAppointment = async (req, res) => {
   try {
     const { psychiatrist_id, scheduled_time } = req.body;
     const patient_id = req.user.user_id;
 
-    // Check if psychiatrist exists
-    const psychiatrist = await Psychiatrist.findByPk(psychiatrist_id);
-    if (!psychiatrist) {
-      return res.status(404).json({ success: false, message: 'Psychiatrist not found' });
+    // 1. Get psychiatrist and patient emails
+    const [psychiatrist, patient] = await Promise.all([
+      User.findByPk(psychiatrist_id),
+      User.findByPk(patient_id)
+    ]);
+
+    if (!psychiatrist || !patient) {
+      return res.status(404).json({ error: 'User not found' });
     }
 
-    // Check if time slot is available
-    const existingAppointment = await Appointment.findOne({
-      where: {
-        psychiatrist_id,
-        scheduled_time,
-        status: 'Scheduled'
-      }
+    // 2. Generate meeting link with proper parameters
+    const meetLink = await generateMeetingLink({
+      psychiatristEmail: psychiatrist.email,
+      patientEmail: patient.email,
+      startTime: new Date(scheduled_time),
+      endTime: new Date(new Date(scheduled_time).setHours(new Date(scheduled_time).getHours() + 1)),
+      summary: `Therapy Session - ${patient.name}`
     });
 
-    if (existingAppointment) {
-      return res.status(400).json({ success: false, message: 'Time slot not available' });
-    }
-
-    // Create appointment
+    // 3. Create appointment with the string meeting link
     const appointment = await Appointment.create({
       patient_id,
       psychiatrist_id,
       scheduled_time,
-      status: 'Scheduled',
-      meeting_link: generateMeetingLink(),
-      created_at: new Date()
+      meeting_link: meetLink, // Ensure this is a string
+      status: 'Scheduled'
     });
 
-    res.status(201).json({
-      success: true,
-      message: 'Appointment booked successfully',
-      data: appointment
-    });
+    res.status(201).json(appointment);
   } catch (error) {
-    next(error);
+    console.error('Booking error:', error);
+    res.status(500).json({ 
+      error: error.name === 'SequelizeValidationError' 
+        ? 'Invalid meeting link format' 
+        : 'Failed to book appointment' 
+    });
   }
 };
 
