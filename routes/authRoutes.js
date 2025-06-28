@@ -4,7 +4,7 @@ const authController = require('../controllers/authController');
 const { asyncHandler } = require('../middlewares/errorHandler');
 const validate = require('../middlewares/validate');
 const { check } = require('express-validator');
-const authMiddleware = require('./middlewares/authMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
 /**
  * @route POST /auth/register
  * @desc Register a new user

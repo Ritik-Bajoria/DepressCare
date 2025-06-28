@@ -5,7 +5,7 @@ const internalController = require('../controllers/internalController');
 const { check } = require('express-validator');
 const { asyncHandler } = require('../middlewares/errorHandler');
 const validate = require('../middlewares/validate');
-const authMiddleware = require('./middlewares/authMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 // Apply to all routes
 router.use(authMiddleware,roleMiddleware(['InternalManagement']));

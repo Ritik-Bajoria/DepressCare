@@ -8,7 +8,7 @@ const { check, validationResult } = require('express-validator');
 const { Op } = require('sequelize');
 const db = require('../models');
 const { User, Psychiatrist } = db;
-const authMiddleware = require('./middlewares/authMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 // Apply admin role middleware to all routes
 router.use(authMiddleware, roleMiddleware(['admin']));

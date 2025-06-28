@@ -4,7 +4,7 @@ const roleMiddleware = require('../middlewares/roleMiddleware');
 const patientController = require('../controllers/patientController');
 const { check } = require('express-validator');
 const { asyncHandler } = require('../middlewares/errorHandler');
-const authMiddleware = require('./middlewares/authMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 // Apply authentication and patient role middleware to all routes
 router.use(authMiddleware, roleMiddleware(['Patient']));

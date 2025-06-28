@@ -7,5 +7,11 @@ module.exports = (sequelize) => {
     score_type: { type: DataTypes.ENUM('Likert', 'Binary', 'Scale'), allowNull: false }
   }, { tableName: 'FormQuestions', timestamps: false });
 
+  FormQuestion.associate = (models) => {
+    FormQuestion.hasMany(models.FormResponse, {
+      foreignKey: 'question_id',
+      as: 'Responses'
+    });
+  };
   return FormQuestion;
 };

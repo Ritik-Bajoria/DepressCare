@@ -9,10 +9,14 @@ module.exports = (sequelize) => {
   }, { tableName: 'FormResponses', timestamps: false });
 
   FormResponse.associate = (models) => {
-  FormResponse.belongsTo(models.FormQuestion, {
-    foreignKey: 'question_id',
-    as: 'Question' // This must match what you use in the include
-  });
-};
+    FormResponse.belongsTo(models.DepressionForm, {
+      foreignKey: 'form_id',
+      as: 'Form'
+    });
+    FormResponse.belongsTo(models.FormQuestion, {
+      foreignKey: 'question_id',
+      as: 'Question' // This must match what you use in the include
+    });
+  };
   return FormResponse;
 };

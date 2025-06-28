@@ -1956,3 +1956,14 @@
 6/28/2025 6:39:46 PM [INFO]:  SIGINT signal received: closing HTTP server
 6/28/2025 6:39:46 PM [INFO]:  HTTP server closed
 6/28/2025 6:39:46 PM [INFO]:  Sequelize connection closed
+6/28/2025 7:30:46 PM [INFO]:  App started on process id:4492
+6/28/2025 7:31:34 PM [INFO]:  App started on process id:14736
+6/28/2025 7:31:36 PM [INFO]:  Server is listening on port 3000
+6/28/2025 7:31:53 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 7:31:53 PM [INFO]:  HTTP server closed
+6/28/2025 7:31:53 PM [INFO]:  Sequelize connection closed
+6/28/2025 7:31:55 PM [INFO]:  App started on process id:7276
+6/28/2025 7:31:56 PM [INFO]:  Server is listening on port 3000
+6/28/2025 7:32:02 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 7:32:02 PM [INFO]:  HTTP server closed
+6/28/2025 7:32:02 PM [INFO]:  Sequelize connection closed
