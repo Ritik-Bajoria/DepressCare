@@ -11,7 +11,6 @@ const adminRouter = require('./routes/adminRoutes');
 const patientRouter = require('./routes/patientRoutes');
 const psychiatristRouter = require('./routes/psychiatristRoutes');
 const internalRouter = require('./routes/internalRoutes');
-const authMiddleware = require('./middlewares/authMiddleware');
 const { errorHandler, notFoundHandler, asyncHandler } = require('./middlewares/errorHandler');
 
 // Middleware to parse JSON Request Bodies
@@ -34,9 +33,6 @@ app.use((req, res, next) => {
   logger.info(`Request from ${req.ip} at ${req.method} ${req.originalUrl}`);
   next();
 });
-
-// authentication middleware
-app.use(authMiddleware);
 
 //connect to routers
 app.use('/api/auth', authRouter);

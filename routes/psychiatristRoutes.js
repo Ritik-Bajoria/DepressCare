@@ -6,11 +6,11 @@ const { check, validationResult } = require('express-validator');
 const { asyncHandler } = require('../middlewares/errorHandler');
 const { upload, handleUploadErrors } = require('../utils/fileUpload');
 const validate = require('../middlewares/validate');
-
+const authMiddleware = require('./middlewares/authMiddleware');
 // Make sure to use express.json() middleware
 router.use(express.json());
 // Apply authentication and psychiatrist role middleware to all routes
-router.use(roleMiddleware(['Psychiatrist']));
+router.use(authMiddleware,roleMiddleware(['Psychiatrist']));
 
 // Profile routes
 router.get('/profile', asyncHandler(psychiatristController.getProfile));

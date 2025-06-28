@@ -4,9 +4,10 @@ const roleMiddleware = require('../middlewares/roleMiddleware');
 const patientController = require('../controllers/patientController');
 const { check } = require('express-validator');
 const { asyncHandler } = require('../middlewares/errorHandler');
+const authMiddleware = require('./middlewares/authMiddleware');
 
 // Apply authentication and patient role middleware to all routes
-router.use(roleMiddleware(['Patient']));
+router.use(authMiddleware, roleMiddleware(['Patient']));
 
 /**
  * @route GET /patient/psychiatrists
