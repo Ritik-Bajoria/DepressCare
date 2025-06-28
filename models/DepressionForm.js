@@ -12,10 +12,11 @@ module.exports = (sequelize) => {
   DepressionForm.associate = (models) => {
     DepressionForm.belongsTo(models.User, {
       foreignKey: 'patient_id',
-      as: 'User' // This alias should match what you use in your includes
+      as: 'User' 
     });
     DepressionForm.hasMany(models.FormResponse, {
-      foreignKey: 'form_id'
+      foreignKey: 'form_id',
+      as: 'FormResponses' 
     });
   };
   return DepressionForm;

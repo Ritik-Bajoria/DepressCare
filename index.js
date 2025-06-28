@@ -9,6 +9,7 @@ const path = require('path');
 const authRouter = require('./routes/authRoutes');
 const adminRouter = require('./routes/adminRoutes');
 const patientRouter = require('./routes/patientRoutes');
+const psychiatristRouter = require('./routes/psychiatristRoutes');
 const authMiddleware = require('./middlewares/authMiddleware');
 const { errorHandler, notFoundHandler, asyncHandler } = require('./middlewares/errorHandler');
 
@@ -40,6 +41,7 @@ app.use(authMiddleware);
 app.use('/api/auth', authRouter);
 app.use('/api/admin',adminRouter);
 app.use('/api/patient',patientRouter);
+app.use('/api/psychiatrist',psychiatristRouter);
 
 app.use(notFoundHandler);
 app.use(errorHandler);

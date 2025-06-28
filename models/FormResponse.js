@@ -8,5 +8,11 @@ module.exports = (sequelize) => {
     response_value: { type: DataTypes.INTEGER }
   }, { tableName: 'FormResponses', timestamps: false });
 
+  FormResponse.associate = (models) => {
+  FormResponse.belongsTo(models.FormQuestion, {
+    foreignKey: 'question_id',
+    as: 'Question' // This must match what you use in the include
+  });
+};
   return FormResponse;
 };
