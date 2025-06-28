@@ -305,30 +305,42 @@ const generateExcelReport = async (title, reportData, filename) => {
 };
 
 const generatePdfReport = (title, reportData, filename) => {
-  const fonts = {
-    Helvetica: {
-      normal: 'Helvetica',
-      bold: 'Helvetica-Bold',
-      italics: 'Helvetica-Oblique',
-      bolditalics: 'Helvetica-BoldOblique'
-    }
-  };
+  return new Promise((resolve, reject) => {
+    const fonts = {
+      Helvetica: {
+        normal: 'Helvetica',
+        bold: 'Helvetica-Bold',
+        italics: 'Helvetica-Oblique',
+        bolditalics: 'Helvetica-BoldOblique'
+      }
+    };
 
-  const printer = new PdfPrinter(fonts);
-  const docDefinition = createPdfDefinition(title, reportData);
-  const pdfDoc = printer.createPdfKitDocument(docDefinition);
+    const printer = new PdfPrinter(fonts);
+    const docDefinition = createPdfDefinition(title, reportData);
+    const pdfDoc = printer.createPdfKitDocument(docDefinition);
 
-  const filePath = path.join(__dirname, '../reports', `${filename}.pdf`);
-  const stream = fs.createWriteStream(filePath);
-  pdfDoc.pipe(stream);
-  pdfDoc.end();
+    const chunks = [];
+    pdfDoc.on('data', chunk => chunks.push(chunk));
+    pdfDoc.on('end', () => {
+      const buffer = Buffer.concat(chunks);
+      const reportsDir = path.join(__dirname, '../reports');
+      if (!fs.existsSync(reportsDir)) {
+        fs.mkdirSync(reportsDir, { recursive: true });
+      }
+      const filePath = path.join(reportsDir, `${filename}.pdf`);
+      fs.writeFileSync(filePath, buffer);
 
-  return {
-    file: pdfDoc,
-    contentType: 'application/pdf',
-    filename: `${filename}.pdf`,
-    filePath
-  };
+      resolve({
+        file: buffer,
+        contentType: 'application/pdf',
+        filename: `${filename}.pdf`,
+        filePath
+      });
+    });
+
+    pdfDoc.on('error', err => reject(err));
+    pdfDoc.end();
+  });
 };
 
 const createPdfDefinition = (title, reportData) => {
@@ -359,17 +371,21 @@ const createPdfDefinition = (title, reportData) => {
       {
         table: {
           headerRows: 1,
-          widths: ['auto', '*', '*', 'auto', 'auto'],
+          widths: [40, 100, 160, 80, 80],  // fixed column widths
           body: [
             ['ID', 'Name', 'Email', 'Role', 'Created At'],
             ...reportData.users.map(user => [
               user.user_id,
-              user.full_name,
-              user.email,
+              truncate(user.full_name, 30),
+              truncate(user.email, 35),
               user.role,
-              moment(user.created_at).format('YYYY-MM-DD')
+              moment(user.created_at).isValid() ? moment(user.created_at).format('YYYY-MM-DD') : 'N/A'
             ])
           ]
+        },
+        layout: {
+          hLineWidth: () => 0.5,
+          vLineWidth: () => 0.5
         }
       }
     );
@@ -404,7 +420,10 @@ const createPdfDefinition = (title, reportData) => {
     }
   };
 };
-
+const truncate = (text, max = 30) => {
+  if (!text) return '';
+  return text.length > max ? text.substring(0, max - 3) + '...' : text;
+};
 module.exports = {
   generateReport
 };

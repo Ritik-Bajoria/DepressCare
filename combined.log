@@ -1797,3 +1797,43 @@
 6/28/2025 3:56:44 PM [INFO]:  SIGINT signal received: closing HTTP server
 6/28/2025 3:56:44 PM [INFO]:  HTTP server closed
 6/28/2025 3:56:44 PM [INFO]:  Sequelize connection closed
+6/28/2025 4:03:58 PM [INFO]:  App started on process id:31656
+6/28/2025 4:03:59 PM [INFO]:  Server is listening on port 3000
+6/28/2025 4:04:01 PM [INFO]:  Request from 127.0.0.1 at GET /api/psychiatrist/patients/1/assessments
+6/28/2025 4:07:45 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/json
+6/28/2025 4:07:57 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/json
+6/28/2025 4:08:01 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/JSON
+6/28/2025 4:08:41 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=json
+6/28/2025 4:09:20 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=json
+6/28/2025 4:09:28 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/json
+6/28/2025 4:11:04 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 4:11:04 PM [INFO]:  HTTP server closed
+6/28/2025 4:11:04 PM [INFO]:  Sequelize connection closed
+6/28/2025 4:11:07 PM [INFO]:  App started on process id:1572
+6/28/2025 4:11:08 PM [INFO]:  Server is listening on port 3000
+6/28/2025 4:11:09 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/json
+6/28/2025 4:11:13 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=json
+6/28/2025 4:11:18 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=a
+6/28/2025 4:11:23 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=json
+6/28/2025 4:11:37 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=pdf
+6/28/2025 4:18:11 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 4:18:11 PM [INFO]:  HTTP server closed
+6/28/2025 4:18:11 PM [INFO]:  Sequelize connection closed
+6/28/2025 4:18:16 PM [INFO]:  App started on process id:22036
+6/28/2025 4:18:17 PM [INFO]:  Server is listening on port 3000
+6/28/2025 4:18:23 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=pdf
+6/28/2025 4:18:33 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=pdf
+6/28/2025 4:29:26 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 4:29:26 PM [INFO]:  HTTP server closed
+6/28/2025 4:29:26 PM [INFO]:  Sequelize connection closed
+6/28/2025 4:29:27 PM [INFO]:  App started on process id:1992
+6/28/2025 4:29:29 PM [INFO]:  Server is listening on port 3000
+6/28/2025 4:29:31 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=pdf
+6/28/2025 4:30:43 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=pdf
+6/28/2025 4:30:50 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=pdf
+6/28/2025 4:31:10 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=xlxs
+6/28/2025 4:31:17 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=excel
+6/28/2025 4:31:21 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=excel
+6/28/2025 4:32:18 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 4:32:18 PM [INFO]:  HTTP server closed
+6/28/2025 4:32:18 PM [INFO]:  Sequelize connection closed

@@ -201,12 +201,12 @@ router.get(
   '/reports/:type',
   [
     check('type')
-      .isIn(['UserStats', 'AppointmentStats', 'AssessmentSummary'])
-      .withMessage('Invalid report type'),
+      .isIn(['UserStats', 'UserStats', 'AssessmentSummary'])
+      .withMessage('Invalid report type should be one of (UserStats, UserStats, AssessmentSummary)'),
     check('format')
       .optional()
       .isIn(['pdf', 'excel', 'json'])
-      .withMessage('Invalid format specified'),
+      .withMessage('Invalid format specified should be (pdf, excel, json)'),
     check('startDate')
       .optional()
       .isISO8601()
