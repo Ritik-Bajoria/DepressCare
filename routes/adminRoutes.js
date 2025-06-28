@@ -61,9 +61,7 @@ router.post(
     check('email').isEmail().withMessage('Invalid email format'),
     check('password')
       .isLength({ min: 8 })
-      .withMessage('Password must be at least 8 characters')
-      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
-      .withMessage('Password must contain at least one uppercase, one lowercase, one number and one special character'),
+      .withMessage('Password must be at least 8 characters'),
     check('phone').optional().isMobilePhone().withMessage('Invalid phone number'),
     check('gender').optional().isIn(['Male', 'Female', 'Other']).withMessage('Invalid gender'),
     check('date_of_birth').optional().isISO8601().withMessage('Invalid date format (YYYY-MM-DD)'),

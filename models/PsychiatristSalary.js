@@ -11,5 +11,12 @@ module.exports = (sequelize) => {
     processed_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
   }, { tableName: 'PsychiatristSalaries', timestamps: false });
 
+  PsychiatristSalary.associate = (models) => {
+    PsychiatristSalary.belongsTo(models.Psychiatrist, {
+      foreignKey: 'psychiatrist_id',
+      as: 'Psychiatrist'
+    });
+  };
+
   return PsychiatristSalary;
 };

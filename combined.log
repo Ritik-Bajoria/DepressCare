@@ -1837,3 +1837,95 @@
 6/28/2025 4:32:18 PM [INFO]:  SIGINT signal received: closing HTTP server
 6/28/2025 4:32:18 PM [INFO]:  HTTP server closed
 6/28/2025 4:32:18 PM [INFO]:  Sequelize connection closed
+6/28/2025 4:39:09 PM [INFO]:  App started on process id:10848
+6/28/2025 4:40:49 PM [INFO]:  App started on process id:23700
+6/28/2025 4:41:48 PM [INFO]:  App started on process id:33596
+6/28/2025 4:41:50 PM [INFO]:  Server is listening on port 3000
+6/28/2025 4:49:05 PM [INFO]:  Request from 127.0.0.1 at POST /api/admin/enroll-internal
+6/28/2025 4:49:30 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 4:49:30 PM [INFO]:  HTTP server closed
+6/28/2025 4:49:30 PM [INFO]:  Sequelize connection closed
+6/28/2025 4:49:35 PM [INFO]:  App started on process id:33496
+6/28/2025 4:49:36 PM [INFO]:  Server is listening on port 3000
+6/28/2025 4:49:38 PM [INFO]:  Request from 127.0.0.1 at POST /api/admin/enroll-internal
+6/28/2025 4:50:00 PM [INFO]:  Request from 127.0.0.1 at POST /api/auth/login
+6/28/2025 4:50:18 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/jobs
+6/28/2025 4:50:26 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/jobs
+6/28/2025 4:50:32 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/jobs
+6/28/2025 4:50:34 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/jobs
+6/28/2025 4:50:35 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/jobs
+6/28/2025 4:52:11 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+6/28/2025 4:52:25 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+6/28/2025 4:58:45 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 4:58:45 PM [INFO]:  HTTP server closed
+6/28/2025 4:58:45 PM [INFO]:  Sequelize connection closed
+6/28/2025 4:59:03 PM [INFO]:  App started on process id:26044
+6/28/2025 4:59:04 PM [INFO]:  Server is listening on port 3000
+6/28/2025 5:00:32 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 5:00:32 PM [INFO]:  HTTP server closed
+6/28/2025 5:00:32 PM [INFO]:  Sequelize connection closed
+6/28/2025 5:00:34 PM [INFO]:  App started on process id:29884
+6/28/2025 5:00:35 PM [INFO]:  Server is listening on port 3000
+6/28/2025 5:00:52 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 5:00:52 PM [INFO]:  HTTP server closed
+6/28/2025 5:00:52 PM [INFO]:  Sequelize connection closed
+6/28/2025 5:00:54 PM [INFO]:  App started on process id:11508
+6/28/2025 5:00:55 PM [INFO]:  Server is listening on port 3000
+6/28/2025 5:00:57 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+6/28/2025 5:02:39 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 5:02:39 PM [INFO]:  HTTP server closed
+6/28/2025 5:02:39 PM [INFO]:  Sequelize connection closed
+6/28/2025 5:02:40 PM [INFO]:  App started on process id:19460
+6/28/2025 5:02:41 PM [INFO]:  Server is listening on port 3000
+6/28/2025 5:02:44 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+6/28/2025 5:03:15 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+6/28/2025 5:03:20 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+6/28/2025 5:03:43 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+6/28/2025 5:04:26 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+6/28/2025 5:04:52 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+6/28/2025 5:05:05 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+6/28/2025 5:05:12 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+6/28/2025 5:05:59 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/salaries
+6/28/2025 5:06:06 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/salaries
+6/28/2025 5:06:29 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/salaries
+6/28/2025 5:09:55 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 5:09:55 PM [INFO]:  HTTP server closed
+6/28/2025 5:09:55 PM [INFO]:  Sequelize connection closed
+6/28/2025 5:09:59 PM [INFO]:  App started on process id:8240
+6/28/2025 5:10:00 PM [INFO]:  Server is listening on port 3000
+6/28/2025 5:10:08 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 5:10:08 PM [INFO]:  HTTP server closed
+6/28/2025 5:10:08 PM [INFO]:  Sequelize connection closed
+6/28/2025 5:10:20 PM [INFO]:  App started on process id:11336
+6/28/2025 5:10:21 PM [INFO]:  Server is listening on port 3000
+6/28/2025 5:10:52 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/salaries
+6/28/2025 5:12:31 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 5:12:31 PM [INFO]:  HTTP server closed
+6/28/2025 5:12:31 PM [INFO]:  Sequelize connection closed
+6/28/2025 5:12:33 PM [INFO]:  App started on process id:29312
+6/28/2025 5:12:34 PM [INFO]:  Server is listening on port 3000
+6/28/2025 5:12:37 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/salaries
+6/28/2025 5:12:47 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/salaries
+6/28/2025 5:14:56 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 5:14:56 PM [INFO]:  HTTP server closed
+6/28/2025 5:14:56 PM [INFO]:  Sequelize connection closed
+6/28/2025 5:14:57 PM [INFO]:  App started on process id:29932
+6/28/2025 5:14:59 PM [INFO]:  Server is listening on port 3000
+6/28/2025 5:15:00 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/salaries
+6/28/2025 5:15:10 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/salaries
+6/28/2025 5:15:20 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/salaries
+6/28/2025 5:17:18 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 5:17:18 PM [INFO]:  HTTP server closed
+6/28/2025 5:17:18 PM [INFO]:  Sequelize connection closed
+6/28/2025 5:17:19 PM [INFO]:  App started on process id:11280
+6/28/2025 5:17:20 PM [INFO]:  Server is listening on port 3000
+6/28/2025 5:18:26 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/internal/salaries/2/status
+6/28/2025 5:18:50 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/internal/salaries/2/status
+6/28/2025 5:18:55 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/internal/salaries/2/status
+6/28/2025 5:18:59 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/internal/salaries/2/status
+6/28/2025 5:19:04 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/internal/salaries/2/status
+6/28/2025 5:19:08 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/internal/salaries/2/status
+6/28/2025 5:20:58 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/reports/financial
+6/28/2025 5:22:31 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/28/2025 5:22:31 PM [INFO]:  HTTP server closed
+6/28/2025 5:22:31 PM [INFO]:  Sequelize connection closed

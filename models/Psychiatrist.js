@@ -11,10 +11,18 @@ module.exports = (sequelize) => {
     availability: { type: DataTypes.BOOLEAN }
   }, { tableName: 'Psychiatrists', timestamps: false });
 
-    Psychiatrist.associate = (models) => {
+  Psychiatrist.associate = (models) => {
     Psychiatrist.belongsTo(models.User, {
       foreignKey: 'psychiatrist_id',
       as: 'User'
+    });
+    Psychiatrist.hasMany(models.Appointment, {
+      foreignKey: 'psychiatrist_id',
+      as: 'Appointments'
+    });
+    Psychiatrist.hasMany(models.PsychiatristSalary, {
+      foreignKey: 'psychiatrist_id',
+      as: 'Salaries'
     });
   };
   
