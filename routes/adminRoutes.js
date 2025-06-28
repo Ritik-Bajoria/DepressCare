@@ -3,6 +3,7 @@ const router = express.Router();
 const adminController = require('../controllers/adminController');
 const roleMiddleware = require('../middlewares/roleMiddleware');
 const { asyncHandler } = require('../middlewares/errorHandler');
+const validate = require('../middlewares/validate');
 const { check, validationResult } = require('express-validator');
 const { Op } = require('sequelize');
 const db = require('../models');
@@ -44,6 +45,7 @@ router.post(
       .withMessage('Years of experience must be a positive number'),
     check('bio').notEmpty().withMessage('Bio is required')
   ],
+  validate,
   asyncHandler(adminController.enrollPsychiatrist)
 );
 
@@ -66,6 +68,7 @@ router.post(
     check('gender').optional().isIn(['Male', 'Female', 'Other']).withMessage('Invalid gender'),
     check('date_of_birth').optional().isISO8601().withMessage('Invalid date format (YYYY-MM-DD)'),
   ],
+  validate,
   asyncHandler(adminController.enrollInternalManagement)
 );
 
@@ -77,6 +80,7 @@ router.post(
  */
 router.delete(
   '/users/:id',
+  validate,
   asyncHandler(adminController.deleteUser)
 );
 
@@ -87,6 +91,15 @@ router.delete(
  */
 router.patch(
   '/users/:id',
+    (req, res, next) => {
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Request body is required'
+      });
+    }
+    next();
+  },
   [
     // Basic user validation
     check('email').optional().isEmail().withMessage('Invalid email format'),
@@ -173,6 +186,7 @@ router.get(
     check('page').optional().isInt({ min: 1 }).toInt(),
     check('limit').optional().isInt({ min: 1, max: 100 }).toInt()
   ],
+  validate,
   asyncHandler(adminController.getAllUsers)
 );
 
@@ -202,6 +216,7 @@ router.get(
       .isISO8601()
       .withMessage('End date must be in ISO format (YYYY-MM-DD)')
   ],
+  validate,
   asyncHandler(adminController.generateReports)
 );
 
@@ -220,6 +235,7 @@ router.post(
       .withMessage('Title must be less than 255 characters'),
     check('content').notEmpty().withMessage('Content is required')
   ],
+  validate,
   asyncHandler(adminController.createCommunityPost)
 );
 

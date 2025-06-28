@@ -1,5 +1,6 @@
 const db = require('../models');
 const { Op } = require('sequelize');
+const {Appointment} = db;
 
 /**
  * @desc Get psychiatrist's profile
@@ -372,34 +373,49 @@ const getAppointments = async (req, res, next) => {
  * @route PATCH /psychiatrist/appointments/:id/status
  * @access Private (Psychiatrist)
  */
+// controllers/psychiatristController.js
 const updateAppointmentStatus = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const psychiatrist_id = req.user.user_id;
     const { status } = req.body;
 
-    const appointment = await db.Appointment.findOne({
-      where: { 
+    // Validate status value
+    const allowedStatuses = ['Scheduled', 'Completed', 'Cancelled'];
+    if (!allowedStatuses.includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: `Invalid status. Allowed values: ${allowedStatuses.join(', ')}`
+      });
+    }
+
+    const appointment = await Appointment.findOne({
+      where: {
         appointment_id: id,
-        psychiatrist_id 
+        psychiatrist_id: req.user.user_id
       }
     });
 
     if (!appointment) {
-      return res.status(404).json({ 
-        success: false, 
-        message: 'Appointment not found' 
+      return res.status(404).json({
+        success: false,
+        message: 'Appointment not found'
       });
     }
 
     await appointment.update({ status });
 
-    res.json({ 
+    res.json({
       success: true,
-      message: 'Appointment status updated successfully'
+      message: 'Appointment status updated successfully',
+      data: appointment
     });
   } catch (error) {
-    next(error);
+    console.error('Database error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Database error',
+      error: error.message // More specific error message
+    });
   }
 };
 

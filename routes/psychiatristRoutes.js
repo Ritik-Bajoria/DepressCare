@@ -2,10 +2,13 @@ const express = require('express');
 const router = express.Router();
 const psychiatristController = require('../controllers/psychiatristController');
 const roleMiddleware = require('../middlewares/roleMiddleware');
-const { check } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 const { asyncHandler } = require('../middlewares/errorHandler');
-const upload = require('../utils/fileUpload');
+const { upload, handleUploadErrors } = require('../utils/fileUpload');
+const validate = require('../middlewares/validate');
 
+// Make sure to use express.json() middleware
+router.use(express.json());
 // Apply authentication and psychiatrist role middleware to all routes
 router.use(roleMiddleware(['Psychiatrist']));
 
@@ -20,13 +23,14 @@ router.put(
     check('bio').optional().isString(),
     check('availability').optional().isBoolean()
   ],
+  validate,
   asyncHandler(psychiatristController.updateProfile)
 );
 
 // Patient routes
-router.get('/patients', asyncHandler(psychiatristController.getPatients));
-router.get('/patients/:id', asyncHandler(psychiatristController.getPatientDetails));
-router.get('/patients/:id/assessments', asyncHandler(psychiatristController.getPatientAssessments));
+router.get('/patients',validate, asyncHandler(psychiatristController.getPatients));
+router.get('/patients/:id',validate, asyncHandler(psychiatristController.getPatientDetails));
+router.get('/patients/:id/assessments',validate, asyncHandler(psychiatristController.getPatientAssessments));
 
 // Appointment routes
 router.get(
@@ -36,24 +40,32 @@ router.get(
     check('from').optional().isISO8601(),
     check('to').optional().isISO8601()
   ],
+  validate,
   asyncHandler(psychiatristController.getAppointments)
 );
 router.patch(
   '/appointments/:id/status',
   [
-    check('id').isInt(),
-    check('status').isIn(['Scheduled', 'Completed', 'Cancelled'])
+    check('id').isInt().withMessage('Invalid appointment ID'),
+    check('status')
+      .notEmpty()
+      .withMessage('Status is required')
+      .isIn(['Scheduled', 'Completed', 'Cancelled'])
+      .withMessage('Invalid status value')
   ],
+  validate,
   asyncHandler(psychiatristController.updateAppointmentStatus)
 );
+
 
 // Recommendation routes
 router.post(
   '/recommendations',
   [
-    check('patient_id').isInt(),
-    check('content').isString().notEmpty()
+    check('patient_id').isInt().withMessage('Patient ID must be an integer'),
+    check('content').isString().notEmpty().withMessage('Content is required')
   ],
+  validate,
   asyncHandler(psychiatristController.createRecommendation)
 );
 
@@ -61,10 +73,25 @@ router.post(
 router.post(
   '/prescriptions',
   upload.single('document'),
+  (req, res, next) => {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: 'A PDF document is required'
+      });
+    }
+    next();
+  },
+  handleUploadErrors,
   [
-    check('appointment_id').isInt(),
+    check('appointment_id')
+      .notEmpty()
+      .withMessage('Appointment ID is required')
+      .isInt()
+      .withMessage('Invalid Appointment ID'),
     check('notes').optional().isString()
   ],
+  validate,
   asyncHandler(psychiatristController.uploadPrescription)
 );
 

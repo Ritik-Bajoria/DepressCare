@@ -40,13 +40,13 @@ Object.keys(db).forEach(modelName => {
 });
 
 // Sync all models
-sequelize.sync({ alter: true })  // Use `force: true` for dev if you want to drop & recreate
-  .then(() => {
-    console.log('✔ All models synced with DB');
-  })
-  .catch(err => {
-    console.error('❌ Failed to sync models:', err);
-  });
+// sequelize.sync({ alter: true })  // Use `force: true` for dev if you want to drop & recreate
+//   .then(() => {
+//     console.log('✔ All models synced with DB');
+//   })
+//   .catch(err => {
+//     console.error('❌ Failed to sync models:', err);
+//   });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
