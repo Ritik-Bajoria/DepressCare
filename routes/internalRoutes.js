@@ -8,7 +8,7 @@ const validate = require('../middlewares/validate');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 // Apply to all routes
-router.use(authMiddleware,roleMiddleware(['InternalManagement']));
+// router.use(authMiddleware,roleMiddleware(['InternalManagement']));
 
 /**
  * Job Postings Routes

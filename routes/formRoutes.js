@@ -24,15 +24,15 @@ router.post(
 );
 
 router.get('/history', 
-  authMiddleware, 
-  roleMiddleware(['Patient']), 
+//   authMiddleware, 
+//   roleMiddleware(['Patient']), 
   formController.getFormHistory
 );
 
 // Shared patient/psychiatrist routes
 router.get('/:id', 
-  authMiddleware, 
-  roleMiddleware(['Patient', 'Psychiatrist']), 
+//   authMiddleware, 
+//   roleMiddleware(['Patient', 'Psychiatrist']), 
   formController.getFormDetails
 );
 

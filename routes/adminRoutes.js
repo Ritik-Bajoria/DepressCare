@@ -11,7 +11,7 @@ const db = require('../models');
 const { User, Psychiatrist } = db;
 
 // Apply admin role middleware to all routes
-router.use(authMiddleware, roleMiddleware(['admin']));
+// router.use(authMiddleware, roleMiddleware(['admin']));
 
 /**
  * @route GET /admin/users

@@ -337,33 +337,84 @@ const getPatientAssessments = async (req, res, next) => {
  */
 const getAppointments = async (req, res, next) => {
   try {
-    const psychiatrist_id = req.user.user_id;
-    const { status, from, to } = req.query;
+    const { user_id, role } = req.user;
+    const { status, from, to, patient_id } = req.query;
 
-    const where = { psychiatrist_id };
-    if (status) where.status = status;
-    if (from && to) {
-      where.scheduled_time = {
-        [Op.between]: [new Date(from), new Date(to)]
-      };
+    // 1. Build the base query conditions
+    const where = {};
+    const include = [{
+      model: db.User,
+      as: 'PatientUser',
+      attributes: ['user_id', 'full_name', 'email', 'profile_picture', 'phone']
+    }, {
+      model: db.User,
+      as: 'PsychiatristUser',
+      attributes: ['user_id', 'full_name', 'email', 'profile_picture']
+    }];
+
+    // 2. Role-based filtering
+    if (role === 'Psychiatrist') {
+      where.psychiatrist_id = user_id;
+    } else if (role === 'Patient') {
+      where.patient_id = user_id;
+    } else if (role === 'Admin' && patient_id) {
+      where.patient_id = patient_id;
     }
 
-    const appointments = await db.Appointment.findAll({
+    // 3. Additional filters
+    if (status) {
+      where.status = Array.isArray(status) ? { [Op.in]: status } : status;
+    }
+
+    if (from && to) {
+      where.scheduled_time = {
+        [Op.between]: [
+          new Date(from),
+          new Date(new Date(to).setHours(23, 59, 59, 999))
+        ]
+      };
+    } else if (from) {
+      where.scheduled_time = { [Op.gte]: new Date(from) };
+    } else if (to) {
+      where.scheduled_time = { [Op.lte]: new Date(to) };
+    }
+
+    // 4. Execute query with pagination
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    const offset = (page - 1) * limit;
+
+    const { count, rows: appointments } = await db.Appointment.findAndCountAll({
       where,
-      include: [{
-        model: db.User,
-        as: 'PatientUser',
-        attributes: ['full_name', 'profile_picture']
-      }],
-      order: [['scheduled_time', 'ASC']]
+      include,
+      order: [['scheduled_time', 'ASC']],
+      limit,
+      offset,
+      distinct: true // Important for correct counting with includes
     });
 
-    res.json({ 
+    // 5. Format response
+    res.json({
       success: true,
-      count: appointments.length,
-      data: appointments 
+      count,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page,
+      data: appointments.map(appt => ({
+        appointment_id: appt.appointment_id,
+        scheduled_time: appt.scheduled_time,
+        status: appt.status,
+        meeting_link: appt.meeting_link,
+        symptoms: appt.symptoms,
+        short_description: appt.short_description,
+        previous_diagnosis: appt.previous_diagnosis,
+        patient: appt.PatientUser,
+        psychiatrist: appt.PsychiatristUser,
+        created_at: appt.created_at
+      }))
     });
+
   } catch (error) {
+    console.error('Error fetching appointments:', error);
     next(error);
   }
 };

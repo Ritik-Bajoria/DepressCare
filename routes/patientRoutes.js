@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const roleMiddleware = require('../middlewares/roleMiddleware');
 const patientController = require('../controllers/patientController');
-const { check } = require('express-validator');
+const { check,validationResult} = require('express-validator');
 const { asyncHandler } = require('../middlewares/errorHandler');
 const authMiddleware = require('../middlewares/authMiddleware');
 
@@ -24,12 +24,51 @@ router.get('/psychiatrists', asyncHandler(patientController.searchPsychiatrists)
 router.post(
   '/appointments',
   [
-    check('psychiatrist_id').isInt().withMessage('Invalid psychiatrist ID'),
-    check('scheduled_time').isISO8601().withMessage('Invalid date format')
+    check('psychiatrist_id')
+      .isInt({ min: 1 })
+      .withMessage('Psychiatrist ID must be a positive integer'),
+      
+    check('scheduled_time')
+      .isISO8601()
+      .withMessage('Invalid ISO 8601 date format')
+      .custom((value) => {
+        if (new Date(value) <= new Date()) {
+          throw new Error('Appointment time must be in the future');
+        }
+        return true;
+      }),
+      
+    check('previous_diagnosis')
+      .optional()
+      .isBoolean()
+      .withMessage('Previous diagnosis must be a boolean value'),
+      
+    check('symptoms')
+      .optional()
+      .isString()
+      .trim()
+      .isLength({ max: 500 })
+      .withMessage('Symptoms must be a string (max 500 characters)'),
+      
+    check('short_description')
+      .optional()
+      .isString()
+      .trim()
+      .isLength({ max: 255 })
+      .withMessage('Short description must be a string (max 255 characters)')
   ],
-  asyncHandler(patientController.bookAppointment)
-);
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ 
+        success: false,
+        errors: errors.array() 
+      });
+    }
 
+    await patientController.bookAppointment(req, res);
+  })
+);
 /**
  * @route PATCH /patient/appointments/:id/cancel
  * @desc Cancel appointment

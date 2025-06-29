@@ -53,44 +53,134 @@ const searchPsychiatrists = async (req, res, next) => {
  */
 const bookAppointment = async (req, res) => {
   try {
-    const { psychiatrist_id, scheduled_time } = req.body;
+    const { psychiatrist_id, scheduled_time, previous_diagnosis, symptoms, short_description } = req.body;
     const patient_id = req.user.user_id;
 
-    // 1. Get psychiatrist and patient emails
-    const [psychiatrist, patient] = await Promise.all([
-      User.findByPk(psychiatrist_id),
-      User.findByPk(patient_id)
-    ]);
-
-    if (!psychiatrist || !patient) {
-      return res.status(404).json({ error: 'User not found' });
+    // Validate required fields
+    if (!psychiatrist_id || !scheduled_time) {
+      return res.status(400).json({ error: 'Psychiatrist ID and scheduled time are required' });
     }
 
-    // 2. Generate meeting link with proper parameters
+    // 1. Get psychiatrist (with role validation) and patient
+    const [psychiatrist, patient] = await Promise.all([
+      User.findOne({
+        where: { 
+          user_id: psychiatrist_id,
+          role: 'Psychiatrist' // Ensure the user is actually a psychiatrist
+        },
+        include: [{
+          model: Psychiatrist,
+          as: 'Psychiatrist',
+          required: true // Enforce that the user must have a psychiatrist profile
+        }],
+        attributes: ['user_id', 'email', 'full_name']
+      }),
+      User.findByPk(patient_id, {
+        attributes: ['user_id', 'email', 'full_name']
+      })
+    ]);
+
+    if (!psychiatrist) {
+      return res.status(404).json({ 
+        error: 'Psychiatrist not found',
+        details: 'The specified ID does not belong to a valid psychiatrist'
+      });
+    }
+    
+    if (!patient) {
+      return res.status(404).json({ error: 'Patient not found' });
+    }
+
+    // 2. Validate scheduled time is in the future
+    if (new Date(scheduled_time) <= new Date()) {
+      return res.status(400).json({ error: 'Appointment time must be in the future' });
+    }
+
+    // 3. Check psychiatrist availability (optional enhancement)
+    const existingAppointment = await Appointment.findOne({
+      where: {
+        psychiatrist_id,
+        scheduled_time: {
+          [Op.between]: [
+            new Date(new Date(scheduled_time).setMinutes(-30)), // 30 mins before
+            new Date(new Date(scheduled_time).setHours(1, 30)) // 1.5 hours after
+          ]
+        },
+        status: {
+          [Op.notIn]: ['Cancelled', 'Completed']
+        }
+      }
+    });
+
+    if (existingAppointment) {
+      return res.status(409).json({
+        error: 'Time slot unavailable',
+        details: 'Psychiatrist already has an appointment during this time'
+      });
+    }
+
+    // 4. Generate meeting link
     const meetLink = await generateMeetingLink({
       psychiatristEmail: psychiatrist.email,
       patientEmail: patient.email,
       startTime: new Date(scheduled_time),
       endTime: new Date(new Date(scheduled_time).setHours(new Date(scheduled_time).getHours() + 1)),
-      summary: `Therapy Session - ${patient.name}`
+      summary: `Therapy Session - ${patient.full_name}`
     });
 
-    // 3. Create appointment with the string meeting link
+    // 5. Create appointment with all required fields
     const appointment = await Appointment.create({
       patient_id,
       psychiatrist_id,
-      scheduled_time,
-      meeting_link: meetLink, // Ensure this is a string
-      status: 'Scheduled'
+      scheduled_time: new Date(scheduled_time),
+      status: 'Pending',
+      previous_diagnosis: previous_diagnosis || false,
+      symptoms: symptoms || null,
+      short_description: short_description || null,
+      meeting_link: meetLink
     });
 
-    res.status(201).json(appointment);
+    // 6. Return appointment with associations
+    const createdAppointment = await Appointment.findByPk(appointment.appointment_id, {
+      include: [
+        { 
+          model: User, 
+          as: 'PatientUser',
+          attributes: ['user_id', 'full_name', 'email']
+        },
+        { 
+          model: User, 
+          as: 'PsychiatristUser',
+          attributes: ['user_id', 'full_name', 'email']
+        }
+      ]
+    });
+
+    res.status(201).json({
+      success: true,
+      data: createdAppointment
+    });
+
   } catch (error) {
     console.error('Booking error:', error);
+    
+    if (error.name === 'SequelizeValidationError') {
+      return res.status(400).json({ 
+        error: 'Validation error',
+        details: error.errors.map(err => err.message) 
+      });
+    }
+    
+    if (error.name === 'SequelizeUniqueConstraintError') {
+      return res.status(409).json({ 
+        error: 'Conflict error',
+        details: 'Appointment slot already booked' 
+      });
+    }
+
     res.status(500).json({ 
-      error: error.name === 'SequelizeValidationError' 
-        ? 'Invalid meeting link format' 
-        : 'Failed to book appointment' 
+      error: 'Failed to book appointment',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 };

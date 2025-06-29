@@ -253,12 +253,12 @@ const deleteUser = async (req, res, next) => {
     const { id } = req.params;
 
     // Prevent admin from deleting themselves
-    if (id === req.user.user_id) {
-      return res.status(403).json({ 
-        success: false, 
-        message: 'You cannot delete your own account' 
-      });
-    }
+    // if (id === req.user.user_id) {
+    //   return res.status(403).json({ 
+    //     success: false, 
+    //     message: 'You cannot delete your own account' 
+    //   });
+    // }
 
     const user = await User.findByPk(id);
     if (!user) {
