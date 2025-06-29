@@ -12,11 +12,12 @@ module.exports = (sequelize) => {
   DepressionForm.associate = (models) => {
     DepressionForm.belongsTo(models.User, {
       foreignKey: 'patient_id',
-      as: 'User' 
+      as: 'Patient' // Consistent naming
     });
+    
     DepressionForm.hasMany(models.FormResponse, {
       foreignKey: 'form_id',
-      as: 'FormResponses' 
+      as: 'Responses' // Singular vs plural consistency
     });
   };
   return DepressionForm;

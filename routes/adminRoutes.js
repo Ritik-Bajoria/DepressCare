@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/adminController');
 const roleMiddleware = require('../middlewares/roleMiddleware');
-const { asyncHandler } = require('../middlewares/errorHandler');
+const authMiddleware = require('../middlewares/authMiddleware');
 const validate = require('../middlewares/validate');
+const { asyncHandler } = require('../middlewares/errorHandler');
 const { check, validationResult } = require('express-validator');
 const { Op } = require('sequelize');
 const db = require('../models');
 const { User, Psychiatrist } = db;
-const authMiddleware = require('../middlewares/authMiddleware');
 
 // Apply admin role middleware to all routes
 router.use(authMiddleware, roleMiddleware(['admin']));

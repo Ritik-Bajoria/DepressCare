@@ -6,17 +6,9 @@ const cors = require('cors');
 const logger = require('./controllers/logger');
 const db = require('./models');
 const path = require('path');
-const authRouter = require('./routes/authRoutes');
-const adminRouter = require('./routes/adminRoutes');
-const patientRouter = require('./routes/patientRoutes');
-const psychiatristRouter = require('./routes/psychiatristRoutes');
-const internalRouter = require('./routes/internalRoutes');
-const { errorHandler, notFoundHandler, asyncHandler } = require('./middlewares/errorHandler');
+const router = require('./routes/index')
+const { errorHandler, notFoundHandler } = require('./middlewares/errorHandler');
 
-// Middleware to parse JSON Request Bodies
-// app.use(express.json());
-// // Midddleware to parse URL-encoded Request Bodies
-// app.use(express.urlencoded({ extended: false }));
 // Increase payload size limit (e.g., 50MB)
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
@@ -28,18 +20,14 @@ app.use(cors({
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(morgan('dev')); 
+
 // Middleware to create logs
 app.use((req, res, next) => {
   logger.info(`Request from ${req.ip} at ${req.method} ${req.originalUrl}`);
   next();
 });
 
-//connect to routers
-app.use('/api/auth', authRouter);
-app.use('/api/admin',adminRouter);
-app.use('/api/patient',patientRouter);
-app.use('/api/psychiatrist',psychiatristRouter);
-app.use('/api/internal',internalRouter);
+app.use('/api',router);
 
 app.use(notFoundHandler);
 app.use(errorHandler);

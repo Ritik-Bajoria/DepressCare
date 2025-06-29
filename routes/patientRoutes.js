@@ -56,14 +56,14 @@ router.get('/appointments', asyncHandler(patientController.getAppointmentHistory
  * @access Private (Patient)
  */
 router.post(
-  '/assessments',
+  '/submitForm',
   [
     check('responses').isArray().withMessage('Responses must be an array'),
     check('responses.*.question_id').isInt().withMessage('Invalid question ID'),
     check('responses.*.score').isInt({ min: 0 }).withMessage('Invalid score value'),
     check('notes').optional().isString().withMessage('Notes must be a string')
   ],
-  asyncHandler(patientController.submitAssessment)
+  asyncHandler(patientController.submitForm)
 );
 
 /**

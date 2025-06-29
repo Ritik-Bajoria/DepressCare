@@ -1,5 +1,5 @@
 const db = require('../models');
-const { User, Psychiatrist, Appointment, DepressionForm, Prescription, Recommendation } = db;
+const { User, Psychiatrist, Appointment, DepressionForm, Prescription, Recommendation, FormResponse } = db;
 const { Op } = require('sequelize');
 const generateMeetingLink = require('../utils/generateMeetingLink');
 
@@ -176,41 +176,73 @@ const getAppointmentHistory = async (req, res, next) => {
 
 /**
  * @desc Submit depression self-assessment form
- * @route POST /patients/assessments
+ * @route POST /patients/submitForm
  * @access Private (Patient)
  */
-const submitAssessment = async (req, res, next) => {
+const submitForm = async (req, res) => {
+  const transaction = await db.sequelize.transaction();
   try {
-    const patient_id = req.user.user_id;
+    const { patient_id } = req.user;
     const { responses, notes } = req.body;
 
-    // Calculate total score
-    const total_score = responses.reduce((sum, response) => sum + response.score, 0);
-
-    // Create form and responses in transaction
-    await db.sequelize.transaction(async (t) => {
-      const form = await DepressionForm.create({
-        patient_id,
-        total_score,
-        notes,
-        filled_at: new Date()
-      }, { transaction: t });
-
-      const formResponses = responses.map(response => ({
-        form_id: form.form_id,
-        question_id: response.question_id,
-        response_value: response.score
-      }));
-
-      await db.FormResponse.bulkCreate(formResponses, { transaction: t });
+    // 1. Validate all question IDs exist
+    const questionIds = responses.map(r => r.question_id);
+    const existingQuestions = await db.FormQuestion.findAll({
+      where: { question_id: questionIds },
+      attributes: ['question_id'],
+      transaction
     });
 
+    if (existingQuestions.length !== questionIds.length) {
+      const missingIds = questionIds.filter(id => 
+        !existingQuestions.some(q => q.question_id === id)
+      );
+      throw new Error(`Invalid question IDs: ${missingIds.join(', ')}`);
+    }
+
+    // 2. Calculate total score
+    const total_score = responses.reduce((sum, r) => sum + r.response_value, 0);
+
+    // 3. Create form and responses
+    const form = await db.DepressionForm.create({
+      patient_id,
+      total_score,
+      notes
+    }, { transaction });
+
+    await db.FormResponse.bulkCreate(
+      responses.map(r => ({
+        form_id: form.form_id,
+        question_id: r.question_id,
+        response_value: r.response_value
+      })),
+      { transaction }
+    );
+
+    await transaction.commit();
+    
     res.status(201).json({
       success: true,
-      message: 'Assessment submitted successfully'
+      form_id: form.form_id,
+      total_score,
+      message: 'Form submitted successfully'
     });
+
   } catch (error) {
-    next(error);
+    await transaction.rollback();
+    
+    if (error.message.includes('Invalid question IDs')) {
+      return res.status(400).json({ 
+        error: 'Invalid form data',
+        details: error.message
+      });
+    }
+
+    console.error('Form submission error:', error);
+    res.status(500).json({ 
+      error: 'Form submission failed',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 };
 
@@ -223,7 +255,7 @@ const getPrescriptions = async (req, res, next) => {
   try {
     const patient_id = req.user.user_id;
 
-    const prescriptions = await db.Prescription.findAll({
+    const prescriptions = await Prescription.findAll({
       include: [{
         model: db.Appointment,
         as: 'Appointment',
@@ -262,7 +294,7 @@ const getRecommendations = async (req, res, next) => {
   try {
     const patient_id = req.user.user_id;
 
-    const recommendations = await db.Recommendation.findAll({
+    const recommendations = await Recommendation.findAll({
       where: { patient_id },
       include: [
         {
@@ -294,7 +326,7 @@ module.exports = {
   bookAppointment,
   cancelAppointment,
   getAppointmentHistory,
-  submitAssessment,
+  submitForm,
   getPrescriptions,
   getRecommendations
 };
