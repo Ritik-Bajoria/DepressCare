@@ -521,7 +521,6 @@ const uploadPrescription = async (req, res, next) => {
     const uploaded_by = req.user.user_id;
     const { appointment_id, notes } = req.body;
     const document_url = req.file ? `/uploads/prescriptions/${req.file.filename}` : null;
-
     // Verify the appointment belongs to this psychiatrist
     const appointment = await db.Appointment.findOne({
       where: { 

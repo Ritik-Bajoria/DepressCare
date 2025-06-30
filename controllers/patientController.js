@@ -133,7 +133,7 @@ const bookAppointment = async (req, res) => {
       patient_id,
       psychiatrist_id,
       scheduled_time: new Date(scheduled_time),
-      status: 'Pending',
+      status: 'Scheduled',
       previous_diagnosis: previous_diagnosis || false,
       symptoms: symptoms || null,
       short_description: short_description || null,
@@ -199,7 +199,9 @@ const cancelAppointment = async (req, res, next) => {
       where: {
         appointment_id: id,
         patient_id,
-        status: 'Scheduled'
+        status: {
+          [Op.or]: ['Scheduled', 'Pending']
+        }
       }
     });
 
@@ -226,7 +228,7 @@ const cancelAppointment = async (req, res, next) => {
  * @route GET /patients/appointments
  * @access Private (Patient)
  */
-const getAppointmentHistory = async (req, res, next) => {
+const getAppointmentHistory = async (req, res) => {
   try {
     const patient_id = req.user.user_id;
     const { status, from, to } = req.query;
@@ -241,26 +243,27 @@ const getAppointmentHistory = async (req, res, next) => {
 
     const appointments = await Appointment.findAll({
       where,
-      include: [{
-        model: User,
-        as: 'Psychiatrist',
-        attributes: ['full_name', 'profile_picture'],
-        include: [{
-          model: Psychiatrist,
-          as: 'Psychiatrist',
-          attributes: ['specialization']
-        }]
-      }],
-      order: [['scheduled_time', 'DESC']]
+      include: [
+        {
+          model: User,
+          as: 'PsychiatristUser',  // Use the exact alias from your association
+          attributes: ['user_id', 'full_name', 'email', 'profile_picture']
+        }
+      ],
+      order: [['scheduled_time', 'ASC']]
     });
 
-    res.json({
+    res.json({ 
       success: true,
       count: appointments.length,
-      data: appointments
+      data: appointments 
     });
   } catch (error) {
-    next(error);
+    console.error('Error fetching appointments:', error);
+    res.status(500).json({ 
+      error: 'Failed to fetch appointments',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 };
 

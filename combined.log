@@ -2429,3 +2429,302 @@
 6/29/2025 11:45:50 AM [INFO]:  SIGINT signal received: closing HTTP server
 6/29/2025 11:45:50 AM [INFO]:  HTTP server closed
 6/29/2025 11:45:50 AM [INFO]:  Sequelize connection closed
+6/29/2025 11:46:54 AM [INFO]:  App started on process id:12024
+6/29/2025 11:46:55 AM [INFO]:  Server is listening on port 3000
+6/29/2025 11:48:05 AM [INFO]:  Request from 192.168.177.180 at GET /api/users?role=psychiatrist
+6/29/2025 11:48:06 AM [INFO]:  Request from 192.168.177.180 at GET /api/users?role=psychiatrist
+6/29/2025 11:48:08 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+6/29/2025 11:48:08 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+6/29/2025 11:48:10 AM [INFO]:  Request from 192.168.177.180 at GET /api/users?role=psychiatrist
+6/29/2025 11:48:10 AM [INFO]:  Request from 192.168.177.180 at GET /api/users?role=psychiatrist
+6/29/2025 11:48:30 AM [INFO]:  Request from 192.168.177.180 at GET /api/appointments
+6/29/2025 11:48:30 AM [INFO]:  Request from 192.168.177.180 at GET /api/appointments
+6/29/2025 11:48:33 AM [INFO]:  Request from 192.168.177.180 at GET /api/users?role=psychiatrist
+6/29/2025 11:48:33 AM [INFO]:  Request from 192.168.177.180 at GET /api/users?role=psychiatrist
+6/29/2025 11:52:03 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+6/29/2025 11:52:03 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+6/29/2025 11:52:10 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 11:52:10 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 11:53:48 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+6/29/2025 11:53:48 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+6/29/2025 11:54:37 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 11:54:37 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 11:57:05 AM [INFO]:  Request from 192.168.177.180 at POST /api/patient/appointments
+6/29/2025 11:57:07 AM [INFO]:  Request from 192.168.177.180 at POST /api/patient/appointments
+6/29/2025 11:57:18 AM [INFO]:  Request from 192.168.177.180 at POST /api/patient/appointments
+6/29/2025 11:59:01 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+6/29/2025 11:59:01 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+6/29/2025 11:59:03 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 11:59:03 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 11:59:55 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+6/29/2025 11:59:55 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+6/29/2025 11:59:57 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 11:59:57 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 12:00:02 PM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 12:00:02 PM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 12:02:39 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+6/29/2025 12:02:39 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+6/29/2025 12:02:40 PM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 12:02:40 PM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 12:05:42 PM [INFO]:  Request from 192.168.177.180 at GET /api/patient/appointments
+6/29/2025 12:05:42 PM [INFO]:  Request from 192.168.177.180 at GET /api/patient/appointments
+6/29/2025 12:05:43 PM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 12:05:43 PM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 12:08:34 PM [INFO]:  Request from 192.168.177.180 at GET /api/patient/appointments
+6/29/2025 12:08:34 PM [INFO]:  Request from 192.168.177.180 at GET /api/patient/appointments
+6/29/2025 12:08:34 PM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 12:08:35 PM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+6/29/2025 12:13:32 PM [INFO]:  Request from 127.0.0.1 at GET /api/patient/psychiatrists
+6/29/2025 5:31:02 PM [INFO]:  App started on process id:17680
+6/29/2025 5:31:04 PM [INFO]:  Server is listening on port 3000
+6/29/2025 5:31:35 PM [INFO]:  Request from 127.0.0.1 at GET /api/patient/appointments/
+6/29/2025 5:33:28 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 5:33:28 PM [INFO]:  HTTP server closed
+6/29/2025 5:33:28 PM [INFO]:  Sequelize connection closed
+6/29/2025 5:33:30 PM [INFO]:  App started on process id:10120
+6/29/2025 5:33:31 PM [INFO]:  Server is listening on port 3000
+6/29/2025 5:33:35 PM [INFO]:  Request from 127.0.0.1 at GET /api/patient/appointments/
+6/29/2025 5:34:57 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 5:34:57 PM [INFO]:  HTTP server closed
+6/29/2025 5:34:57 PM [INFO]:  Sequelize connection closed
+6/29/2025 6:24:46 PM [INFO]:  App started on process id:11508
+6/29/2025 6:24:48 PM [INFO]:  Server is listening on port 3000
+6/29/2025 6:27:16 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/patient/appointments/2/cancel
+6/29/2025 6:28:17 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/patient/appointments/3/cancel
+6/29/2025 6:28:35 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/patient/appointments/3/cancel
+6/29/2025 6:28:49 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/patient/appointments/3/cancel
+6/29/2025 6:30:34 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/patient/appointments/6/cancel
+6/29/2025 6:33:00 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 6:33:00 PM [INFO]:  HTTP server closed
+6/29/2025 6:33:00 PM [INFO]:  Sequelize connection closed
+6/29/2025 6:33:01 PM [INFO]:  App started on process id:856
+6/29/2025 6:33:03 PM [INFO]:  Server is listening on port 3000
+6/29/2025 6:33:04 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/patient/appointments/6/cancel
+6/29/2025 6:33:06 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/patient/appointments/6/cancel
+6/29/2025 6:34:04 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 6:34:04 PM [INFO]:  HTTP server closed
+6/29/2025 6:34:04 PM [INFO]:  Sequelize connection closed
+6/29/2025 6:34:06 PM [INFO]:  App started on process id:22156
+6/29/2025 6:34:07 PM [INFO]:  Server is listening on port 3000
+6/29/2025 6:34:11 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/patient/appointments/6/cancel
+6/29/2025 6:47:59 PM [INFO]:  Request from 127.0.0.1 at GET /api/psychiatrist/patients/1
+6/29/2025 6:49:31 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 6:49:31 PM [INFO]:  HTTP server closed
+6/29/2025 6:49:31 PM [INFO]:  Sequelize connection closed
+6/29/2025 8:55:34 PM [INFO]:  App started on process id:27060
+6/29/2025 8:55:35 PM [INFO]:  Server is listening on port 3000
+6/29/2025 8:55:40 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 8:55:46 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 8:55:52 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 8:57:08 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 8:57:08 PM [INFO]:  HTTP server closed
+6/29/2025 8:57:08 PM [INFO]:  Sequelize connection closed
+6/29/2025 8:57:10 PM [INFO]:  App started on process id:11688
+6/29/2025 8:57:11 PM [INFO]:  Server is listening on port 3000
+6/29/2025 8:57:12 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:00:24 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:01:05 PM [INFO]:  Request from 127.0.0.1 at GET /api/patient/prescriptions
+6/29/2025 9:02:57 PM [INFO]:  Request from 127.0.0.1 at GET /api/patient/prescriptions
+6/29/2025 9:03:00 PM [INFO]:  Request from 127.0.0.1 at GET /favicon.ico
+6/29/2025 9:03:37 PM [INFO]:  Request from 127.0.0.1 at POST /api/form/questions
+6/29/2025 9:03:52 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/reports/financial
+6/29/2025 9:04:04 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/internal/salaries/2/status
+6/29/2025 9:05:41 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/internal/salaries/2/status
+6/29/2025 9:05:46 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/salaries
+6/29/2025 9:05:51 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/jobs
+6/29/2025 9:05:56 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/jobs
+6/29/2025 9:06:00 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:06:08 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:07:53 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:07:53 PM [INFO]:  HTTP server closed
+6/29/2025 9:07:53 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:07:54 PM [INFO]:  App started on process id:3296
+6/29/2025 9:07:56 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:08:46 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:09:12 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:09:13 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:09:16 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:09:16 PM [INFO]:  HTTP server closed
+6/29/2025 9:09:16 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:09:17 PM [INFO]:  App started on process id:31676
+6/29/2025 9:09:18 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:09:25 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:10:42 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:11:41 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:11:41 PM [INFO]:  HTTP server closed
+6/29/2025 9:11:41 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:11:44 PM [INFO]:  App started on process id:15852
+6/29/2025 9:11:45 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:11:46 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:15:45 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:15:45 PM [INFO]:  HTTP server closed
+6/29/2025 9:15:45 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:15:47 PM [INFO]:  App started on process id:24876
+6/29/2025 9:15:48 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:15:52 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:18:20 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:18:20 PM [INFO]:  HTTP server closed
+6/29/2025 9:18:20 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:18:23 PM [INFO]:  App started on process id:22260
+6/29/2025 9:18:24 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:18:26 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:20:44 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:20:44 PM [INFO]:  HTTP server closed
+6/29/2025 9:20:44 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:20:47 PM [INFO]:  App started on process id:15920
+6/29/2025 9:20:48 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:20:51 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:20:52 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:21:14 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:21:14 PM [INFO]:  HTTP server closed
+6/29/2025 9:21:14 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:21:16 PM [INFO]:  App started on process id:25968
+6/29/2025 9:21:17 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:21:20 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:21:30 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:21:30 PM [INFO]:  HTTP server closed
+6/29/2025 9:21:30 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:21:32 PM [INFO]:  App started on process id:12156
+6/29/2025 9:21:33 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:21:36 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:22:55 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:22:55 PM [INFO]:  HTTP server closed
+6/29/2025 9:22:55 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:22:56 PM [INFO]:  App started on process id:19208
+6/29/2025 9:22:57 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:23:00 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:24:14 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:24:14 PM [INFO]:  HTTP server closed
+6/29/2025 9:24:14 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:24:15 PM [INFO]:  App started on process id:15656
+6/29/2025 9:24:16 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:24:21 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:35:23 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:35:23 PM [INFO]:  HTTP server closed
+6/29/2025 9:35:23 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:35:25 PM [INFO]:  App started on process id:22768
+6/29/2025 9:35:34 PM [INFO]:  App started on process id:23276
+6/29/2025 9:36:32 PM [INFO]:  App started on process id:32044
+6/29/2025 9:36:50 PM [INFO]:  App started on process id:33588
+6/29/2025 9:36:51 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:36:53 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:36:55 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:37:11 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:37:11 PM [INFO]:  HTTP server closed
+6/29/2025 9:37:11 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:37:12 PM [INFO]:  App started on process id:20764
+6/29/2025 9:37:13 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:38:25 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:38:25 PM [INFO]:  HTTP server closed
+6/29/2025 9:38:25 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:38:27 PM [INFO]:  App started on process id:11828
+6/29/2025 9:38:28 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:38:29 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:38:30 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:38:58 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:38:58 PM [INFO]:  HTTP server closed
+6/29/2025 9:38:58 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:38:59 PM [INFO]:  App started on process id:3648
+6/29/2025 9:39:00 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:39:02 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:41:09 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:41:09 PM [INFO]:  HTTP server closed
+6/29/2025 9:41:09 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:41:11 PM [INFO]:  App started on process id:33032
+6/29/2025 9:41:12 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:41:13 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:41:56 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:41:56 PM [INFO]:  HTTP server closed
+6/29/2025 9:41:56 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:41:58 PM [INFO]:  App started on process id:12116
+6/29/2025 9:41:59 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:42:00 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:43:44 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:43:44 PM [INFO]:  HTTP server closed
+6/29/2025 9:43:44 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:43:45 PM [INFO]:  App started on process id:19624
+6/29/2025 9:43:46 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:43:48 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:44:44 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:44:44 PM [INFO]:  HTTP server closed
+6/29/2025 9:44:44 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:44:45 PM [INFO]:  App started on process id:3480
+6/29/2025 9:44:46 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:45:31 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:45:31 PM [INFO]:  HTTP server closed
+6/29/2025 9:45:31 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:45:33 PM [INFO]:  App started on process id:19960
+6/29/2025 9:45:34 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:45:36 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:47:09 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:47:09 PM [INFO]:  HTTP server closed
+6/29/2025 9:47:09 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:47:10 PM [INFO]:  App started on process id:11384
+6/29/2025 9:47:29 PM [INFO]:  App started on process id:24840
+6/29/2025 9:51:54 PM [INFO]:  App started on process id:29184
+6/29/2025 9:51:55 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:51:59 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:52:08 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:52:12 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:52:57 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:52:57 PM [INFO]:  HTTP server closed
+6/29/2025 9:52:57 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:52:59 PM [INFO]:  App started on process id:33504
+6/29/2025 9:53:00 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:53:01 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:54:01 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:54:01 PM [INFO]:  HTTP server closed
+6/29/2025 9:54:01 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:54:03 PM [INFO]:  App started on process id:23416
+6/29/2025 9:54:04 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:54:05 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:55:38 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:55:38 PM [INFO]:  HTTP server closed
+6/29/2025 9:55:38 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:55:39 PM [INFO]:  App started on process id:6332
+6/29/2025 9:55:40 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:55:42 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:57:38 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:57:38 PM [INFO]:  HTTP server closed
+6/29/2025 9:57:38 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:57:39 PM [INFO]:  App started on process id:3480
+6/29/2025 9:57:40 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:57:42 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:57:43 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:58:24 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:58:24 PM [INFO]:  HTTP server closed
+6/29/2025 9:58:24 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:58:25 PM [INFO]:  App started on process id:16444
+6/29/2025 9:58:26 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:58:28 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:58:39 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:58:39 PM [INFO]:  HTTP server closed
+6/29/2025 9:58:39 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:58:40 PM [INFO]:  App started on process id:33680
+6/29/2025 9:58:41 PM [INFO]:  Server is listening on port 3000
+6/29/2025 9:58:43 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:59:12 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 9:59:25 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 9:59:25 PM [INFO]:  HTTP server closed
+6/29/2025 9:59:25 PM [INFO]:  Sequelize connection closed
+6/29/2025 9:59:27 PM [INFO]:  App started on process id:13316
+6/29/2025 9:59:28 PM [INFO]:  Server is listening on port 3000
+6/29/2025 10:01:56 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 10:02:33 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 10:02:33 PM [INFO]:  HTTP server closed
+6/29/2025 10:02:33 PM [INFO]:  Sequelize connection closed
+6/29/2025 10:02:35 PM [INFO]:  App started on process id:7692
+6/29/2025 10:02:36 PM [INFO]:  Server is listening on port 3000
+6/29/2025 10:02:37 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 10:13:54 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 10:14:13 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 10:18:50 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 10:20:03 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 10:20:03 PM [INFO]:  HTTP server closed
+6/29/2025 10:20:03 PM [INFO]:  Sequelize connection closed
+6/29/2025 10:21:56 PM [INFO]:  App started on process id:27044
+6/29/2025 10:21:58 PM [INFO]:  Server is listening on port 3000
+6/29/2025 10:21:59 PM [INFO]:  Request from 127.0.0.1 at POST /api/psychiatrist/prescriptions
+6/29/2025 10:28:39 PM [INFO]:  SIGINT signal received: closing HTTP server
+6/29/2025 10:28:39 PM [INFO]:  HTTP server closed
+6/29/2025 10:28:39 PM [INFO]:  Sequelize connection closed
