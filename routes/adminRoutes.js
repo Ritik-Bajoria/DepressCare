@@ -11,7 +11,7 @@ const db = require('../models');
 const { User, Psychiatrist } = db;
 
 // Apply admin role middleware to all routes
-// router.use(authMiddleware, roleMiddleware(['admin']));
+router.use(authMiddleware, roleMiddleware(['admin']));
 
 /**
  * @route GET /admin/users
@@ -200,8 +200,8 @@ router.get(
   '/reports/:type',
   [
     check('type')
-      .isIn(['UserStats', 'UserStats', 'AssessmentSummary'])
-      .withMessage('Invalid report type should be one of (UserStats, UserStats, AssessmentSummary)'),
+      .isIn(['UserStats', 'AppointmentStats', 'AssessmentSummary'])
+      .withMessage('Invalid report type should be one of (UserStats, AppointmentStats, AssessmentSummary)'),
     check('format')
       .optional()
       .isIn(['pdf', 'excel', 'json'])

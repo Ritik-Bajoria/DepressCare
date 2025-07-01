@@ -2728,3 +2728,90 @@
 6/29/2025 10:28:39 PM [INFO]:  SIGINT signal received: closing HTTP server
 6/29/2025 10:28:39 PM [INFO]:  HTTP server closed
 6/29/2025 10:28:39 PM [INFO]:  Sequelize connection closed
+6/30/2025 7:49:06 AM [INFO]:  App started on process id:25852
+6/30/2025 7:49:07 AM [INFO]:  Server is listening on port 3000
+6/30/2025 7:50:02 AM [INFO]:  Request from 127.0.0.1 at GET /api/admin/users
+6/30/2025 7:52:07 AM [INFO]:  Request from 192.168.177.180 at POST /api/auth/login
+6/30/2025 7:52:58 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/login
+6/30/2025 7:53:03 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/login
+6/30/2025 7:53:10 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/login
+6/30/2025 8:05:15 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/login
+6/30/2025 8:06:17 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/register
+6/30/2025 8:09:44 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/30/2025 8:09:44 AM [INFO]:  HTTP server closed
+6/30/2025 8:09:44 AM [INFO]:  Sequelize connection closed
+6/30/2025 8:09:47 AM [INFO]:  App started on process id:17224
+6/30/2025 8:09:48 AM [INFO]:  Server is listening on port 3000
+6/30/2025 8:13:24 AM [INFO]:  SIGINT signal received: closing HTTP server
+6/30/2025 8:13:24 AM [INFO]:  HTTP server closed
+6/30/2025 8:13:24 AM [INFO]:  Sequelize connection closed
+7/1/2025 9:06:05 PM [INFO]:  App started on process id:26564
+7/1/2025 9:06:06 PM [INFO]:  Server is listening on port 3000
+7/1/2025 9:06:09 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats
+7/1/2025 9:06:39 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/1/2025 9:06:39 PM [INFO]:  HTTP server closed
+7/1/2025 9:06:39 PM [INFO]:  Sequelize connection closed
+7/1/2025 9:06:41 PM [INFO]:  App started on process id:7476
+7/1/2025 9:06:42 PM [INFO]:  Server is listening on port 3000
+7/1/2025 9:06:44 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats
+7/1/2025 9:07:31 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=excel
+7/1/2025 9:07:35 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=excel
+7/1/2025 9:08:04 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=json
+7/1/2025 9:08:37 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AssessmentSummary?format=json
+7/1/2025 9:09:13 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=json
+7/1/2025 9:09:46 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/1/2025 9:09:46 PM [INFO]:  HTTP server closed
+7/1/2025 9:09:46 PM [INFO]:  Sequelize connection closed
+7/1/2025 9:09:47 PM [INFO]:  App started on process id:10592
+7/1/2025 9:09:49 PM [INFO]:  Server is listening on port 3000
+7/1/2025 9:09:50 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=json
+7/1/2025 9:11:51 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/1/2025 9:11:51 PM [INFO]:  HTTP server closed
+7/1/2025 9:11:51 PM [INFO]:  Sequelize connection closed
+7/1/2025 9:11:53 PM [INFO]:  App started on process id:32188
+7/1/2025 9:11:54 PM [INFO]:  Server is listening on port 3000
+7/1/2025 9:11:55 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=json
+7/1/2025 9:12:06 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=pdf
+7/1/2025 9:12:23 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=json
+7/1/2025 9:13:28 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=pdf
+7/1/2025 9:13:37 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=excel
+7/1/2025 9:13:39 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=excel
+7/1/2025 9:13:41 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=excel
+7/1/2025 9:14:08 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=json
+7/1/2025 9:14:16 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=pdf
+7/1/2025 9:14:36 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AssessmentSummary?format=pdf
+7/1/2025 9:15:55 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/1/2025 9:15:55 PM [INFO]:  HTTP server closed
+7/1/2025 9:15:55 PM [INFO]:  Sequelize connection closed
+7/1/2025 9:15:56 PM [INFO]:  App started on process id:20500
+7/1/2025 9:15:57 PM [INFO]:  Server is listening on port 3000
+7/1/2025 9:15:59 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AssessmentSummary?format=pdf
+7/1/2025 9:16:12 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AssessmentSummary?format=json
+7/1/2025 9:16:45 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=json
+7/1/2025 9:16:50 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=pdf
+7/1/2025 9:20:09 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/1/2025 9:20:09 PM [INFO]:  HTTP server closed
+7/1/2025 9:20:09 PM [INFO]:  Sequelize connection closed
+7/1/2025 9:20:12 PM [INFO]:  App started on process id:26340
+7/1/2025 9:20:13 PM [INFO]:  Server is listening on port 3000
+7/1/2025 9:20:20 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AssessmentSummary?format=pdf
+7/1/2025 9:20:37 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=pdf
+7/1/2025 9:20:50 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=pdf
+7/1/2025 9:21:08 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=excel
+7/1/2025 9:21:10 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=excel
+7/1/2025 9:21:46 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=excel
+7/1/2025 9:21:48 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/UserStats?format=excel
+7/1/2025 9:22:21 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AssessmentSummary?format=excel
+7/1/2025 9:22:23 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AssessmentSummary?format=excel
+7/1/2025 9:26:47 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/1/2025 9:26:47 PM [INFO]:  HTTP server closed
+7/1/2025 9:26:47 PM [INFO]:  Sequelize connection closed
+7/1/2025 9:26:48 PM [INFO]:  App started on process id:23588
+7/1/2025 9:26:49 PM [INFO]:  Server is listening on port 3000
+7/1/2025 9:27:23 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AssessmentSummary?format=excel
+7/1/2025 9:27:27 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AssessmentSummary?format=excel
+7/1/2025 9:28:27 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=excel
+7/1/2025 9:28:28 PM [INFO]:  Request from 127.0.0.1 at GET /api/admin/reports/AppointmentStats?format=excel
+7/1/2025 9:36:28 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/1/2025 9:36:28 PM [INFO]:  HTTP server closed
+7/1/2025 9:36:28 PM [INFO]:  Sequelize connection closed

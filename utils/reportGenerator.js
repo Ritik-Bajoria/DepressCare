@@ -116,12 +116,12 @@ const generateAppointmentStatsReport = async (dateFilter) => {
       include: [
         { 
           model: User,
-          as: 'Patient',
+          as: 'PatientUser',
           attributes: ['full_name', 'email']
         },
         { 
           model: User,
-          as: 'Psychiatrist',
+          as: 'PsychiatristUser',
           attributes: ['full_name', 'email']
         }
       ],
@@ -158,7 +158,7 @@ const generateAssessmentSummaryReport = async (dateFilter) => {
       include: [
         { 
           model: User, 
-          as: 'User', // Must match the alias in your association
+          as: 'Patient', // Must match the alias in your association
           attributes: ['full_name', 'email'] 
         }
       ],
@@ -227,7 +227,7 @@ const generateExcelReport = async (title, reportData, filename) => {
       });
     } 
     else if (reportData.appointments) {
-      // Appointment Stats Report
+      // Appointment Stats Report - FIXED
       worksheet.addRow(['Appointment Statistics']);
       worksheet.addRow(['Total Appointments', 'Completed', 'Scheduled', 'Cancelled']);
       worksheet.addRow([
@@ -244,15 +244,15 @@ const generateExcelReport = async (title, reportData, filename) => {
       (reportData.appointments || []).forEach(appt => {
         worksheet.addRow([
           appt.appointment_id,
-          appt.Patient?.full_name || 'N/A',
-          appt.Psychiatrist?.full_name || 'N/A',
+          appt.PatientUser?.full_name || 'N/A',  // Changed from Patient to PatientUser
+          appt.PsychiatristUser?.full_name || 'N/A',  // Changed from Psychiatrist to PsychiatristUser
           moment(appt.scheduled_time).format('YYYY-MM-DD HH:mm'),
           appt.status
         ]);
       });
     }
     else if (reportData.assessments) {
-      // Assessment Report
+      // Assessment Report - FIXED
       worksheet.addRow(['Assessment Statistics']);
       worksheet.addRow(['Total Assessments', 'Average Score', 'Max Score', 'Min Score']);
       worksheet.addRow([
@@ -269,7 +269,7 @@ const generateExcelReport = async (title, reportData, filename) => {
       (reportData.assessments || []).forEach(assessment => {
         worksheet.addRow([
           assessment.form_id,
-          assessment.User?.full_name || 'N/A',
+          assessment.Patient?.full_name || 'N/A',  // Changed from User to Patient
           assessment.total_score,
           moment(assessment.filled_at).format('YYYY-MM-DD')
         ]);
@@ -347,9 +347,15 @@ const createPdfDefinition = (title, reportData) => {
   const content = [
     { text: title, style: 'header' },
     { text: `Generated at: ${new Date().toLocaleString()}`, style: 'subheader' },
-    { text: `Time range: ${reportData.metadata.timeRange}`, style: 'subheader' },
+    { text: `Time range: ${reportData.metadata?.timeRange || 'All time'}`, style: 'subheader' },
     { text: '\n\n' }
   ];
+
+  // Helper function to safely format dates
+  const formatDate = (date) => {
+    if (!date) return 'N/A';
+    return moment(date).isValid() ? moment(date).format('YYYY-MM-DD HH:mm') : 'N/A';
+  };
 
   if (reportData.users) {
     content.push(
@@ -360,9 +366,9 @@ const createPdfDefinition = (title, reportData) => {
           body: [
             ['Total Users', 'Total Patients', 'Total Psychiatrists'],
             [
-              reportData.metadata.total_users,
-              reportData.metadata.total_patients,
-              reportData.metadata.total_psychiatrists
+              reportData.metadata.total_users || 0,
+              reportData.metadata.total_patients || 0,
+              reportData.metadata.total_psychiatrists || 0
             ]
           ]
         }
@@ -371,15 +377,15 @@ const createPdfDefinition = (title, reportData) => {
       {
         table: {
           headerRows: 1,
-          widths: [40, 100, 160, 80, 80],  // fixed column widths
+          widths: [40, 100, 160, 80, 80],
           body: [
             ['ID', 'Name', 'Email', 'Role', 'Created At'],
             ...reportData.users.map(user => [
-              user.user_id,
-              truncate(user.full_name, 30),
-              truncate(user.email, 35),
-              user.role,
-              moment(user.created_at).isValid() ? moment(user.created_at).format('YYYY-MM-DD') : 'N/A'
+              user.user_id || 'N/A',
+              truncate(user.full_name || 'N/A', 30),
+              truncate(user.email || 'N/A', 35),
+              user.role || 'N/A',
+              formatDate(user.created_at)
             ])
           ]
         },
@@ -390,11 +396,82 @@ const createPdfDefinition = (title, reportData) => {
       }
     );
   } else if (reportData.appointments) {
-    // Similar structure for appointments
-    // ...
+    content.push(
+      { text: 'Appointment Statistics', style: 'sectionHeader' },
+      {
+        table: {
+          widths: ['*', '*', '*', '*'],
+          body: [
+            ['Total', 'Completed', 'Scheduled', 'Cancelled'],
+            [
+              reportData.metadata.total_appointments || 0,
+              reportData.metadata.completed || 0,
+              reportData.metadata.scheduled || 0,
+              reportData.metadata.cancelled || 0
+            ]
+          ]
+        }
+      },
+      { text: '\nAppointment Details', style: 'sectionHeader' },
+      {
+        table: {
+          headerRows: 1,
+          widths: [40, 100, 100, 100, 60],
+          body: [
+            ['ID', 'Patient', 'Psychiatrist', 'Scheduled Time', 'Status'],
+            ...reportData.appointments.map(appt => [
+              appt.appointment_id || 'N/A',
+              truncate(appt.PatientUser?.full_name || 'N/A', 25),
+              truncate(appt.PsychiatristUser?.full_name || 'N/A', 25),
+              formatDate(appt.scheduled_time),
+              appt.status || 'N/A'
+            ])
+          ]
+        },
+        layout: {
+          hLineWidth: () => 0.5,
+          vLineWidth: () => 0.5
+        }
+      }
+    );
   } else if (reportData.assessments) {
-    // Similar structure for assessments
-    // ...
+    content.push(
+      { text: 'Assessment Statistics', style: 'sectionHeader' },
+      {
+        table: {
+          widths: ['*', '*', '*', '*'],
+          body: [
+            ['Total', 'Avg Score', 'Max Score', 'Min Score'],
+            [
+              reportData.metadata.total_assessments || 0,
+              reportData.metadata.average_score ? Math.round(reportData.metadata.average_score * 100) / 100 : 0,
+              reportData.metadata.max_score || 0,
+              reportData.metadata.min_score || 0
+            ]
+          ]
+        }
+      },
+      { text: '\nAssessment Details', style: 'sectionHeader' },
+      {
+        table: {
+          headerRows: 1,
+          widths: [40, 120, 60, 80],
+          body: [
+            ['ID', 'Patient', 'Score', 'Date Taken'],
+            ...reportData.assessments.map(assessment => [
+              assessment.form_id || 'N/A',
+              truncate(assessment.Patient?.full_name || 'N/A', 30),
+              assessment.total_score || 'N/A',
+              formatDate(assessment.filled_at)
+            ])
+          ]
+        },
+        layout: {
+          hLineWidth: () => 0.5,
+          vLineWidth: () => 0.5
+        }
+      }
+    );
   }
 
   return {
@@ -420,6 +497,7 @@ const createPdfDefinition = (title, reportData) => {
     }
   };
 };
+
 const truncate = (text, max = 30) => {
   if (!text) return '';
   return text.length > max ? text.substring(0, max - 3) + '...' : text;
