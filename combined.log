@@ -2815,3 +2815,34 @@
 7/1/2025 9:36:28 PM [INFO]:  SIGINT signal received: closing HTTP server
 7/1/2025 9:36:28 PM [INFO]:  HTTP server closed
 7/1/2025 9:36:28 PM [INFO]:  Sequelize connection closed
+7/1/2025 10:10:14 PM [INFO]:  App started on process id:25140
+7/1/2025 10:10:15 PM [INFO]:  Server is listening on port 3000
+7/1/2025 10:10:57 PM [INFO]:  Request from 127.0.0.1 at POST /api/auth/register
+7/1/2025 10:11:34 PM [INFO]:  Request from 127.0.0.1 at POST /api/patient/appointments
+7/1/2025 10:11:43 PM [INFO]:  Request from 127.0.0.1 at POST /api/patient/appointments
+7/1/2025 10:12:47 PM [INFO]:  Request from 127.0.0.1 at POST /api/patient/appointments
+7/1/2025 10:17:08 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/1/2025 10:17:08 PM [INFO]:  HTTP server closed
+7/1/2025 10:17:08 PM [INFO]:  Sequelize connection closed
+7/1/2025 10:17:09 PM [INFO]:  App started on process id:27412
+7/1/2025 10:18:34 PM [INFO]:  App started on process id:31888
+7/1/2025 10:18:35 PM [INFO]:  Server is listening on port 3000
+7/1/2025 10:18:37 PM [INFO]:  Request from 127.0.0.1 at POST /api/patient/appointments
+7/1/2025 10:19:14 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/patient/appointments/12/cancel
+7/1/2025 10:19:29 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/patient/appointments/12/cancel
+7/1/2025 10:19:41 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/patient/appointments/12/cancel
+7/1/2025 10:23:16 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/1/2025 10:23:16 PM [INFO]:  HTTP server closed
+7/1/2025 10:23:16 PM [INFO]:  Sequelize connection closed
+7/1/2025 10:23:17 PM [INFO]:  App started on process id:28340
+7/1/2025 10:23:19 PM [INFO]:  Server is listening on port 3000
+7/1/2025 10:23:35 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/1/2025 10:23:35 PM [INFO]:  HTTP server closed
+7/1/2025 10:23:35 PM [INFO]:  Sequelize connection closed
+7/1/2025 10:23:36 PM [INFO]:  App started on process id:1732
+7/1/2025 10:23:37 PM [INFO]:  Server is listening on port 3000
+7/1/2025 10:23:44 PM [INFO]:  Request from 127.0.0.1 at GET /api/psychiatrist/appointments
+7/1/2025 10:24:11 PM [INFO]:  Request from 127.0.0.1 at PATCH /api/psychiatrist/appointments/11/status
+7/1/2025 10:24:52 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/1/2025 10:24:52 PM [INFO]:  HTTP server closed
+7/1/2025 10:24:52 PM [INFO]:  Sequelize connection closed

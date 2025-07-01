@@ -1,6 +1,7 @@
 const db = require('../models');
 const { Op } = require('sequelize');
 const {Appointment} = db;
+const { sendCancellationNotice } = require('../utils/emailService');
 
 /**
  * @desc Get psychiatrist's profile
@@ -439,11 +440,24 @@ const updateAppointmentStatus = async (req, res, next) => {
       });
     }
 
+    // Find appointment with patient and psychiatrist details
     const appointment = await Appointment.findOne({
       where: {
         appointment_id: id,
         psychiatrist_id: req.user.user_id
-      }
+      },
+      include: [
+        {
+          model: db.User,
+          as: 'PatientUser',
+          attributes: ['email', 'full_name']
+        },
+        {
+          model: db.User,
+          as: 'PsychiatristUser',
+          attributes: ['full_name']
+        }
+      ]
     });
 
     if (!appointment) {
@@ -453,7 +467,24 @@ const updateAppointmentStatus = async (req, res, next) => {
       });
     }
 
+    // Save old status for comparison
+    const oldStatus = appointment.status;
     await appointment.update({ status });
+
+    // Send cancellation email if status changed to Cancelled
+    if (status === 'Cancelled' && oldStatus !== 'Cancelled') {
+      try {
+        await sendCancellationNotice({
+          userEmail: appointment.PatientUser.email,
+          userName: appointment.PatientUser.full_name,
+          psychiatristName: appointment.PsychiatristUser.full_name,
+          appointmentTime: appointment.scheduled_time.toLocaleString()
+        });
+      } catch (emailError) {
+        console.error('Failed to send cancellation email:', emailError);
+        // Don't fail the request if email fails
+      }
+    }
 
     res.json({
       success: true,
@@ -465,7 +496,7 @@ const updateAppointmentStatus = async (req, res, next) => {
     res.status(500).json({
       success: false,
       message: 'Database error',
-      error: error.message // More specific error message
+      error: error.message
     });
   }
 };

@@ -2,6 +2,7 @@ const db = require('../models');
 const { User, Psychiatrist, Appointment, DepressionForm, Prescription, Recommendation, FormResponse } = db;
 const { Op } = require('sequelize');
 const generateMeetingLink = require('../utils/generateMeetingLink');
+const { sendBookingConfirmation, sendCancellationNotice } = require('../utils/emailService');
 
 /**
  * @desc Search psychiatrists based on filters
@@ -61,17 +62,17 @@ const bookAppointment = async (req, res) => {
       return res.status(400).json({ error: 'Psychiatrist ID and scheduled time are required' });
     }
 
-    // 1. Get psychiatrist (with role validation) and patient
+    // 1. Get psychiatrist and patient
     const [psychiatrist, patient] = await Promise.all([
       User.findOne({
         where: { 
           user_id: psychiatrist_id,
-          role: 'Psychiatrist' // Ensure the user is actually a psychiatrist
+          role: 'Psychiatrist'
         },
         include: [{
           model: Psychiatrist,
           as: 'Psychiatrist',
-          required: true // Enforce that the user must have a psychiatrist profile
+          required: true
         }],
         attributes: ['user_id', 'email', 'full_name']
       }),
@@ -96,14 +97,14 @@ const bookAppointment = async (req, res) => {
       return res.status(400).json({ error: 'Appointment time must be in the future' });
     }
 
-    // 3. Check psychiatrist availability (optional enhancement)
+    // 3. Check psychiatrist availability
     const existingAppointment = await Appointment.findOne({
       where: {
         psychiatrist_id,
         scheduled_time: {
           [Op.between]: [
-            new Date(new Date(scheduled_time).setMinutes(-30)), // 30 mins before
-            new Date(new Date(scheduled_time).setHours(1, 30)) // 1.5 hours after
+            new Date(new Date(scheduled_time).setMinutes(-30)),
+            new Date(new Date(scheduled_time).setHours(1, 30))
           ]
         },
         status: {
@@ -128,7 +129,7 @@ const bookAppointment = async (req, res) => {
       summary: `Therapy Session - ${patient.full_name}`
     });
 
-    // 5. Create appointment with all required fields
+    // 5. Create appointment
     const appointment = await Appointment.create({
       patient_id,
       psychiatrist_id,
@@ -140,7 +141,7 @@ const bookAppointment = async (req, res) => {
       meeting_link: meetLink
     });
 
-    // 6. Return appointment with associations
+    // 6. Get full appointment details
     const createdAppointment = await Appointment.findByPk(appointment.appointment_id, {
       include: [
         { 
@@ -156,7 +157,19 @@ const bookAppointment = async (req, res) => {
       ]
     });
 
-    res.status(201).json({
+    // 7. Send email (don't await it to prevent blocking)
+    sendBookingConfirmation({
+      userEmail: patient.email,
+      userName: patient.full_name,
+      psychiatristName: psychiatrist.full_name,
+      appointmentTime: new Date(scheduled_time).toLocaleString(),
+      meetingLink: meetLink
+    }).catch(emailError => {
+      console.error('Failed to send confirmation email:', emailError);
+    });
+
+    // 8. Return response
+    return res.status(201).json({
       success: true,
       data: createdAppointment
     });
@@ -178,7 +191,7 @@ const bookAppointment = async (req, res) => {
       });
     }
 
-    res.status(500).json({ 
+    return res.status(500).json({ 
       error: 'Failed to book appointment',
       details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
@@ -202,7 +215,19 @@ const cancelAppointment = async (req, res, next) => {
         status: {
           [Op.or]: ['Scheduled', 'Pending']
         }
-      }
+      },
+      include: [
+        {
+          model: User,
+          as: 'PatientUser',
+          attributes: ['email', 'full_name']
+        },
+        {
+          model: User,
+          as: 'PsychiatristUser',
+          attributes: ['full_name']
+        }
+      ]
     });
 
     if (!appointment) {
@@ -213,6 +238,19 @@ const cancelAppointment = async (req, res, next) => {
     }
 
     await appointment.update({ status: 'Cancelled' });
+
+    // Send cancellation email
+    try {
+      await sendCancellationNotice({
+        userEmail: appointment.PatientUser.email,
+        userName: appointment.PatientUser.full_name,
+        psychiatristName: appointment.PsychiatristUser.full_name,
+        appointmentTime: appointment.scheduled_time.toLocaleString()
+      });
+    } catch (emailError) {
+      console.error('Failed to send cancellation email:', emailError);
+      // Don't fail the whole request if email fails
+    }
 
     res.json({
       success: true,
