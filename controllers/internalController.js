@@ -120,7 +120,7 @@ const createJobPosting = async (req, res, next) => {
  * @param {string} base64Data - Base64 encoded image data
  * @returns {string} - Path to saved image
  */
-async function savePicture(base64Data) {
+async function savePicture(base64Data,type) {
   try {
     // Extract the image type and data from base64 string
     const matches = base64Data.match(/^data:image\/([A-Za-z-+/]+);base64,(.+)$/);
@@ -136,7 +136,7 @@ async function savePicture(base64Data) {
     // Create unique filename (using timestamp)
     const timestamp = Date.now();
     const filename = `job_${timestamp}.${imageType}`;
-    const uploadDir = path.join(__dirname, '../uploads/jobs');
+    const uploadDir = path.join(__dirname, '../uploads',type);
     const filePath = path.join(uploadDir, filename);
 
     // Ensure upload directory exists
