@@ -16,9 +16,17 @@ router.use(authMiddleware,roleMiddleware(['InternalManagement']));
 router.post(
   '/jobs',
   [
-    check('title').notEmpty().withMessage('Title is required'),
+    check('title')
+      .notEmpty()
+      .withMessage('Title is required')
+      .isLength({ max: 255 })
+      .withMessage('Title must be less than 255 characters'),
     check('description').notEmpty().withMessage('Description is required'),
-    check('requirements').notEmpty().withMessage('Requirements are required')
+    check('requirements').notEmpty().withMessage('Requirements are required'),
+    check('picture')
+      .optional()
+      .isString()
+      .withMessage('Picture must be a base64 string if provided')
   ],
   validate,
   asyncHandler(internalController.createJobPosting)
@@ -91,6 +99,30 @@ router.get(
   ],
   validate,
   asyncHandler(internalController.getFinancialReports)
+);
+
+/**
+ * @route POST /internal/community-posts
+ * @desc Create community posts
+ * @access Private (Internal)
+ */
+router.post(
+  '/community-posts',
+  [
+    check('title')
+      .notEmpty()
+      .withMessage('Title is required')
+      .isLength({ max: 255 })
+      .withMessage('Title must be less than 255 characters'),
+    check('content').notEmpty().withMessage('Content is required'),
+    check('category').notEmpty().withMessage('Category is required'),
+    check('picture')
+      .optional()
+      .isString()
+      .withMessage('Picture must be a base64 string if provided')
+  ],
+  validate,
+  asyncHandler(internalController.createCommunityPost)
 );
 
 module.exports = router;

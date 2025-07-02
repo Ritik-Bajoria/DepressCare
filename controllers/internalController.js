@@ -1,7 +1,13 @@
 const db = require('../models');
-const { JobPosting, PsychiatristSalary, PatientPayment } = db;
+const { JobPosting, PsychiatristSalary, PatientPayment, CommunityPost,User } = db;
 const { Op } = require('sequelize');
+const path = require('path');
+const fs = require('fs');
+const { promisify } = require('util');
 
+// Convert callback functions to promise-based
+const mkdir = promisify(fs.mkdir);
+const writeFile = promisify(fs.writeFile);
 /**
  * @desc Create job posting
  * @route POST /internal/jobs
@@ -9,22 +15,213 @@ const { Op } = require('sequelize');
  */
 const createJobPosting = async (req, res, next) => {
   try {
-    const { title, description, requirements } = req.body;
+    const { title, description, requirements, picture } = req.body;
     const posted_by = req.user.user_id;
 
+    // Validate required fields
+    if (!title || !description || !requirements) {
+      return res.status(400).json({
+        success: false,
+        message: 'Title, description, and requirements are required fields'
+      });
+    }
+
+    // Verify the user exists
+    const user = await User.findByPk(posted_by);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    // Handle picture upload if provided
+    let picture_url = null;
+    if (picture) {
+      try {
+        picture_url = await savePicture(picture, 'jobs'); // Added 'jobs' as folder
+      } catch (error) {
+        console.error('Error saving job picture:', error);
+        return res.status(400).json({
+          success: false,
+          message: 'Failed to process image upload'
+        });
+      }
+    }
+
+    // Create job posting in database
     const job = await JobPosting.create({
       posted_by,
       title,
       description,
-      requirements
+      requirements,
+      picture_url
     });
+
+    // Include poster information in response
+    const responseData = {
+      job_id: job.job_id,
+      title: job.title,
+      description: job.description,
+      requirements: job.requirements,
+      picture_url: job.picture_url,
+      posted_at: job.posted_at,
+      poster: {
+        user_id: user.user_id,
+        full_name: user.full_name,
+        profile_picture: user.profile_picture
+      }
+    };
 
     res.status(201).json({
       success: true,
       message: 'Job posting created successfully',
-      data: job
+      data: responseData
     });
+
   } catch (error) {
+    // Handle specific error cases
+    if (error.name === 'SequelizeValidationError') {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation error',
+        errors: error.errors.map(err => ({
+          field: err.path,
+          message: err.message
+        }))
+      });
+    }
+
+    if (error.name === 'SequelizeForeignKeyConstraintError') {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid user reference'
+      });
+    }
+
+    if (error.message.includes('Invalid base64 image data')) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid image format. Please provide a valid base64 encoded image.'
+      });
+    }
+
+    console.error('Error creating job posting:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to create job posting',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+};
+
+/**
+ * Helper function to save base64 profile picture to server
+ * @param {string} base64Data - Base64 encoded image data
+ * @returns {string} - Path to saved image
+ */
+async function savePicture(base64Data) {
+  try {
+    // Extract the image type and data from base64 string
+    const matches = base64Data.match(/^data:image\/([A-Za-z-+/]+);base64,(.+)$/);
+    
+    if (!matches || matches.length !== 3) {
+      throw new Error('Invalid base64 image data');
+    }
+
+    const imageType = matches[1];
+    const imageData = matches[2];
+    const buffer = Buffer.from(imageData, 'base64');
+    
+    // Create unique filename (using timestamp)
+    const timestamp = Date.now();
+    const filename = `job_${timestamp}.${imageType}`;
+    const uploadDir = path.join(__dirname, '../uploads/jobs');
+    const filePath = path.join(uploadDir, filename);
+
+    // Ensure upload directory exists
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+
+    // Save file
+    fs.writeFileSync(filePath, buffer);
+    
+    // Return relative path to be stored in database
+    return `/uploads/jobs/${filename}`;
+  } catch (error) {
+    console.error('Error saving job picture:', error);
+    throw error;
+  }
+}
+
+
+/**
+ * @desc    Create community posts
+ * @route   POST /internal/community-posts
+ * @access  Private (internalManagement)
+ */
+const createCommunityPost = async (req, res, next) => {
+  try {
+    const { title, content, category, picture } = req.body;
+    const posted_by = req.user.user_id;
+
+    // Validate required fields
+    if (!title || !content || !category) {
+      return res.status(400).json({
+        success: false,
+        message: 'Title, content, and category are required fields'
+      });
+    }
+
+    // Handle picture upload if provided
+    let picture_url = null;
+    if (picture) {
+      try {
+        picture_url = await savePicture(picture, 'community');
+      } catch (error) {
+        console.error('Error saving community post picture:', error);
+        return res.status(400).json({
+          success: false,
+          message: 'Failed to process image upload'
+        });
+      }
+    }
+
+    const post = await CommunityPost.create({
+      posted_by,
+      title,
+      category,
+      content,
+      picture_url
+      // posted_at will be automatically set by the model's defaultValue
+    });
+
+    res.status(201).json({
+      success: true,
+      message: 'Community post created successfully',
+      data: {
+        post_id: post.post_id,
+        posted_by: post.posted_by,
+        title: post.title,
+        category: post.category,
+        content: post.content,
+        picture_url: post.picture_url,
+        posted_at: post.posted_at
+      }
+    });
+
+  } catch (error) {
+    if (error.name === 'SequelizeValidationError') {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation error',
+        errors: error.errors.map(err => ({
+          field: err.path,
+          message: err.message
+        }))
+      });
+    }
     next(error);
   }
 };
@@ -274,5 +471,6 @@ module.exports = {
   recordPatientPayment,
   processSalary,
   updateSalaryStatus,
-  getFinancialReports
+  getFinancialReports,
+  createCommunityPost
 };

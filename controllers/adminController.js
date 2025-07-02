@@ -547,31 +547,7 @@ const generateReports = async (req, res, next) => {
   }
 };
 
-/**
- * @desc    Create community posts
- * @route   POST /admin/community-posts
- * @access  Private (Admin)
- */
-const createCommunityPost = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
 
-  try {
-    const { title, content } = req.body;
-
-    const post = await CommunityPost.create({
-      posted_by: req.user.user_id,
-      title,
-      content
-    });
-
-    res.status(201).json({ success: true, data: post });
-  } catch (error) {
-    next(error);
-  }
-};
 
 
 module.exports = {
@@ -580,6 +556,5 @@ module.exports = {
   enrollInternalManagement,
   updateUser,
   deleteUser,
-  generateReports,
-  createCommunityPost
+  generateReports
 };

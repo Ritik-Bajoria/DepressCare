@@ -45,6 +45,14 @@ module.exports = (sequelize) => {
       foreignKey: 'patient_id',
       as: 'ReceivedRecommendations'
     });
+    User.hasMany(models.CommunityPost, {
+      foreignKey: 'posted_by',
+      as: 'CommunityPosts'
+    });
+    User.hasMany(models.JobPosting, {
+      foreignKey: 'posted_by',
+      as: 'JobPostings'
+    });
   };
 
   return User;

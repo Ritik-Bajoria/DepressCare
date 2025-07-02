@@ -219,23 +219,4 @@ router.get(
   asyncHandler(adminController.generateReports)
 );
 
-/**
- * @route POST /admin/community-posts
- * @desc Create community posts
- * @access Private (Admin)
- */
-router.post(
-  '/community-posts',
-  [
-    check('title')
-      .notEmpty()
-      .withMessage('Title is required')
-      .isLength({ max: 255 })
-      .withMessage('Title must be less than 255 characters'),
-    check('content').notEmpty().withMessage('Content is required')
-  ],
-  validate,
-  asyncHandler(adminController.createCommunityPost)
-);
-
 module.exports = router;
