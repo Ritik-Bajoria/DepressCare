@@ -148,7 +148,7 @@ async function savePicture(base64Data,type) {
     fs.writeFileSync(filePath, buffer);
     
     // Return relative path to be stored in database
-    return `/uploads/jobs/${filename}`;
+    return `/uploads/${type}/${filename}`;
   } catch (error) {
     console.error('Error saving job picture:', error);
     throw error;
