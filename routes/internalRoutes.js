@@ -52,6 +52,24 @@ router.post(
 );
 
 /**
+ * @route GET /internal/appointments
+ * @desc Get all appointments with associated data
+ * @access Private (InternalManagement)
+ */
+router.get(
+  '/appointments',
+  [
+    check('page').optional().isInt({ min: 1 }).withMessage('Page must be a positive integer'),
+    check('limit').optional().isInt({ min: 1 }).withMessage('Limit must be a positive integer'),
+    check('status').optional().isIn(['Scheduled', 'Completed', 'Cancelled', 'Pending']).withMessage('Invalid status'),
+    check('from_date').optional().isISO8601().withMessage('Invalid from date format'),
+    check('to_date').optional().isISO8601().withMessage('Invalid to date format')
+  ],
+  validate,
+  asyncHandler(internalController.getAllAppointmentsWithPayments)
+);
+
+/**
  * Salary Routes
  */
 router.post(
@@ -125,4 +143,20 @@ router.post(
   asyncHandler(internalController.createCommunityPost)
 );
 
+/**
+ * @route GET /internal/psychiatrists
+ * @desc Get all psychiatrists with their details
+ * @access Private (InternalManagement)
+ */
+router.get(
+  '/psychiatrists',
+  [
+    check('page').optional().isInt({ min: 1 }).withMessage('Page must be a positive integer'),
+    check('limit').optional().isInt({ min: 1 }).withMessage('Limit must be a positive integer'),
+    check('available').optional().isBoolean().withMessage('Available must be true or false'),
+    check('specialization').optional().isString().withMessage('Specialization must be a string')
+  ],
+  validate,
+  asyncHandler(internalController.getAllPsychiatrists)
+);
 module.exports = router;

@@ -3455,3 +3455,280 @@
 7/2/2025 3:16:06 PM [INFO]:  Request from 192.168.1.14 at GET /api/auth/me
 7/2/2025 3:16:06 PM [INFO]:  Request from 192.168.1.14 at GET /api/psychiatrist/appointments
 7/2/2025 3:16:14 PM [INFO]:  Request from 192.168.1.14 at PATCH /api/psychiatrist/appointments/14/status
+7/2/2025 3:17:43 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/2/2025 3:17:43 PM [INFO]:  HTTP server closed
+7/2/2025 3:17:43 PM [INFO]:  Sequelize connection closed
+7/2/2025 3:22:00 PM [INFO]:  App started on process id:25112
+7/2/2025 3:22:02 PM [INFO]:  Server is listening on port 3000
+7/2/2025 3:22:09 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/reports/financial
+7/2/2025 3:23:16 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/salaries
+7/2/2025 3:35:58 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/2/2025 3:35:58 PM [INFO]:  HTTP server closed
+7/2/2025 3:35:58 PM [INFO]:  Sequelize connection closed
+7/6/2025 10:25:19 AM [INFO]:  App started on process id:21844
+7/6/2025 10:25:21 AM [INFO]:  Server is listening on port 3000
+7/6/2025 10:25:22 AM [INFO]:  Request from 192.168.177.180 at POST /api/auth/login
+7/6/2025 10:25:23 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:25:23 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:34:06 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:34:07 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:34:10 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+7/6/2025 10:34:11 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+7/6/2025 10:34:11 AM [INFO]:  Request from 192.168.177.180 at GET /uploads/profile_pictures/profile_1750922091232.png
+7/6/2025 10:34:11 AM [INFO]:  Request from 192.168.177.180 at GET /uploads/profile_pictures/profile_1750922082298.png
+7/6/2025 10:34:11 AM [INFO]:  Request from 192.168.177.180 at GET /uploads/profile_pictures/profile_1750922072950.png
+7/6/2025 10:34:15 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/appointments
+7/6/2025 10:34:15 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/appointments
+7/6/2025 10:34:55 AM [INFO]:  Request from 192.168.177.180 at GET /api/jobs
+7/6/2025 10:34:55 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 10:34:55 AM [INFO]:  Request from 192.168.177.180 at GET /api/jobs
+7/6/2025 10:34:55 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 10:42:45 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:42:45 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:43:28 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/appointments
+7/6/2025 10:43:28 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/appointments
+7/6/2025 10:43:32 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+7/6/2025 10:43:32 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+7/6/2025 10:43:32 AM [INFO]:  Request from 192.168.177.180 at GET /uploads/profile_pictures/profile_1750922091232.png
+7/6/2025 10:43:32 AM [INFO]:  Request from 192.168.177.180 at GET /uploads/profile_pictures/profile_1750922082298.png
+7/6/2025 10:43:32 AM [INFO]:  Request from 192.168.177.180 at GET /uploads/profile_pictures/profile_1750922072950.png
+7/6/2025 10:46:31 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+7/6/2025 10:46:31 AM [INFO]:  Request from 192.168.177.180 at GET /api/patient/psychiatrists
+7/6/2025 10:46:31 AM [INFO]:  Request from 192.168.177.180 at GET /uploads/profile_pictures/profile_1750922091232.png
+7/6/2025 10:46:31 AM [INFO]:  Request from 192.168.177.180 at GET /uploads/profile_pictures/profile_1750922072950.png
+7/6/2025 10:46:31 AM [INFO]:  Request from 192.168.177.180 at GET /uploads/profile_pictures/profile_1750922082298.png
+7/6/2025 10:51:48 AM [INFO]:  Request from 192.168.177.180 at POST /api/auth/login
+7/6/2025 10:51:49 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:51:49 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:52:13 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:52:13 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:52:26 AM [INFO]:  Request from 192.168.177.180 at GET /api/psychiatrist/appointments
+7/6/2025 10:52:26 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:52:26 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:52:26 AM [INFO]:  Request from 192.168.177.180 at GET /api/psychiatrist/appointments
+7/6/2025 10:52:29 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:52:29 AM [INFO]:  Request from 192.168.177.180 at GET /api/psychiatrist/appointments
+7/6/2025 10:52:29 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:52:29 AM [INFO]:  Request from 192.168.177.180 at GET /api/psychiatrist/appointments
+7/6/2025 10:52:32 AM [INFO]:  Request from 192.168.177.180 at GET /api/psychiatrist/appointments
+7/6/2025 10:52:32 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:52:32 AM [INFO]:  Request from 192.168.177.180 at GET /api/psychiatrist/appointments
+7/6/2025 10:52:32 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:52:52 AM [INFO]:  Request from 192.168.177.180 at POST /api/auth/login
+7/6/2025 10:52:52 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:52:52 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:52:57 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 10:52:57 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 10:59:09 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 10:59:09 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 10:59:10 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 10:59:10 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 10:59:19 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 10:59:19 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 10:59:37 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:59:37 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 10:59:39 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 10:59:39 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 10:59:40 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 10:59:40 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 11:06:09 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 11:06:09 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 11:06:12 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 11:06:12 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 11:06:13 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 11:06:13 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 11:06:23 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 11:06:23 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 11:06:32 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 11:06:32 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 11:08:57 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 11:08:57 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 11:09:19 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 11:09:19 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 11:09:24 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 11:09:24 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 11:10:13 AM [INFO]:  Request from 192.168.177.180 at POST /api/internal/community-posts
+7/6/2025 11:10:13 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 11:10:21 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 11:10:21 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/job
+7/6/2025 11:31:26 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 11:31:26 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 11:31:26 AM [INFO]:  Request from 192.168.177.180 at GET /api/jobs
+7/6/2025 11:31:26 AM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 11:31:26 AM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 11:31:26 AM [INFO]:  Request from 192.168.177.180 at GET /api/jobs
+7/6/2025 12:06:44 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/6/2025 12:06:44 PM [INFO]:  HTTP server closed
+7/6/2025 12:06:44 PM [INFO]:  Sequelize connection closed
+7/6/2025 12:06:46 PM [INFO]:  App started on process id:20100
+7/6/2025 12:06:47 PM [INFO]:  Server is listening on port 3000
+7/6/2025 12:06:51 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/appointments
+7/6/2025 12:07:41 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/6/2025 12:07:41 PM [INFO]:  HTTP server closed
+7/6/2025 12:07:41 PM [INFO]:  Sequelize connection closed
+7/6/2025 12:07:43 PM [INFO]:  App started on process id:22044
+7/6/2025 12:07:44 PM [INFO]:  Server is listening on port 3000
+7/6/2025 12:07:47 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/appointments
+7/6/2025 12:07:59 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/6/2025 12:07:59 PM [INFO]:  HTTP server closed
+7/6/2025 12:07:59 PM [INFO]:  Sequelize connection closed
+7/6/2025 12:08:00 PM [INFO]:  App started on process id:376
+7/6/2025 12:08:02 PM [INFO]:  Server is listening on port 3000
+7/6/2025 12:08:04 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/appointments
+7/6/2025 12:08:16 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/6/2025 12:08:16 PM [INFO]:  HTTP server closed
+7/6/2025 12:08:16 PM [INFO]:  Sequelize connection closed
+7/6/2025 12:08:18 PM [INFO]:  App started on process id:16036
+7/6/2025 12:08:19 PM [INFO]:  Server is listening on port 3000
+7/6/2025 12:08:20 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/appointments
+7/6/2025 1:06:44 PM [INFO]:  Request from 192.168.177.180 at POST /api/auth/login
+7/6/2025 1:06:56 PM [INFO]:  Request from 192.168.177.180 at POST /api/auth/login
+7/6/2025 1:06:57 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:06:57 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:06:59 PM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 1:06:59 PM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 1:13:43 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:13:43 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:25:37 PM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 1:25:37 PM [INFO]:  Request from 192.168.177.180 at GET /api/jobs
+7/6/2025 1:25:37 PM [INFO]:  Request from 192.168.177.180 at GET /api/jobs
+7/6/2025 1:25:37 PM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 1:25:45 PM [INFO]:  Request from 192.168.177.180 at GET /api/jobs
+7/6/2025 1:25:45 PM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 1:25:45 PM [INFO]:  Request from 192.168.177.180 at GET /api/jobs
+7/6/2025 1:25:45 PM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 1:26:29 PM [INFO]:  Request from 192.168.177.180 at POST /api/auth/login
+7/6/2025 1:26:29 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:26:29 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:26:35 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:26:35 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:26:51 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:26:51 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:26:53 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:26:53 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:28:00 PM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 1:28:00 PM [INFO]:  Request from 192.168.177.180 at GET /api/jobs
+7/6/2025 1:28:00 PM [INFO]:  Request from 192.168.177.180 at GET /api/jobs
+7/6/2025 1:28:00 PM [INFO]:  Request from 192.168.177.180 at GET /api/post/community
+7/6/2025 1:28:53 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:28:53 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:28:55 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:28:55 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:34:11 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/jobs
+7/6/2025 1:35:03 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:36:47 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+7/6/2025 1:39:35 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/appointments
+7/6/2025 1:40:28 PM [INFO]:  Request from 192.168.177.180 at POST /api/internal/payments/pay
+7/6/2025 1:40:34 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+7/6/2025 1:41:54 PM [INFO]:  Request from 192.168.177.180 at POST /api/api/internal/payments/pay
+7/6/2025 1:42:14 PM [INFO]:  Request from 192.168.177.180 at POST /api/internal/payments
+7/6/2025 1:43:27 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:43:27 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:43:30 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:43:30 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:43:30 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:43:30 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:43:32 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:43:32 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:44:34 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:44:34 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:44:37 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:44:37 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:45:26 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:45:26 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:45:29 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:45:29 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:45:58 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:45:58 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:46:03 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:46:03 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:47:43 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:47:43 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:47:47 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:47:47 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:47:56 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:47:56 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:47:59 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:47:59 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:49:43 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:49:43 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 1:50:16 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:50:16 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/appointments
+7/6/2025 1:50:37 PM [INFO]:  Request from 192.168.177.180 at POST /api/internal/payments
+7/6/2025 1:50:47 PM [INFO]:  Request from 192.168.177.180 at POST /api/internal/payments
+7/6/2025 1:51:12 PM [INFO]:  Request from 192.168.177.180 at POST /api/internal/payments
+7/6/2025 1:51:40 PM [INFO]:  Request from 192.168.177.180 at POST /api/internal/payments
+7/6/2025 1:51:56 PM [INFO]:  Request from 192.168.177.180 at POST /api/internal/payments
+7/6/2025 1:58:25 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/6/2025 1:58:25 PM [INFO]:  HTTP server closed
+7/6/2025 1:58:25 PM [INFO]:  Sequelize connection closed
+7/6/2025 1:58:26 PM [INFO]:  App started on process id:27256
+7/6/2025 1:58:28 PM [INFO]:  Server is listening on port 3000
+7/6/2025 1:58:34 PM [INFO]:  Request from 127.0.0.1 at POST /api/internal/salaries
+7/6/2025 1:59:12 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/psychiatrists
+7/6/2025 1:59:37 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/6/2025 1:59:37 PM [INFO]:  HTTP server closed
+7/6/2025 1:59:37 PM [INFO]:  Sequelize connection closed
+7/6/2025 1:59:39 PM [INFO]:  App started on process id:16632
+7/6/2025 1:59:40 PM [INFO]:  Server is listening on port 3000
+7/6/2025 1:59:42 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/psychiatrists
+7/6/2025 2:00:17 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 2:00:17 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 2:00:22 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/psychiatrists
+7/6/2025 2:00:22 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/psychiatrists
+7/6/2025 2:00:34 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 2:00:34 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 2:00:36 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/psychiatrists
+7/6/2025 2:00:37 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/psychiatrists
+7/6/2025 2:01:23 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/6/2025 2:01:23 PM [INFO]:  HTTP server closed
+7/6/2025 2:01:23 PM [INFO]:  Sequelize connection closed
+7/6/2025 2:01:24 PM [INFO]:  App started on process id:7588
+7/6/2025 2:01:25 PM [INFO]:  Server is listening on port 3000
+7/6/2025 2:01:28 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/psychiatrists
+7/6/2025 2:03:23 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/6/2025 2:03:23 PM [INFO]:  HTTP server closed
+7/6/2025 2:03:23 PM [INFO]:  Sequelize connection closed
+7/6/2025 2:03:24 PM [INFO]:  App started on process id:9524
+7/6/2025 2:03:25 PM [INFO]:  Server is listening on port 3000
+7/6/2025 2:03:27 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/psychiatrists
+7/6/2025 2:03:32 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/6/2025 2:03:32 PM [INFO]:  HTTP server closed
+7/6/2025 2:03:32 PM [INFO]:  Sequelize connection closed
+7/6/2025 2:03:33 PM [INFO]:  App started on process id:12544
+7/6/2025 2:03:34 PM [INFO]:  Server is listening on port 3000
+7/6/2025 2:03:36 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/psychiatrists
+7/6/2025 2:04:02 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/6/2025 2:04:02 PM [INFO]:  HTTP server closed
+7/6/2025 2:04:02 PM [INFO]:  Sequelize connection closed
+7/6/2025 2:04:04 PM [INFO]:  App started on process id:24112
+7/6/2025 2:04:05 PM [INFO]:  Server is listening on port 3000
+7/6/2025 2:04:06 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/psychiatrists
+7/6/2025 2:04:11 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/6/2025 2:04:11 PM [INFO]:  HTTP server closed
+7/6/2025 2:04:11 PM [INFO]:  Sequelize connection closed
+7/6/2025 2:04:12 PM [INFO]:  App started on process id:26240
+7/6/2025 2:04:13 PM [INFO]:  Server is listening on port 3000
+7/6/2025 2:04:15 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/psychiatrists
+7/6/2025 2:04:26 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/6/2025 2:04:26 PM [INFO]:  HTTP server closed
+7/6/2025 2:04:26 PM [INFO]:  Sequelize connection closed
+7/6/2025 2:05:06 PM [INFO]:  App started on process id:7916
+7/6/2025 2:05:07 PM [INFO]:  Server is listening on port 3000
+7/6/2025 2:05:09 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/psychiatrists
+7/6/2025 2:08:41 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/6/2025 2:08:41 PM [INFO]:  HTTP server closed
+7/6/2025 2:08:41 PM [INFO]:  Sequelize connection closed
+7/6/2025 2:08:44 PM [INFO]:  App started on process id:6372
+7/6/2025 2:08:45 PM [INFO]:  Server is listening on port 3000
+7/6/2025 2:08:50 PM [INFO]:  Request from 127.0.0.1 at GET /api/internal/psychiatrists
+7/6/2025 2:10:10 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 2:10:10 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 2:10:14 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/psychiatrists
+7/6/2025 2:10:14 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/psychiatrists
+7/6/2025 2:12:35 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/psychiatrists
+7/6/2025 2:12:45 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 2:12:45 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 2:12:50 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/psychiatrists
+7/6/2025 2:12:50 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/psychiatrists
+7/6/2025 2:13:09 PM [INFO]:  Request from 192.168.177.180 at POST /api/internal/salaries

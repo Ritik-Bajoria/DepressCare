@@ -1,5 +1,5 @@
 const db = require('../models');
-const { JobPosting, PsychiatristSalary, PatientPayment, CommunityPost,User } = db;
+const { JobPosting, PsychiatristSalary, PatientPayment, CommunityPost,User, Appointment, Prescription, Psychiatrist } = db;
 const { Op } = require('sequelize');
 const path = require('path');
 const fs = require('fs');
@@ -222,6 +222,87 @@ const createCommunityPost = async (req, res, next) => {
         }))
       });
     }
+    next(error);
+  }
+};
+
+const getAllAppointmentsWithPayments = async (req, res, next) => {
+  try {
+    const { 
+      page = 1, 
+      limit = 10, 
+      status, 
+      from_date, 
+      to_date 
+    } = req.query;
+
+    const offset = (page - 1) * limit;
+
+    // Build where clause
+    const where = {};
+    if (status) where.status = status;
+    if (from_date || to_date) {
+      where.scheduled_time = {};
+      if (from_date) where.scheduled_time[Op.gte] = new Date(from_date);
+      if (to_date) where.scheduled_time[Op.lte] = new Date(to_date);
+    }
+
+    const { count, rows: appointments } = await Appointment.findAndCountAll({
+      where,
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+      order: [['scheduled_time', 'DESC']],
+      include: [
+        {
+          model: User,
+          as: 'PatientUser',
+          attributes: ['user_id', 'full_name', 'email', 'phone']
+        },
+        {
+          model: User,
+          as: 'PsychiatristUser',
+          attributes: ['user_id', 'full_name', 'email', 'phone']
+        },
+        {
+          model: PatientPayment,
+          as: 'Payment',
+          required: false // Left join to include appointments without payments
+        },
+        {
+          model: Prescription,
+          as: 'Prescriptions',
+          required: false
+        }
+      ]
+    });
+
+    // Format response
+    const formattedAppointments = appointments.map(appointment => ({
+      appointment_id: appointment.appointment_id,
+      scheduled_time: appointment.scheduled_time,
+      status: appointment.status,
+      meeting_link: appointment.meeting_link,
+      symptoms: appointment.symptoms,
+      short_description: appointment.short_description,
+      patient: appointment.PatientUser,
+      psychiatrist: appointment.PsychiatristUser,
+      payment: appointment.Payment || { status: 'unpaid' },
+      prescriptions: appointment.Prescriptions
+    }));
+
+    res.json({
+      success: true,
+      data: formattedAppointments,
+      pagination: {
+        total: count,
+        totalPages: Math.ceil(count / limit),
+        currentPage: parseInt(page),
+        perPage: parseInt(limit)
+      }
+    });
+
+  } catch (error) {
+    console.error('Error fetching appointments:', error);
     next(error);
   }
 };
@@ -465,6 +546,71 @@ const getFinancialReports = async (req, res, next) => {
   }
 };
 
+const getAllPsychiatrists = async (req, res, next) => {
+  try {
+    const { 
+      page = 1, 
+      limit = 10, 
+      available,
+      specialization
+    } = req.query;
+
+    const offset = (page - 1) * limit;
+
+    // Build where clause
+    const where = {};
+    if (available !== undefined) where.availability = available;
+    if (specialization) where.specialization = specialization;
+
+    const { count, rows: psychiatrists } = await Psychiatrist.findAndCountAll({
+      where,
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+      order: [['years_of_experience', 'DESC']],
+      include: [{
+        model: User,
+        as: 'User',
+        attributes: ['user_id', 'full_name', 'email', 'phone', 'profile_picture', 'gender', 'date_of_birth']
+      }]
+    });
+
+    // Format response
+    const formattedPsychiatrists = psychiatrists.map(psychiatrist => {
+      const userData = psychiatrist.User ? psychiatrist.User.get({ plain: true }) : null;
+      
+      return {
+        psychiatrist_id: psychiatrist.psychiatrist_id,
+        license_number: psychiatrist.license_number,
+        qualifications: psychiatrist.qualifications,
+        specialization: psychiatrist.specialization,
+        years_of_experience: psychiatrist.years_of_experience,
+        bio: psychiatrist.bio,
+        availability: psychiatrist.availability,
+        user: userData
+      };
+    });
+
+    res.json({
+      success: true,
+      data: formattedPsychiatrists,
+      pagination: {
+        total: count,
+        totalPages: Math.ceil(count / limit),
+        currentPage: parseInt(page),
+        perPage: parseInt(limit)
+      }
+    });
+
+  } catch (error) {
+    console.error('Error fetching psychiatrists:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch psychiatrists',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+};
+
 module.exports = {
   createJobPosting,
   getJobPostings,
@@ -472,5 +618,7 @@ module.exports = {
   processSalary,
   updateSalaryStatus,
   getFinancialReports,
-  createCommunityPost
+  createCommunityPost,
+  getAllAppointmentsWithPayments,
+  getAllPsychiatrists
 };
