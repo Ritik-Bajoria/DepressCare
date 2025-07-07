@@ -80,7 +80,100 @@ const sendCancellationNotice = async (options) => {
   return sendAppointmentEmail(userEmail, subject, text, html);
 };
 
+/**
+ * Send payment confirmation email to patient
+ * @param {object} options - { userEmail, userName, amount, appointmentTime, paymentDate }
+ * @returns {Promise}
+ */
+const sendPaymentConfirmation = async (options) => {
+  const { userEmail, userName, amount, appointmentTime, paymentDate } = options;
+  
+  const subject = 'Payment Confirmation';
+  const text = `Hello ${userName},\n\nYour payment of $${amount} for the appointment on ${appointmentTime} has been successfully processed on ${paymentDate}.\n\nThank you for choosing our services!`;
+  const html = `
+    <div>
+      <h2>Payment Confirmation</h2>
+      <p>Hello ${userName},</p>
+      <p>Your payment of <strong>$${amount}</strong> for the appointment on <strong>${appointmentTime}</strong> has been successfully processed on <strong>${paymentDate}</strong>.</p>
+      <p>Thank you for choosing our services!</p>
+    </div>
+  `;
+
+  return sendAppointmentEmail(userEmail, subject, text, html);
+};
+
+/**
+ * Send payment notification to psychiatrist
+ * @param {object} options - { userEmail, userName, patientName, amount, appointmentTime }
+ * @returns {Promise}
+ */
+const sendPaymentNotification = async (options) => {
+  const { userEmail, userName, patientName, amount, appointmentTime } = options;
+  
+  const subject = 'Payment Received for Appointment';
+  const text = `Hello ${userName},\n\nA payment of $${amount} has been received for your appointment with ${patientName} scheduled for ${appointmentTime}.\n\nThank you!`;
+  const html = `
+    <div>
+      <h2>Payment Received</h2>
+      <p>Hello ${userName},</p>
+      <p>A payment of <strong>$${amount}</strong> has been received for your appointment with <strong>${patientName}</strong> scheduled for <strong>${appointmentTime}</strong>.</p>
+      <p>Thank you!</p>
+    </div>
+  `;
+
+  return sendAppointmentEmail(userEmail, subject, text, html);
+};
+
+/**
+ * Send salary processed notification
+ * @param {object} options - { userEmail, userName, amount, month, year, paymentStatus }
+ * @returns {Promise}
+ */
+const sendSalaryProcessedNotification = async (options) => {
+  const { userEmail, userName, amount, month, year, paymentStatus } = options;
+  
+  const subject = 'Your Salary Has Been Processed';
+  const text = `Hello ${userName},\n\nYour salary of $${amount} for ${month} ${year} has been processed with status: ${paymentStatus}.\n\nYou will receive another notification when the payment is completed.\n\nThank you!`;
+  const html = `
+    <div>
+      <h2>Salary Processed</h2>
+      <p>Hello ${userName},</p>
+      <p>Your salary of <strong>$${amount}</strong> for <strong>${month} ${year}</strong> has been processed with status: <strong>${paymentStatus}</strong>.</p>
+      <p>You will receive another notification when the payment is completed.</p>
+      <p>Thank you!</p>
+    </div>
+  `;
+
+  return sendAppointmentEmail(userEmail, subject, text, html);
+};
+
+/**
+ * Send salary paid notification
+ * @param {object} options - { userEmail, userName, amount, month, year, paymentDate }
+ * @returns {Promise}
+ */
+const sendSalaryPaidNotification = async (options) => {
+  const { userEmail, userName, amount, month, year, paymentDate } = options;
+  
+  const subject = 'Salary Payment Completed';
+  const text = `Hello ${userName},\n\nYour salary of $${amount} for ${month} ${year} has been successfully paid on ${paymentDate}.\n\nThank you for your service!`;
+  const html = `
+    <div>
+      <h2>Salary Payment Completed</h2>
+      <p>Hello ${userName},</p>
+      <p>Your salary of <strong>$${amount}</strong> for <strong>${month} ${year}</strong> has been successfully paid on <strong>${paymentDate}</strong>.</p>
+      <p>Thank you for your service!</p>
+    </div>
+  `;
+
+  return sendAppointmentEmail(userEmail, subject, text, html);
+};
+
 module.exports = {
   sendBookingConfirmation,
-  sendCancellationNotice
+  sendCancellationNotice,
+  sendPaymentConfirmation,
+  sendPaymentNotification,
+  sendSalaryProcessedNotification,
+  sendSalaryPaidNotification
 };

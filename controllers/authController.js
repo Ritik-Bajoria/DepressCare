@@ -11,6 +11,11 @@ const User = db.User;
  * @route   POST /auth/register
  * @access  Public
  */
+/**
+ * @desc    Register a new user
+ * @route   POST /auth/register
+ * @access  Public
+ */
 const registerUser = async (req, res) => {
   // Validate request body
   const errors = validationResult(req);
@@ -18,45 +23,95 @@ const registerUser = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { full_name, email, password,address, phone, gender, date_of_birth } = req.body;
-  role = 'patient';
+  const { full_name, email, password, address, phone, gender, date_of_birth } = req.body;
+  const role = 'Patient'; // Default role for registration
+
   try {
     // Check if user already exists
     const userExists = await User.findOne({ where: { email } });
     if (userExists) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ 
+        success: false,
+        message: 'User already exists' 
+      });
     }
 
     // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create user
-    const user = await User.create({
-      full_name,
-      email,
-      password_hash: hashedPassword,
-      phone,
-      address,
-      gender,
-      date_of_birth,
-      role: role || 'Patient', // Default to Patient if role not specified
-      created_at: new Date()
-    });
+    // Start a transaction
+    const transaction = await db.sequelize.transaction();
 
-    // Generate token
-    const token = generateToken(user.user_id, user.role);
+    try {
+      // Create user
+      const user = await User.create({
+        full_name,
+        email,
+        password_hash: hashedPassword,
+        phone,
+        address,
+        gender,
+        date_of_birth,
+        role,
+        profile_picture: null,
+        created_at: new Date()
+      }, { transaction });
 
-    res.status(201).json({
-      user_id: user.user_id,
-      full_name: user.full_name,
-      email: user.email,
-      role: user.role,
-      token
-    });
+      // Create corresponding Patient record with patient_id = user_id
+      await db.Patient.create({
+        patient_id: user.user_id, // Set patient_id to match user_id
+        user_id: user.user_id,   // Also store user_id as foreign key
+        previous_diagnosis: false,
+        symptoms: null,
+        short_description: null
+      }, { transaction });
+
+      // Generate token
+      const token = generateToken(user.user_id, user.role);
+
+      // Commit the transaction
+      await transaction.commit();
+
+      // Return response
+      res.status(201).json({
+        success: true,
+        data: {
+          user_id: user.user_id,
+          patient_id: user.user_id, // Now same as user_id
+          full_name: user.full_name,
+          email: user.email,
+          role: user.role,
+          token
+        }
+      });
+
+    } catch (error) {
+      // Rollback transaction if any error occurs
+      await transaction.rollback();
+      throw error;
+    }
+
   } catch (error) {
     console.error('Registration error:', error);
-    res.status(500).json({ message: 'Server error during registration' });
+    
+    // Handle specific error cases
+    if (error.name === 'SequelizeValidationError') {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation error',
+        errors: error.errors.map(e => ({
+          field: e.path,
+          message: e.message
+        }))
+      });
+    }
+
+    res.status(500).json({ 
+      success: false,
+      message: 'Server error during registration',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 };
 

@@ -4,6 +4,7 @@ const { Op } = require('sequelize');
 const path = require('path');
 const fs = require('fs');
 const { promisify } = require('util');
+const emailService = require('../utils/emailService');
 
 // Convert callback functions to promise-based
 const mkdir = promisify(fs.mkdir);
@@ -349,9 +350,24 @@ const recordPatientPayment = async (req, res, next) => {
     }
 
     // Check if patient and appointment exist
-    const [patient, appointment] = await Promise.all([
-      db.Patient.findByPk(patient_id, { transaction }),
-      db.Appointment.findByPk(appointment_id, { transaction })
+    const [patient, appointment, psychiatrist] = await Promise.all([
+      db.Patient.findByPk(patient_id, { 
+        include: [{
+          model: User,
+          as: 'User',
+          attributes: ['user_id', 'full_name', 'email']
+        }],
+        transaction 
+      }),
+      db.Appointment.findByPk(appointment_id, { transaction }),
+      db.Appointment.findByPk(appointment_id, {
+        include: [{
+          model: User,
+          as: 'PsychiatristUser',
+          attributes: ['user_id', 'full_name', 'email']
+        }],
+        transaction
+      })
     ]);
 
     if (!patient) {
@@ -377,6 +393,38 @@ const recordPatientPayment = async (req, res, next) => {
       amount,
       payment_status: 'Paid'
     }, { transaction });
+
+    // Send email notifications
+    try {
+      // Email to patient
+      if (patient.User && patient.User.email) {
+        const patientEmailContent = {
+          userEmail: patient.User.email,
+          userName: patient.User.full_name,
+          amount: amount,
+          appointmentTime: appointment.scheduled_time,
+          paymentDate: new Date()
+        };
+
+        await emailService.sendPaymentConfirmation(patientEmailContent);
+      }
+
+      // Email to psychiatrist
+      if (psychiatrist.PsychiatristUser && psychiatrist.PsychiatristUser.email) {
+        const psychiatristEmailContent = {
+          userEmail: psychiatrist.PsychiatristUser.email,
+          userName: psychiatrist.PsychiatristUser.full_name,
+          patientName: patient.User ? patient.User.full_name : 'Patient',
+          amount: amount,
+          appointmentTime: appointment.scheduled_time
+        };
+
+        await emailService.sendPaymentNotification(psychiatristEmailContent);
+      }
+    } catch (emailError) {
+      console.error('Error sending payment emails:', emailError);
+      // Don't fail the whole operation if email fails
+    }
 
     await transaction.commit();
     
@@ -428,7 +476,15 @@ const processSalary = async (req, res, next) => {
     }
 
     // 2. Check if psychiatrist exists
-    const psychiatrist = await db.Psychiatrist.findByPk(psychiatrist_id, { transaction });
+    const psychiatrist = await db.Psychiatrist.findByPk(psychiatrist_id, {
+      include: [{
+        model: User,
+        as: 'User',
+        attributes: ['user_id', 'full_name', 'email']
+      }],
+      transaction
+    });
+    
     if (!psychiatrist) {
       await transaction.rollback();
       return res.status(404).json({
@@ -437,20 +493,40 @@ const processSalary = async (req, res, next) => {
       });
     }
 
-    // 3. Create salary record
+    // 3. Create salary record with status 'Paid'
     const salary = await db.PsychiatristSalary.create({
       psychiatrist_id,
       month,
       year,
       amount,
-      payment_status: 'Pending'
+      payment_status: 'Paid', // Set to Paid immediately
+      processed_at: new Date() // Add processing timestamp
     }, { transaction });
+
+    // 4. Send email notification
+    try {
+      if (psychiatrist.User && psychiatrist.User.email) {
+        const salaryEmailContent = {
+          userEmail: psychiatrist.User.email,
+          userName: psychiatrist.User.full_name,
+          amount: amount,
+          month: month,
+          year: year,
+          paymentDate: new Date()
+        };
+
+        await emailService.sendSalaryPaidNotification(salaryEmailContent);
+      }
+    } catch (emailError) {
+      console.error('Error sending salary email:', emailError);
+      // Don't fail the whole operation if email fails
+    }
 
     await transaction.commit();
     
     res.status(201).json({
       success: true,
-      message: 'Salary processed successfully',
+      message: 'Salary processed and paid successfully',
       data: salary
     });
   } catch (error) {
@@ -490,7 +566,26 @@ const updateSalaryStatus = async (req, res, next) => {
     const { id } = req.params;
     const { payment_status } = req.body;
 
-    const salary = await PsychiatristSalary.findByPk(id);
+    // Validate input
+    if (!payment_status || !['Paid', 'Pending'].includes(payment_status)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid payment status'
+      });
+    }
+
+    const salary = await PsychiatristSalary.findByPk(id, {
+      include: [{
+        model: Psychiatrist,
+        as: 'Psychiatrist',
+        include: [{
+          model: User,
+          as: 'User',
+          attributes: ['user_id', 'full_name', 'email']
+        }]
+      }]
+    });
+    
     if (!salary) {
       return res.status(404).json({
         success: false,
@@ -498,7 +593,30 @@ const updateSalaryStatus = async (req, res, next) => {
       });
     }
 
-    await salary.update({ payment_status });
+    const oldStatus = salary.payment_status;
+    await salary.update({ 
+      payment_status,
+      // Update processed_at if changing to Paid
+      processed_at: payment_status === 'Paid' ? new Date() : salary.processed_at
+    });
+
+    // Send email notification if status changed to Paid
+    if (payment_status === 'Paid' && oldStatus !== 'Paid' && salary.Psychiatrist.User) {
+      try {
+        const salaryPaidContent = {
+          userEmail: salary.Psychiatrist.User.email,
+          userName: salary.Psychiatrist.User.full_name,
+          amount: salary.amount,
+          month: salary.month,
+          year: salary.year,
+          paymentDate: new Date()
+        };
+
+        await emailService.sendSalaryPaidNotification(salaryPaidContent);
+      } catch (emailError) {
+        console.error('Error sending salary paid email:', emailError);
+      }
+    }
 
     res.json({
       success: true,

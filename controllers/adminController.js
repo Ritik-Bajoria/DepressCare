@@ -248,52 +248,104 @@ const enrollInternalManagement = async (req, res, next) => {
  * @route DELETE /admin/users/:id
  * @access Private (Admin)
  */
-const deleteUser = async (req, res, next) => {
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  const transaction = await db.sequelize.transaction();
+
   try {
-    const { id } = req.params;
+    // 1. First, find the user with all associations
+    const user = await User.findByPk(id, {
+      include: [
+        { association: 'PatientAppointments' },
+        { association: 'PsychiatristAppointments' },
+        { association: 'CommunityPosts' },
+        { association: 'JobPostings' },
+        { association: 'Patient' }
+      ],
+      transaction
+    });
 
-    // Prevent admin from deleting themselves
-    // if (id === req.user.user_id) {
-    //   return res.status(403).json({ 
-    //     success: false, 
-    //     message: 'You cannot delete your own account' 
-    //   });
-    // }
-
-    const user = await User.findByPk(id);
     if (!user) {
-      return res.status(404).json({ success: false, message: 'User not found' });
+      await transaction.rollback();
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
     }
 
-    // Start transaction for atomic operations
-    await db.sequelize.transaction(async (t) => {
-      // Delete role-specific data first
-      switch (user.role) {
-        case 'Patient':
-          await Patient.destroy({ where: { user_id: id }, transaction: t });
-          break;
-        case 'Psychiatrist':
-          await Psychiatrist.destroy({ where: { psychiatrist_id: id }, transaction: t });
-          // Also delete any appointments, prescriptions, etc.
-          await Appointment.destroy({ where: { psychiatrist_id: id }, transaction: t });
-          break;
-        case 'InternalManagement':
-          // await InternalManagement.destroy({ where: { user_id: id }, transaction: t });
-          break;
+    // 2. Delete all dependent records
+    if (user.role === 'Patient') {
+      // Delete patient-specific records
+      await Promise.all([
+        db.PatientPayment.destroy({ where: { patient_id: user.Patient?.patient_id }, transaction }),
+        db.DepressionForm.destroy({ where: { patient_id: id }, transaction }),
+        db.Appointment.destroy({ where: { patient_id: id }, transaction })
+      ]);
+      
+      // Delete the patient record
+      if (user.Patient) {
+        await user.Patient.destroy({ transaction });
       }
+    } else if (user.role === 'Psychiatrist') {
+      // Delete psychiatrist-specific records
+      await Promise.all([
+        db.PsychiatristSalary.destroy({ where: { psychiatrist_id: id }, transaction }),
+        db.Appointment.destroy({ where: { psychiatrist_id: id }, transaction }),
+        db.Recommendation.destroy({ 
+          where: { 
+            [Op.or]: [
+              { psychiatrist_id: id },
+              { patient_id: id }
+            ]
+          }, 
+          transaction 
+        })
+      ]);
+      
+      // Delete the psychiatrist record
+      const psychiatrist = await db.Psychiatrist.findOne({ where: { psychiatrist_id: id }, transaction });
+      if (psychiatrist) {
+        await psychiatrist.destroy({ transaction });
+      }
+    }
 
-      // Finally delete the user
-      await user.destroy({ transaction: t });
+    // 3. Delete generic user associations
+    await Promise.all([
+      db.CommunityPost.destroy({ where: { posted_by: id }, transaction }),
+      db.JobPosting.destroy({ where: { posted_by: id }, transaction }),
+      db.Recommendation.destroy({ where: { patient_id: id }, transaction })
+    ]);
+
+    // 4. Finally, delete the user
+    await user.destroy({ transaction });
+
+    await transaction.commit();
+    
+    res.json({
+      success: true,
+      message: 'User and all associated data deleted successfully'
     });
 
-    res.json({ 
-      success: true, 
-      message: `User (${user.role}) and all associated data deleted successfully` 
-    });
   } catch (error) {
-    next(error);
+    await transaction.rollback();
+    console.error('Error deleting user:', error);
+    
+    if (error.name === 'SequelizeForeignKeyConstraintError') {
+      return res.status(400).json({
+        success: false,
+        message: 'Cannot delete user due to existing references',
+        error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      });
+    }
+
+    res.status(500).json({
+      success: false,
+      message: 'Failed to delete user',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 };
+
 /**
  * @desc Update user information with role-specific handling and image management
  * @route PUT /admin/users/:id

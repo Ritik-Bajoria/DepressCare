@@ -4,12 +4,12 @@ module.exports = (sequelize) => {
   const Patient = sequelize.define('Patient', {
     patient_id: { 
       type: DataTypes.INTEGER, 
-      primaryKey: true,
-      autoIncrement: true 
+      primaryKey: true 
     },
     user_id: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     previous_diagnosis: {
       type: DataTypes.BOOLEAN,

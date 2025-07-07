@@ -3732,3 +3732,56 @@
 7/6/2025 2:12:50 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/psychiatrists
 7/6/2025 2:12:50 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/psychiatrists
 7/6/2025 2:13:09 PM [INFO]:  Request from 192.168.177.180 at POST /api/internal/salaries
+7/6/2025 2:17:33 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 2:17:33 PM [INFO]:  Request from 192.168.177.180 at GET /api/auth/me
+7/6/2025 2:17:37 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/psychiatrists
+7/6/2025 2:17:37 PM [INFO]:  Request from 192.168.177.180 at GET /api/internal/psychiatrists
+7/6/2025 2:20:23 PM [INFO]:  Request from 192.168.177.180 at POST /api/internal/salaries
+7/6/2025 2:22:16 PM [INFO]:  Request from 192.168.177.180 at POST /api/internal/salaries
+7/6/2025 2:22:35 PM [INFO]:  SIGINT signal received: closing HTTP server
+7/6/2025 2:22:35 PM [INFO]:  HTTP server closed
+7/6/2025 2:22:35 PM [INFO]:  Sequelize connection closed
+7/7/2025 6:55:12 AM [INFO]:  App started on process id:18708
+7/7/2025 6:55:14 AM [INFO]:  Server is listening on port 3000
+7/7/2025 6:56:49 AM [INFO]:  Request from 127.0.0.1 at GET /api/internal/appointments
+7/7/2025 6:57:34 AM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+7/7/2025 6:58:33 AM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+7/7/2025 6:59:16 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/register
+7/7/2025 6:59:28 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/register
+7/7/2025 7:15:32 AM [INFO]:  SIGINT signal received: closing HTTP server
+7/7/2025 7:15:32 AM [INFO]:  HTTP server closed
+7/7/2025 7:15:32 AM [INFO]:  Sequelize connection closed
+7/7/2025 7:15:34 AM [INFO]:  App started on process id:11044
+7/7/2025 7:15:36 AM [INFO]:  Server is listening on port 3000
+7/7/2025 7:15:48 AM [INFO]:  Request from 127.0.0.1 at GET /api/admin/users
+7/7/2025 7:15:58 AM [INFO]:  Request from 127.0.0.1 at DELETE /api/admin/users/27
+7/7/2025 7:16:14 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/register
+7/7/2025 7:17:08 AM [INFO]:  Request from 127.0.0.1 at POST /api/patient/appointments
+7/7/2025 7:17:57 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/register
+7/7/2025 7:18:25 AM [INFO]:  Request from 127.0.0.1 at POST /api/patient/appointments
+7/7/2025 7:19:19 AM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+7/7/2025 7:19:23 AM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+7/7/2025 7:21:43 AM [INFO]:  SIGINT signal received: closing HTTP server
+7/7/2025 7:21:43 AM [INFO]:  HTTP server closed
+7/7/2025 7:21:43 AM [INFO]:  Sequelize connection closed
+7/7/2025 7:21:45 AM [INFO]:  App started on process id:23728
+7/7/2025 7:21:47 AM [INFO]:  Server is listening on port 3000
+7/7/2025 7:22:22 AM [INFO]:  SIGINT signal received: closing HTTP server
+7/7/2025 7:22:22 AM [INFO]:  HTTP server closed
+7/7/2025 7:22:22 AM [INFO]:  Sequelize connection closed
+7/7/2025 7:22:24 AM [INFO]:  App started on process id:28304
+7/7/2025 7:22:26 AM [INFO]:  Server is listening on port 3000
+7/7/2025 7:22:41 AM [INFO]:  Request from 127.0.0.1 at DELETE /api/admin/users/29
+7/7/2025 7:24:58 AM [INFO]:  SIGINT signal received: closing HTTP server
+7/7/2025 7:24:58 AM [INFO]:  HTTP server closed
+7/7/2025 7:24:58 AM [INFO]:  Sequelize connection closed
+7/7/2025 7:25:00 AM [INFO]:  App started on process id:16588
+7/7/2025 7:25:02 AM [INFO]:  Server is listening on port 3000
+7/7/2025 7:25:04 AM [INFO]:  Request from 127.0.0.1 at DELETE /api/admin/users/29
+7/7/2025 7:25:11 AM [INFO]:  Request from 127.0.0.1 at DELETE /api/admin/users/28
+7/7/2025 7:25:17 AM [INFO]:  Request from 127.0.0.1 at POST /api/auth/register
+7/7/2025 7:25:54 AM [INFO]:  Request from 127.0.0.1 at POST /api/patient/appointments
+7/7/2025 7:26:10 AM [INFO]:  Request from 127.0.0.1 at POST /api/internal/payments
+7/7/2025 7:27:05 AM [INFO]:  SIGINT signal received: closing HTTP server
+7/7/2025 7:27:05 AM [INFO]:  HTTP server closed
+7/7/2025 7:27:05 AM [INFO]:  Sequelize connection closed
