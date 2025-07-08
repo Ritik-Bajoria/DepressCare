@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
     amount: { type: DataTypes.DECIMAL(10, 2) },
     payment_status: { type: DataTypes.ENUM('Paid', 'Pending'), defaultValue: 'Pending' },
     processed_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
-  }, { tableName: 'PsychiatristSalaries', timestamps: false });
+  }, { tableName: 'psychiatristsalaries', timestamps: false });
 
   PsychiatristSalary.associate = (models) => {
     PsychiatristSalary.belongsTo(models.Psychiatrist, {

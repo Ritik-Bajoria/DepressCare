@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
     document_url: { type: DataTypes.STRING(255) },
     notes: { type: DataTypes.TEXT },
     uploaded_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
-  }, { tableName: 'Prescriptions', timestamps: false });
+  }, { tableName: 'prescriptions', timestamps: false });
 
   Prescription.associate = (models) => {
     Prescription.belongsTo(models.Appointment, {

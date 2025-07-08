@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
     filled_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     total_score: { type: DataTypes.INTEGER },
     notes: { type: DataTypes.TEXT }
-  }, { tableName: 'DepressionForms', timestamps: false });
+  }, { tableName: 'depressionforms', timestamps: false });
 
   DepressionForm.associate = (models) => {
     DepressionForm.belongsTo(models.User, {

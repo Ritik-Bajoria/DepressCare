@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Users',
+        model: 'users',
         key: 'user_id'
       }
     },
@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.NOW 
     }
   }, { 
-    tableName: 'JobPostings', 
+    tableName: 'jobpostings', 
     timestamps: false 
   });
 

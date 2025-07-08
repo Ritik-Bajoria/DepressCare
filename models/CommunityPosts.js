@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Users',
+      model: 'users',
       key: 'user_id'
     }
   },
@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
     content: { type: DataTypes.TEXT },
     picture_url: { type: DataTypes.STRING(255) },
     posted_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
-  }, { tableName: 'CommunityPosts', timestamps: false });
+  }, { tableName: 'communityposts', timestamps: false });
 
   CommunityPost.associate = function(models) {
     CommunityPost.belongsTo(models.User, {

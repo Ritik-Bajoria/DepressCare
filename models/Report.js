@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
     generated_by: { type: DataTypes.INTEGER },
     file_url: { type: DataTypes.STRING(255) },
     generated_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
-  }, { tableName: 'Reports', timestamps: false });
+  }, { tableName: 'reports', timestamps: false });
 
   return Report;
 };

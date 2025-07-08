@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
     form_id: { type: DataTypes.INTEGER },
     question_id: { type: DataTypes.INTEGER },
     response_value: { type: DataTypes.INTEGER }
-  }, { tableName: 'FormResponses', timestamps: false });
+  }, { tableName: 'formresponses', timestamps: false });
 
   FormResponse.associate = (models) => {
     FormResponse.belongsTo(models.DepressionForm, {

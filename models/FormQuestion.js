@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
     question_id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     question_text: { type: DataTypes.TEXT, allowNull: false },
     score_type: { type: DataTypes.ENUM('Likert', 'Binary', 'Scale'), allowNull: false }
-  }, { tableName: 'FormQuestions', timestamps: false });
+  }, { tableName: 'formquestions', timestamps: false });
 
   FormQuestion.associate = (models) => {
     FormQuestion.hasMany(models.FormResponse, {

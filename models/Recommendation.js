@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
     patient_id: { type: DataTypes.INTEGER },
     content: { type: DataTypes.TEXT },
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
-  }, { tableName: 'Recommendations', timestamps: false });
+  }, { tableName: 'recommendations', timestamps: false });
 
   Recommendation.associate = (models) => {
     Recommendation.belongsTo(models.User, {

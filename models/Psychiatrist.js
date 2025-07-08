@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
     years_of_experience: { type: DataTypes.INTEGER },
     bio: { type: DataTypes.TEXT },
     availability: { type: DataTypes.BOOLEAN }
-  }, { tableName: 'Psychiatrists', timestamps: false });
+  }, { tableName: 'psychiatrists', timestamps: false });
 
   Psychiatrist.associate = (models) => {
     Psychiatrist.belongsTo(models.User, {

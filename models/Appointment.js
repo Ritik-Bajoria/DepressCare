@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
     },
     meeting_link: { type: DataTypes.STRING(255) },
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
-  }, { tableName: 'Appointments', timestamps: false });
+  }, { tableName: 'appointments', timestamps: false });
 
   Appointment.associate = (models) => {
     Appointment.belongsTo(models.User, {

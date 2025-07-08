@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
       allowNull: true
     }
   }, {
-    tableName: 'Patients',
+    tableName: 'patients',
     timestamps: false
   });
 

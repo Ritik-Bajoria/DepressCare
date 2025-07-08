@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
     amount: { type: DataTypes.DECIMAL(10, 2) },
     payment_date: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     payment_status: { type: DataTypes.ENUM('Paid', 'Pending', 'Failed'), defaultValue: 'Pending' }
-  }, { tableName: 'PatientPayments', timestamps: false });
+  }, { tableName: 'patientpayments', timestamps: false });
   
   PatientPayment.associate = (models) => {
     // Association with Patient

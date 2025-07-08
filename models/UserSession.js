@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
     login_time: { type: DataTypes.DATE },
     logout_time: { type: DataTypes.DATE },
     ip_address: { type: DataTypes.STRING(45) }
-  }, { tableName: 'UserSessions', timestamps: false });
+  }, { tableName: 'usersessions', timestamps: false });
 
   return UserSession;
 };

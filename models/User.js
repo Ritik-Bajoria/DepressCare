@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
     role: { type: DataTypes.ENUM('Patient', 'Psychiatrist', 'Admin', 'InternalManagement'), allowNull: false },
     profile_picture: { type: DataTypes.STRING(255) },
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
-  }, { tableName: 'Users', timestamps: false });
+  }, { tableName: 'users', timestamps: false });
 
   User.associate = (models) => {
     User.hasMany(models.DepressionForm, {
